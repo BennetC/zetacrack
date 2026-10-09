@@ -1,0 +1,322 @@
+{
+  "screenedAt": "2026-10-09T15:11:12.917Z",
+  "synthetic": true,
+  "database": "feature-screen-1791558668764.sqlite3",
+  "apiPort": 62143,
+  "sitePort": 62144,
+  "steps": [
+    {
+      "screenshot": "01-custom-setup-desktop.png",
+      "text": "Arithmetic\nCustom practice\n\nConfigure your practice set by choosing operations and creating exercise groups.\n\nOperations\n\nSet the overall percentage for each operation. Total must equal 100%.\n\nAddition\n%\nAdd operation\nTotal: 100%\nAddition\nAdd group\nSplit equally\n\nCreate groups for this operation. Set the within-operation share and the number ranges for each operand.\n\nGroup\nWithin-operation\nshare \nEffective session\nshare \nLeft operand\nRight operand\nActions\n%\n100\n%\nFrom\nTo\nDecimal places\n0\n1\n2\n3\nFrom\nTo\nDecimal places\n0\n1\n2\n3\n\nRange endpoints are included. Equal bounds fix a number.\n\nRemove operation\nSession settings\n\nChoose how you want to practice.\n\nSession type\nTimed\nEndless\nDuration\n30s\n1m\n2m\n5m\n10m\nCustom duration (seconds)\n3-second countdown\nPreset\nCustom (unsaved)\nTwo-digit addition\nTwo-digit subtraction\nMultiply by 11\nMultiply by 12\nSave preset\n\nStart practice\n\nAnswers advance automatically when correct.\n\nExport all sessions\nExport JSON\nExport CSV",
+      "controls": [
+        "Addition",
+        "Add operation",
+        "Add group",
+        "Split equally",
+        "0123",
+        "0123",
+        "",
+        "",
+        "Remove operation",
+        "Timed",
+        "Endless",
+        "30s",
+        "1m",
+        "2m",
+        "5m",
+        "10m",
+        "Custom (unsaved)Two-digit additionTwo-digit subtractionMultiply by 11Multiply by 12",
+        "Save preset",
+        "Start practice",
+        "Export JSON",
+        "Export CSV"
+      ],
+      "svgCount": 6
+    },
+    {
+      "screenshot": "02-active-run.png",
+      "text": "Arithmetic\n2:00\nEnd session\n\n0 completed\n\n81 + 25\nYour answer\n\nAdvances when correct. Leaving this window ends the session.",
+      "controls": [
+        "End session"
+      ],
+      "svgCount": 0
+    },
+    {
+      "screenshot": "03-results-desktop.png",
+      "text": "Arithmetic\n2:00\nPractice complete\n\nYou ended this session.\n\n1\nQuestions completed\n0.20s\nElapsed practice time\n0.16s\nMedian correct-answer time\n0.16s\nMean correct-answer time\n\nTimes include answer entry and edits. Based on 1 timed correct answer.\n\nSession saved to your local database.\n\nExport JSON\nExport CSV\nBack to setup\nShow question details",
+      "controls": [
+        "Export JSON",
+        "Export CSV",
+        "Back to setup",
+        "Show question details"
+      ],
+      "svgCount": 0
+    },
+    {
+      "screenshot": "04-question-details.png",
+      "text": "Arithmetic\n2:00\nPractice complete\n\nYou ended this session.\n\n1\nQuestions completed\n0.20s\nElapsed practice time\n0.16s\nMedian correct-answer time\n0.16s\nMean correct-answer time\n\nTimes include answer entry and edits. Based on 1 timed correct answer.\n\nSession saved to your local database.\n\nExport JSON\nExport CSV\nBack to setup\nHide question details\n81 + 25\nCorrect answer: 0.16s\nFirst input: 0.15s\n86 + 82\nUnfinished: 0.03s\nFirst input: —",
+      "controls": [
+        "Export JSON",
+        "Export CSV",
+        "Back to setup",
+        "Hide question details"
+      ],
+      "svgCount": 0
+    },
+    {
+      "screenshot": "05-custom-setup-mobile.png",
+      "text": "Arithmetic\nCustom practice\n\nConfigure your practice set by choosing operations and creating exercise groups.\n\nOperations\n\nSet the overall percentage for each operation. Total must equal 100%.\n\nAddition\n%\nAdd operation\nTotal: 100%\nAddition\nAdd group\nSplit equally\n\nCreate groups for this operation. Set the within-operation share and the number ranges for each operand.\n\nGroup\nWithin-operation share\n%\nEffective session share\n100\n%\nTwo-digit addition left operand\nFrom\nTo\nDecimal places\n0\n1\n2\n3\nTwo-digit addition right operand\nFrom\nTo\nDecimal places\n0\n1\n2\n3\n\nRange endpoints are included. Equal bounds fix a number.\n\nRemove operation\nSession settings\n\nChoose how you want to practice.\n\nSession type\nTimed\nEndless\nDuration\n30s\n1m\n2m\n5m\n10m\nCustom duration (seconds)\n3-second countdown\nPreset\nCustom (unsaved)\nTwo-digit addition\nTwo-digit subtraction\nMultiply by 11\nMultiply by 12\nSave preset\n\nSetup remembered\n\nStart practice\n\nAnswers advance automatically when correct.\n\nExport all sessions\nExport JSON\nExport CSV",
+      "controls": [
+        "Addition",
+        "Add operation",
+        "Add group",
+        "Split equally",
+        "0123",
+        "0123",
+        "",
+        "",
+        "Remove operation",
+        "Timed",
+        "Endless",
+        "30s",
+        "1m",
+        "2m",
+        "5m",
+        "10m",
+        "Custom (unsaved)Two-digit additionTwo-digit subtractionMultiply by 11Multiply by 12",
+        "Save preset",
+        "Start practice",
+        "Export JSON",
+        "Export CSV"
+      ],
+      "svgCount": 6
+    }
+  ],
+  "session": {
+    "id": "c647c944-0416-490d-bad1-1ec66aa5b29d",
+    "config": {
+      "operations": [
+        {
+          "groups": [
+            {
+              "allowNegative": false,
+              "first": {
+                "decimalPlaces": 0,
+                "max": "99",
+                "min": "10"
+              },
+              "id": "builtin-group-0",
+              "name": "Two-digit addition",
+              "second": {
+                "decimalPlaces": 0,
+                "max": "99",
+                "min": "10"
+              },
+              "share": "100",
+              "version": 1
+            }
+          ],
+          "id": "addition",
+          "share": "100",
+          "version": 1
+        }
+      ],
+      "session": {
+        "countdown": false,
+        "durationSeconds": "120",
+        "format": "timed"
+      },
+      "version": 1
+    },
+    "seed": "570903b8-a92a-4982-9892-a982e594688f",
+    "generatorVersion": "exact-grid-v1",
+    "policyVersion": "hierarchical-shares-v1",
+    "measurementVersion": "response-timing-v1",
+    "createdAt": "2026-10-09T15:11:12.146611+00:00",
+    "status": "ended",
+    "events": [
+      {
+        "elapsedMs": 0,
+        "payload": {
+          "wallAt": "2026-10-09T15:11:12.177Z"
+        },
+        "sequence": 0,
+        "type": "session-started"
+      },
+      {
+        "elapsedMs": 1.4000000059604645,
+        "payload": {
+          "question": {
+            "expected": "106",
+            "groupId": "builtin-group-0",
+            "id": "q-0",
+            "index": 0,
+            "left": "81",
+            "operation": "addition",
+            "right": "25",
+            "selection": {
+              "groupBasisPoints": 10000,
+              "operationBasisPoints": 10000,
+              "validPairCount": "8100"
+            }
+          }
+        },
+        "sequence": 1,
+        "type": "question-presented"
+      },
+      {
+        "elapsedMs": 154.29999999701977,
+        "payload": {
+          "inputType": "insertText",
+          "questionId": "q-0",
+          "value": "1"
+        },
+        "sequence": 2,
+        "type": "input-changed"
+      },
+      {
+        "elapsedMs": 160.1000000089407,
+        "payload": {
+          "inputType": "insertText",
+          "questionId": "q-0",
+          "value": "10"
+        },
+        "sequence": 3,
+        "type": "input-changed"
+      },
+      {
+        "elapsedMs": 165.20000000298023,
+        "payload": {
+          "inputType": "insertText",
+          "questionId": "q-0",
+          "value": "106"
+        },
+        "sequence": 4,
+        "type": "input-changed"
+      },
+      {
+        "elapsedMs": 165.20000000298023,
+        "payload": {
+          "questionId": "q-0",
+          "value": "106"
+        },
+        "sequence": 5,
+        "type": "answer-accepted"
+      },
+      {
+        "elapsedMs": 167.20000000298023,
+        "payload": {
+          "question": {
+            "expected": "168",
+            "groupId": "builtin-group-0",
+            "id": "q-1",
+            "index": 1,
+            "left": "86",
+            "operation": "addition",
+            "right": "82",
+            "selection": {
+              "groupBasisPoints": 10000,
+              "operationBasisPoints": 10000,
+              "validPairCount": "8100"
+            }
+          }
+        },
+        "sequence": 6,
+        "type": "question-presented"
+      },
+      {
+        "elapsedMs": 201.40000000596046,
+        "payload": {
+          "endTimeKnown": true,
+          "reason": "manual-end",
+          "unfinishedQuestionId": "q-1",
+          "wallAt": "2026-10-09T15:11:12.378Z"
+        },
+        "sequence": 7,
+        "type": "session-ended"
+      }
+    ],
+    "terminationState": "ended",
+    "terminationReason": "manual-end",
+    "startedAt": "2026-10-09T15:11:12.177Z",
+    "endedAt": "2026-10-09T15:11:12.378Z",
+    "endTimeKnown": true,
+    "observedDurationMs": 201.40000000596046,
+    "questions": [
+      {
+        "id": "q-0",
+        "index": 0,
+        "presentationSequence": 1,
+        "operation": "addition",
+        "operationVersion": 1,
+        "groupId": "builtin-group-0",
+        "groupVersion": 1,
+        "groupName": "Two-digit addition",
+        "left": "81",
+        "right": "25",
+        "expected": "106",
+        "selection": {
+          "groupBasisPoints": 10000,
+          "operationBasisPoints": 10000,
+          "validPairCount": "8100"
+        },
+        "outcome": "correct",
+        "presentedElapsedMs": 1.4000000059604645,
+        "acceptedElapsedMs": 165.20000000298023,
+        "firstInputElapsedMs": 154.29999999701977,
+        "correctAnswerTimeMs": 163.79999999701977,
+        "firstInputTimeMs": 152.8999999910593,
+        "observedUnfinishedDurationMs": null,
+        "unfinishedDurationIsLowerBound": null,
+        "acceptedInput": "106",
+        "lastInput": "106",
+        "inputChangeCount": 3,
+        "dataQualityWarnings": []
+      },
+      {
+        "id": "q-1",
+        "index": 1,
+        "presentationSequence": 6,
+        "operation": "addition",
+        "operationVersion": 1,
+        "groupId": "builtin-group-0",
+        "groupVersion": 1,
+        "groupName": "Two-digit addition",
+        "left": "86",
+        "right": "82",
+        "expected": "168",
+        "selection": {
+          "groupBasisPoints": 10000,
+          "operationBasisPoints": 10000,
+          "validPairCount": "8100"
+        },
+        "outcome": "unfinished",
+        "presentedElapsedMs": 167.20000000298023,
+        "acceptedElapsedMs": null,
+        "firstInputElapsedMs": null,
+        "correctAnswerTimeMs": null,
+        "firstInputTimeMs": null,
+        "observedUnfinishedDurationMs": 34.20000000298023,
+        "unfinishedDurationIsLowerBound": false,
+        "acceptedInput": null,
+        "lastInput": null,
+        "inputChangeCount": 0,
+        "dataQualityWarnings": []
+      }
+    ],
+    "summary": {
+      "presentedQuestionCount": 2,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 1,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 163.79999999701977,
+      "meanCorrectAnswerTimeMs": 163.79999999701977
+    },
+    "dataQualityWarnings": []
+  },
+  "missingApi": {
+    "historyListStatus": 405,
+    "sessionDeleteStatus": 405
+  },
+  "pageErrors": []
+}

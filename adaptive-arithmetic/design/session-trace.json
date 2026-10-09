@@ -1,0 +1,317 @@
+{
+  "id": "a41898bd-23e6-4d0a-8760-d42a1a6a69e1",
+  "config": {
+    "operations": [
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "id": "fixture-add",
+            "name": "Addition group",
+            "second": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "share": "100",
+            "version": 1
+          }
+        ],
+        "id": "addition",
+        "share": "0",
+        "version": 1
+      },
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "id": "fixture-11",
+            "name": "Multiply by 11",
+            "second": {
+              "decimalPlaces": 0,
+              "max": "11",
+              "min": "11"
+            },
+            "share": "50",
+            "version": 1
+          },
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "id": "fixture-12",
+            "name": "Multiply by 12",
+            "second": {
+              "decimalPlaces": 0,
+              "max": "12",
+              "min": "12"
+            },
+            "share": "50",
+            "version": 1
+          }
+        ],
+        "id": "multiplication",
+        "share": "0",
+        "version": 1
+      },
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "2",
+              "min": "1"
+            },
+            "id": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+            "name": "Division group",
+            "second": {
+              "decimalPlaces": 3,
+              "max": "0.125",
+              "min": "0.125"
+            },
+            "share": "100",
+            "version": 1
+          }
+        ],
+        "id": "division",
+        "share": "100",
+        "version": 1
+      }
+    ],
+    "session": {
+      "countdown": false,
+      "durationSeconds": "120",
+      "format": "endless"
+    },
+    "version": 1
+  },
+  "seed": "ba1dd30f-805a-4029-93b8-0a7250ca26dc",
+  "generatorVersion": "exact-grid-v1",
+  "policyVersion": "hierarchical-shares-v1",
+  "measurementVersion": "response-timing-v1",
+  "createdAt": "2026-10-09T14:13:14.951384+00:00",
+  "status": "ended",
+  "events": [
+    {
+      "elapsedMs": 0,
+      "payload": {
+        "wallAt": "2026-10-09T14:13:14.977Z"
+      },
+      "sequence": 0,
+      "type": "session-started"
+    },
+    {
+      "elapsedMs": 0.6000000089406967,
+      "payload": {
+        "question": {
+          "expected": "0.125",
+          "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+          "id": "q-0",
+          "index": 0,
+          "left": "0.25",
+          "operation": "division",
+          "right": "2",
+          "selection": {
+            "groupBasisPoints": 10000,
+            "operationBasisPoints": 10000,
+            "validPairCount": "2"
+          }
+        }
+      },
+      "sequence": 1,
+      "type": "question-presented"
+    },
+    {
+      "elapsedMs": 39,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": "9"
+      },
+      "sequence": 2,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 53.5,
+      "payload": {
+        "inputType": "deleteContentBackward",
+        "questionId": "q-0",
+        "value": ""
+      },
+      "sequence": 3,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 67.30000001192093,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": "."
+      },
+      "sequence": 4,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 72.30000001192093,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": ".1"
+      },
+      "sequence": 5,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 77.6000000089407,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": ".12"
+      },
+      "sequence": 6,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 85.90000000596046,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": ".125"
+      },
+      "sequence": 7,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 85.90000000596046,
+      "payload": {
+        "questionId": "q-0",
+        "value": ".125"
+      },
+      "sequence": 8,
+      "type": "answer-accepted"
+    },
+    {
+      "elapsedMs": 88.20000000298023,
+      "payload": {
+        "question": {
+          "expected": "0.125",
+          "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+          "id": "q-1",
+          "index": 1,
+          "left": "0.125",
+          "operation": "division",
+          "right": "1",
+          "selection": {
+            "groupBasisPoints": 10000,
+            "operationBasisPoints": 10000,
+            "validPairCount": "2"
+          }
+        }
+      },
+      "sequence": 9,
+      "type": "question-presented"
+    },
+    {
+      "elapsedMs": 120.70000000298023,
+      "payload": {
+        "endTimeKnown": true,
+        "reason": "focus-loss",
+        "unfinishedQuestionId": "q-1",
+        "wallAt": "2026-10-09T14:13:15.098Z"
+      },
+      "sequence": 10,
+      "type": "session-ended"
+    }
+  ],
+  "terminationState": "ended",
+  "terminationReason": "focus-loss",
+  "startedAt": "2026-10-09T14:13:14.977Z",
+  "endedAt": "2026-10-09T14:13:15.098Z",
+  "endTimeKnown": true,
+  "observedDurationMs": 120.70000000298023,
+  "questions": [
+    {
+      "id": "q-0",
+      "index": 0,
+      "presentationSequence": 1,
+      "operation": "division",
+      "operationVersion": 1,
+      "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+      "groupVersion": 1,
+      "groupName": "Division group",
+      "left": "0.25",
+      "right": "2",
+      "expected": "0.125",
+      "selection": {
+        "groupBasisPoints": 10000,
+        "operationBasisPoints": 10000,
+        "validPairCount": "2"
+      },
+      "outcome": "correct",
+      "presentedElapsedMs": 0.6000000089406967,
+      "acceptedElapsedMs": 85.90000000596046,
+      "firstInputElapsedMs": 39,
+      "correctAnswerTimeMs": 85.29999999701977,
+      "firstInputTimeMs": 38.3999999910593,
+      "observedUnfinishedDurationMs": null,
+      "unfinishedDurationIsLowerBound": null,
+      "acceptedInput": ".125",
+      "lastInput": ".125",
+      "inputChangeCount": 6,
+      "dataQualityWarnings": []
+    },
+    {
+      "id": "q-1",
+      "index": 1,
+      "presentationSequence": 9,
+      "operation": "division",
+      "operationVersion": 1,
+      "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+      "groupVersion": 1,
+      "groupName": "Division group",
+      "left": "0.125",
+      "right": "1",
+      "expected": "0.125",
+      "selection": {
+        "groupBasisPoints": 10000,
+        "operationBasisPoints": 10000,
+        "validPairCount": "2"
+      },
+      "outcome": "unfinished",
+      "presentedElapsedMs": 88.20000000298023,
+      "acceptedElapsedMs": null,
+      "firstInputElapsedMs": null,
+      "correctAnswerTimeMs": null,
+      "firstInputTimeMs": null,
+      "observedUnfinishedDurationMs": 32.5,
+      "unfinishedDurationIsLowerBound": false,
+      "acceptedInput": null,
+      "lastInput": null,
+      "inputChangeCount": 0,
+      "dataQualityWarnings": []
+    }
+  ],
+  "summary": {
+    "presentedQuestionCount": 2,
+    "correctQuestionCount": 1,
+    "unfinishedQuestionCount": 1,
+    "validCorrectAnswerCount": 1,
+    "medianCorrectAnswerTimeMs": 85.29999999701977,
+    "meanCorrectAnswerTimeMs": 85.29999999701977
+  },
+  "dataQualityWarnings": []
+}
