@@ -1,0 +1,8 @@
+web/node_modules/
+web/dist/
+web/.vite/
+__pycache__/
+.pytest_cache/
+.venv/
+data/
+.chrome-profile/

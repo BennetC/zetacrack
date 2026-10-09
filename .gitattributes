@@ -1,0 +1,3 @@
+# Normalize text in Git and keep scripts usable on their target platform.
+* text=auto eol=lf
+*.ps1 text eol=crlf

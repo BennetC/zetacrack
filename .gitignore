@@ -1,0 +1,43 @@
+# Installed dependencies and generated output
+node_modules/
+.venv/
+venv/
+dist/
+build/
+.vite/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.tsbuildinfo
+
+# Local practice records, test databases, and browser profiles
+/adaptive-arithmetic/data/
+*.sqlite
+*.sqlite3
+*.db
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.db-wal
+*.db-shm
+.chrome-profile*/
+*.log
+
+# Local credentials; keep shareable environment examples
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.pem
+*.key
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
