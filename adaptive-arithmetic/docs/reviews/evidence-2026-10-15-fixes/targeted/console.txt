@@ -1,0 +1,9 @@
+Passed: FR-02: group/range/session edits survive reversed delayed StrictMode initialization
+Passed: FR-02: custom memory survives navigation and reload independently of Standard
+Passed: FR-02: failed initialization retries in place without discarding newer edits
+Passed: C02: actual BOM clipboard paste retains one valid saved/exported/comparable response
+Passed: C01: pagehide beacon and queued ordinary flush overlap with idempotent success
+Passed: FR-01: refreshing offset 20 after cross-tab deletion reveals the sole survivor
+Passed: FR-01: zero totals and changing mode/text filters show truthful empty/page bounds
+Passed: FR-01: a 21-to-20 exact page boundary clamps to page one; deleting that page shows zero
+{"checks":["FR-02: group/range/session edits survive reversed delayed StrictMode initialization","FR-02: custom memory survives navigation and reload independently of Standard","FR-02: failed initialization retries in place without discarding newer edits","C02: actual BOM clipboard paste retains one valid saved/exported/comparable response","C01: pagehide beacon and queued ordinary flush overlap with idempotent success","FR-01: refreshing offset 20 after cross-tab deletion reveals the sole survivor","FR-01: zero totals and changing mode/text filters show truthful empty/page bounds","FR-01: a 21-to-20 exact page boundary clamps to page one; deleting that page shows zero"],"pageErrors":[]}

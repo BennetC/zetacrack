@@ -8,10 +8,15 @@
     "build": "vite build && node scripts/prepare-sites-build.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/domain.test.ts tests/sessionRecovery.test.ts",
+    "test": "tsx --test tests/domain.test.ts tests/sessionRecovery.test.ts tests/standard.test.ts tests/explorer.test.ts",
+    "test:explorer": "node tests/explorer-browser.mjs",
     "test:browser": "node tests/browser.mjs",
     "test:regressions": "node tests/review-regressions.mjs",
     "test:exports": "node tests/exports-browser.mjs",
+    "test:stage1": "node tests/stage1-browser.mjs",
+    "test:review-fixes": "node tests/review-fixes-browser.mjs",
+    "test:improvements": "node tests/improvements-browser.mjs",
+    "test:next-improvements": "node tests/next-improvements-browser.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs"
   },
   "dependencies": {

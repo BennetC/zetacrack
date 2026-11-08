@@ -1,0 +1,199 @@
+{
+  "valid": {
+    "summary": {
+      "presentedQuestionCount": 1,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 0,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 10.0,
+      "meanCorrectAnswerTimeMs": 10.0
+    },
+    "questionTimes": [
+      {
+        "id": "q0",
+        "index": 0,
+        "correctAnswerTimeMs": 10.0,
+        "firstInputTimeMs": 10.0,
+        "firstInputElapsedMs": 10.0,
+        "inputChangeCount": 1
+      }
+    ],
+    "comparisonEligible": true,
+    "warnings": [],
+    "cumulativePartialValidTimes": 1
+  },
+  "unknown-reference": {
+    "summary": {
+      "presentedQuestionCount": 1,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 0,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 10.0,
+      "meanCorrectAnswerTimeMs": 10.0
+    },
+    "questionTimes": [
+      {
+        "id": "q0",
+        "index": 0,
+        "correctAnswerTimeMs": 10.0,
+        "firstInputTimeMs": 10.0,
+        "firstInputElapsedMs": 10.0,
+        "inputChangeCount": 1
+      }
+    ],
+    "comparisonEligible": false,
+    "warnings": [
+      {
+        "code": "invalid-question-reference",
+        "message": "Input/acceptance does not refer to the current unfinished question.",
+        "sequence": 2
+      }
+    ],
+    "cumulativePartialValidTimes": 2
+  },
+  "invalid-value": {
+    "summary": {
+      "presentedQuestionCount": 1,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 0,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 10.0,
+      "meanCorrectAnswerTimeMs": 10.0
+    },
+    "questionTimes": [
+      {
+        "id": "q0",
+        "index": 0,
+        "correctAnswerTimeMs": 10.0,
+        "firstInputTimeMs": 5.0,
+        "firstInputElapsedMs": 5.0,
+        "inputChangeCount": 2
+      }
+    ],
+    "comparisonEligible": false,
+    "warnings": [
+      {
+        "code": "invalid-input-value",
+        "message": "Raw input is not a string; inspect the raw observation.",
+        "sequence": 2
+      }
+    ],
+    "cumulativePartialValidTimes": 3
+  },
+  "invalid-index": {
+    "summary": {
+      "presentedQuestionCount": 1,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 0,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 10.0,
+      "meanCorrectAnswerTimeMs": 10.0
+    },
+    "questionTimes": [
+      {
+        "id": "q0",
+        "index": null,
+        "correctAnswerTimeMs": 10.0,
+        "firstInputTimeMs": 10.0,
+        "firstInputElapsedMs": 10.0,
+        "inputChangeCount": 1
+      }
+    ],
+    "comparisonEligible": false,
+    "warnings": [
+      {
+        "code": "invalid-question-identity",
+        "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+        "sequence": 1
+      }
+    ],
+    "cumulativePartialValidTimes": 4
+  },
+  "correct-after-stale-reference": {
+    "summary": {
+      "presentedQuestionCount": 2,
+      "correctQuestionCount": 2,
+      "unfinishedQuestionCount": 0,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 20.0,
+      "meanCorrectAnswerTimeMs": 20.0
+    },
+    "questionTimes": [
+      {
+        "id": "q0",
+        "index": 0,
+        "correctAnswerTimeMs": null,
+        "firstInputTimeMs": null,
+        "firstInputElapsedMs": 10.0,
+        "inputChangeCount": 1
+      },
+      {
+        "id": "q1",
+        "index": 1,
+        "correctAnswerTimeMs": 20.0,
+        "firstInputTimeMs": 20.0,
+        "firstInputElapsedMs": 40.0,
+        "inputChangeCount": 1
+      }
+    ],
+    "comparisonEligible": false,
+    "warnings": [
+      {
+        "code": "invalid-question-reference",
+        "message": "Input/acceptance does not refer to the current unfinished question.",
+        "sequence": 5
+      }
+    ],
+    "cumulativePartialValidTimes": 5
+  },
+  "gap-after-correct": {
+    "summary": {
+      "presentedQuestionCount": 2,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 1,
+      "validCorrectAnswerCount": 0,
+      "medianCorrectAnswerTimeMs": null,
+      "meanCorrectAnswerTimeMs": null
+    },
+    "questionTimes": [
+      {
+        "id": "q0",
+        "index": 0,
+        "correctAnswerTimeMs": null,
+        "firstInputTimeMs": null,
+        "firstInputElapsedMs": 10.0,
+        "inputChangeCount": 1
+      },
+      {
+        "id": "q1",
+        "index": 1,
+        "correctAnswerTimeMs": null,
+        "firstInputTimeMs": null,
+        "firstInputElapsedMs": null,
+        "inputChangeCount": 0
+      }
+    ],
+    "comparisonEligible": false,
+    "warnings": [
+      {
+        "code": "invalid-event-order",
+        "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+        "sequence": 5
+      },
+      {
+        "code": "invalid-event-order",
+        "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+        "sequence": 6
+      }
+    ],
+    "cumulativePartialValidTimes": 5
+  },
+  "APIInvariantChecks": [
+    "read/export equality for every case",
+    "raw events unchanged",
+    "fixed standard metadata rejected when inconsistent",
+    "mixed protected bulk scope rolls back"
+  ],
+  "independentPairCountCases": 40000,
+  "independentHistogramCases": 1000
+}

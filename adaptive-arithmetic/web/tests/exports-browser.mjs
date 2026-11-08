@@ -192,7 +192,7 @@ try {
   const page = await browser.newPage();
   page.on("pageerror", (e) => pageErrors.push(e.message));
   await page.bringToFront();
-  await page.goto(siteURL);
+  await page.goto(siteURL + "?view=custom");
   await page.waitForFunction(
     () =>
       document.querySelector(".start-button")?.textContent === "Start practice",
@@ -416,7 +416,7 @@ try {
   );
   assert.equal(active.summary.medianCorrectAnswerTimeMs, null);
   await cdp.send("Target.createTarget", {
-    url: siteURL + "/?background-export",
+    url: siteURL + "/?view=custom&background-export",
     background: true,
   });
   const target = await browser.waitForTarget((target) =>

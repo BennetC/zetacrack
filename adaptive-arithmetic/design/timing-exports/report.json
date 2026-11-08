@@ -9,9 +9,9 @@
     "countdown is excluded; another tab exports persisted live observations without ending/recovering their owner"
   ],
   "pageErrors": [],
-  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\timing-exports-1791555923962.sqlite3",
-  "apiURL": "http://127.0.0.1:49743",
-  "siteURL": "http://127.0.0.1:49744",
+  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\timing-exports-1791561834109.sqlite3",
+  "apiURL": "http://127.0.0.1:63174",
+  "siteURL": "http://127.0.0.1:63175",
   "syntheticVerificationData": true,
-  "sessionId": "109f3ac4-ffc8-47ae-bc3d-31c169469c64"
+  "sessionId": "3281bef8-98b6-4988-ae2f-e071c428bf38"
 }

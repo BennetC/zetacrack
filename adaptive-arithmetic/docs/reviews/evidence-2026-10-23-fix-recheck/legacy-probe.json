@@ -1,0 +1,47 @@
+{
+  "synthetic": true,
+  "beforeOriginalColumnHash": "3ce8a443801d3811913493dda31bc320fbe9f27fe1596f588663aef096bb69aa",
+  "afterOriginalColumnHash": "3ce8a443801d3811913493dda31bc320fbe9f27fe1596f588663aef096bb69aa",
+  "unchangedStoredTexts": true,
+  "cases": [
+    {
+      "case": "missing-acceptance",
+      "summary": {
+        "presentedQuestionCount": 1,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 0,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 10,
+        "meanCorrectAnswerTimeMs": 10
+      },
+      "unversioned": true,
+      "comparisonEligible": false
+    },
+    {
+      "case": "bom-accepted",
+      "summary": {
+        "presentedQuestionCount": 1,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 0,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 10,
+        "meanCorrectAnswerTimeMs": 10
+      },
+      "unversioned": true,
+      "comparisonEligible": false
+    },
+    {
+      "case": "invalid-field",
+      "summary": {
+        "presentedQuestionCount": 1,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 0,
+        "validCorrectAnswerCount": 0,
+        "medianCorrectAnswerTimeMs": null,
+        "meanCorrectAnswerTimeMs": null
+      },
+      "unversioned": true,
+      "comparisonEligible": false
+    }
+  ]
+}

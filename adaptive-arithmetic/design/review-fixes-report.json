@@ -11,11 +11,11 @@
     "earlier real focus loss keeps its reason/time; ending in countdown remains manual at zero with no presented question"
   ],
   "pageErrors": [],
-  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\review-fixes-1791555276115.sqlite3",
-  "apiURL": "http://127.0.0.1:58292",
-  "siteURL": "http://127.0.0.1:58293",
+  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\review-fixes-1791561725846.sqlite3",
+  "apiURL": "http://127.0.0.1:55322",
+  "siteURL": "http://127.0.0.1:55323",
   "syntheticVerificationData": true,
   "normalPreviewUntouched": true,
-  "sourceSessionId": "6726abaf-4d07-4ce5-854c-c69255fe86c6",
-  "staleJournalSessionId": "f25c0f66-fc68-46e9-b956-4e9cc42dfef0"
+  "sourceSessionId": "2fc99620-c53c-4bfa-acc7-67cfa2886a53",
+  "staleJournalSessionId": "4c14f375-6486-4a50-9bd9-ffd129f6cc4c"
 }

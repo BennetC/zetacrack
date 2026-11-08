@@ -1,0 +1,399 @@
+{
+  "id": "c6168f8d-2ade-4442-badc-19de5827c6ab",
+  "config": {
+    "operations": [
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "id": "fixture-add",
+            "name": "Addition group",
+            "second": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "share": "100",
+            "version": 1
+          }
+        ],
+        "id": "addition",
+        "share": "0",
+        "version": 1
+      },
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "id": "fixture-11",
+            "name": "Multiply by 11",
+            "second": {
+              "decimalPlaces": 0,
+              "max": "11",
+              "min": "11"
+            },
+            "share": "50",
+            "version": 1
+          },
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "99",
+              "min": "10"
+            },
+            "id": "fixture-12",
+            "name": "Multiply by 12",
+            "second": {
+              "decimalPlaces": 0,
+              "max": "12",
+              "min": "12"
+            },
+            "share": "50",
+            "version": 1
+          }
+        ],
+        "id": "multiplication",
+        "share": "0",
+        "version": 1
+      },
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 0,
+              "max": "2",
+              "min": "1"
+            },
+            "id": "f02c1800-8ec7-4d03-9637-dec3371e74f0",
+            "name": "Division group",
+            "second": {
+              "decimalPlaces": 3,
+              "max": "0.125",
+              "min": "0.125"
+            },
+            "share": "100",
+            "version": 1
+          }
+        ],
+        "id": "division",
+        "share": "100",
+        "version": 1
+      }
+    ],
+    "session": {
+      "countdown": false,
+      "durationSeconds": "120",
+      "format": "endless"
+    },
+    "version": 1
+  },
+  "seed": "00c85472-46aa-4419-aa6c-ea6a20471189",
+  "generatorVersion": "exact-grid-v1",
+  "policyVersion": "hierarchical-shares-v1",
+  "measurementVersion": "response-timing-v1",
+  "mode": "custom",
+  "contentVersion": "custom-grid-v1",
+  "createdAt": "2026-10-22T22:10:26.641398+00:00",
+  "status": "ended",
+  "events": [
+    {
+      "elapsedMs": 0,
+      "payload": {
+        "wallAt": "2026-10-22T22:10:26.684Z"
+      },
+      "sequence": 0,
+      "type": "session-started"
+    },
+    {
+      "elapsedMs": 0.5999999642372131,
+      "payload": {
+        "question": {
+          "expected": "0.125",
+          "groupId": "f02c1800-8ec7-4d03-9637-dec3371e74f0",
+          "id": "q-0",
+          "index": 0,
+          "left": "0.25",
+          "operation": "division",
+          "right": "2",
+          "selection": {
+            "groupBasisPoints": 10000,
+            "operationBasisPoints": 10000,
+            "validPairCount": "2"
+          }
+        }
+      },
+      "sequence": 1,
+      "type": "question-presented"
+    },
+    {
+      "elapsedMs": 20.69999998807907,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": "9"
+      },
+      "sequence": 2,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 27.399999976158142,
+      "payload": {
+        "inputType": "deleteContentBackward",
+        "questionId": "q-0",
+        "value": ""
+      },
+      "sequence": 3,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 37.59999996423721,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": "."
+      },
+      "sequence": 4,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 42.39999997615814,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": ".1"
+      },
+      "sequence": 5,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 46.39999997615814,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": ".12"
+      },
+      "sequence": 6,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 50.299999952316284,
+      "payload": {
+        "inputType": "insertText",
+        "questionId": "q-0",
+        "value": ".125"
+      },
+      "sequence": 7,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 50.299999952316284,
+      "payload": {
+        "questionId": "q-0",
+        "value": ".125"
+      },
+      "sequence": 8,
+      "type": "answer-accepted"
+    },
+    {
+      "elapsedMs": 52.19999998807907,
+      "payload": {
+        "question": {
+          "expected": "0.125",
+          "groupId": "f02c1800-8ec7-4d03-9637-dec3371e74f0",
+          "id": "q-1",
+          "index": 1,
+          "left": "0.125",
+          "operation": "division",
+          "right": "1",
+          "selection": {
+            "groupBasisPoints": 10000,
+            "operationBasisPoints": 10000,
+            "validPairCount": "2"
+          }
+        }
+      },
+      "sequence": 9,
+      "type": "question-presented"
+    },
+    {
+      "elapsedMs": 76.5,
+      "payload": {
+        "endTimeKnown": true,
+        "reason": "focus-loss",
+        "unfinishedQuestionId": "q-1",
+        "wallAt": "2026-10-22T22:10:26.760Z"
+      },
+      "sequence": 10,
+      "type": "session-ended"
+    }
+  ],
+  "terminationState": "ended",
+  "terminationReason": "focus-loss",
+  "startedAt": "2026-10-22T22:10:26.684Z",
+  "endedAt": "2026-10-22T22:10:26.760Z",
+  "endTimeKnown": true,
+  "observedDurationMs": 76.5,
+  "questions": [
+    {
+      "id": "q-0",
+      "index": 0,
+      "presentationSequence": 1,
+      "operation": "division",
+      "operationVersion": 1,
+      "groupId": "f02c1800-8ec7-4d03-9637-dec3371e74f0",
+      "groupVersion": 1,
+      "groupName": "Division group",
+      "left": "0.25",
+      "right": "2",
+      "expected": "0.125",
+      "selection": {
+        "groupBasisPoints": 10000,
+        "operationBasisPoints": 10000,
+        "validPairCount": "2"
+      },
+      "outcome": "correct",
+      "presentedElapsedMs": 0.5999999642372131,
+      "acceptedElapsedMs": 50.299999952316284,
+      "firstInputElapsedMs": 20.69999998807907,
+      "correctAnswerTimeMs": 49.69999998807907,
+      "firstInputTimeMs": 20.100000023841858,
+      "observedUnfinishedDurationMs": null,
+      "unfinishedDurationIsLowerBound": null,
+      "acceptedInput": ".125",
+      "lastInput": ".125",
+      "inputChangeCount": 6,
+      "dataQualityWarnings": []
+    },
+    {
+      "id": "q-1",
+      "index": 1,
+      "presentationSequence": 9,
+      "operation": "division",
+      "operationVersion": 1,
+      "groupId": "f02c1800-8ec7-4d03-9637-dec3371e74f0",
+      "groupVersion": 1,
+      "groupName": "Division group",
+      "left": "0.125",
+      "right": "1",
+      "expected": "0.125",
+      "selection": {
+        "groupBasisPoints": 10000,
+        "operationBasisPoints": 10000,
+        "validPairCount": "2"
+      },
+      "outcome": "unfinished",
+      "presentedElapsedMs": 52.19999998807907,
+      "acceptedElapsedMs": null,
+      "firstInputElapsedMs": null,
+      "correctAnswerTimeMs": null,
+      "firstInputTimeMs": null,
+      "observedUnfinishedDurationMs": 24.30000001192093,
+      "unfinishedDurationIsLowerBound": false,
+      "acceptedInput": null,
+      "lastInput": null,
+      "inputChangeCount": 0,
+      "dataQualityWarnings": []
+    }
+  ],
+  "summary": {
+    "presentedQuestionCount": 2,
+    "correctQuestionCount": 1,
+    "unfinishedQuestionCount": 1,
+    "validCorrectAnswerCount": 1,
+    "medianCorrectAnswerTimeMs": 49.69999998807907,
+    "meanCorrectAnswerTimeMs": 49.69999998807907
+  },
+  "dataQualityWarnings": [],
+  "cohortKey": "e2594a1738e174a3e1faab2dd44d7b9faba2e5272b30c272cbb5d418e06a7433",
+  "cohortLabel": "Custom practice · endless · division · e2594a17",
+  "score": 1,
+  "comparisonEligible": false,
+  "comparisonExclusionReasons": [
+    "Interrupted or untimed run",
+    "Run did not record its full fixed duration"
+  ],
+  "scoreState": "partial",
+  "analysis": {
+    "cohorts": [
+      {
+        "key": "e2594a1738e174a3e1faab2dd44d7b9faba2e5272b30c272cbb5d418e06a7433",
+        "label": "Custom practice · endless · division · e2594a17",
+        "mode": "custom",
+        "sessionCount": 1,
+        "eligibleSessionCount": 0
+      }
+    ],
+    "selectedCohortKey": "e2594a1738e174a3e1faab2dd44d7b9faba2e5272b30c272cbb5d418e06a7433",
+    "selectedSessionCount": 1,
+    "eligibleSessionCount": 0,
+    "excludedSessionCount": 1,
+    "exclusionReasons": {
+      "Interrupted or untimed run": 1,
+      "Run did not record its full fixed duration": 1
+    },
+    "includePartialObservations": true,
+    "observationSessionCount": 1,
+    "summary": {
+      "presentedQuestionCount": 2,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 1,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 49.69999998807907,
+      "meanCorrectAnswerTimeMs": 49.69999998807907
+    },
+    "histogram": [
+      {
+        "lowerMs": 49.69999998807907,
+        "upperMs": 49.69999998807907,
+        "upperInclusive": true,
+        "count": 1
+      }
+    ],
+    "breakdown": [
+      {
+        "level": "operation",
+        "operation": "division",
+        "groupId": null,
+        "label": "division",
+        "presentedQuestionCount": 2,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 1,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 49.69999998807907,
+        "meanCorrectAnswerTimeMs": 49.69999998807907
+      },
+      {
+        "level": "group",
+        "operation": "division",
+        "groupId": "f02c1800-8ec7-4d03-9637-dec3371e74f0",
+        "label": "Division group",
+        "presentedQuestionCount": 2,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 1,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 49.69999998807907,
+        "meanCorrectAnswerTimeMs": 49.69999998807907
+      }
+    ],
+    "trend": [],
+    "sessions": [
+      {
+        "id": "c6168f8d-2ade-4442-badc-19de5827c6ab",
+        "createdAt": "2026-10-22T22:10:26.641398+00:00",
+        "scoreState": "partial"
+      }
+    ]
+  }
+}

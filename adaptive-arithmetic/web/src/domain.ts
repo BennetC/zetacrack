@@ -68,8 +68,17 @@ export const GENERATOR_VERSION = "exact-grid-v1";
 export const POLICY_VERSION = "hierarchical-shares-v1";
 const pow10 = (n: number) => 10n ** BigInt(n);
 
+// Exact ECMAScript WhiteSpace + LineTerminator set, shared with
+// server/decimal_input.py. Preserve the original string in observations/config.
+export function trimDecimalWhitespace(text: string): string {
+  return text.replace(
+    /^[\u0009-\u000d\u0020\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+|[\u0009-\u000d\u0020\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+$/g,
+    "",
+  );
+}
+
 export function parseDecimal(text: string): Decimal {
-  const value = text.trim();
+  const value = trimDecimalWhitespace(text);
   if (!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(value))
     throw new Error("Enter a decimal number without separators or exponents.");
   const negative = value.startsWith("-");
@@ -369,6 +378,28 @@ function weighted<T extends { share: string }>(
   }
   throw new Error("Shares must sum to 100%.");
 }
+export interface SelectionPolicy {
+  readonly version: string;
+  choose(
+    config: Config,
+    random: SeededRandom,
+  ): { operation: OperationConfig; group: Group };
+}
+export class WeightedRandomPolicy implements SelectionPolicy {
+  readonly version = POLICY_VERSION;
+  choose(config: Config, random: SeededRandom) {
+    // Keep the original operation-then-group draws, including PRNG consumption.
+    const operation = weighted(config.operations, random);
+    return { operation, group: weighted(operation.groups, random) };
+  }
+}
+export class FixedStandardPolicy implements SelectionPolicy {
+  readonly version = "equal-operations-v1";
+  choose(config: Config, random: SeededRandom) {
+    const operation = config.operations[Number(random.below(4n))];
+    return { operation, group: operation.groups[0] };
+  }
+}
 function sample(
   range: NumberRange,
   random: SeededRandom,
@@ -401,6 +432,7 @@ export class QuestionGenerator {
   constructor(
     private config: Config,
     seed: string,
+    private policy: SelectionPolicy = new WeightedRandomPolicy(),
   ) {
     if (Object.keys(validateConfig(config)).length)
       throw new Error("Cannot generate from an invalid configuration.");
@@ -413,8 +445,7 @@ export class QuestionGenerator {
             this.domains.set(g.id, subtractionDomain(g.first, g.second));
   }
   next(): Question {
-    const operation = weighted(this.config.operations, this.random),
-      group = weighted(operation.groups, this.random);
+    const { operation, group } = this.policy.choose(this.config, this.random);
     let first: Decimal, second: Decimal;
     let count = grid(group.first).count * grid(group.second).count;
     if (operation.id === "subtraction" && !group.allowNegative) {

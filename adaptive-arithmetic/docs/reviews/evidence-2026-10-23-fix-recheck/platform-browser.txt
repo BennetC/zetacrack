@@ -1,0 +1,14 @@
+Passed: default Standard entry, accessible navigation, meaningful empty history/graphs
+Passed: standard direct fixed run, independent custom memory, exclusive cutoff, score/results/JSON/CSV trace
+Passed: valid custom edit survives immediate read-view navigation and custom reload without read-only mount writes
+Passed: exact signed custom flow retains raw inputs and full saved details/provenance/graphs
+Passed: real comparable chronology, deterministic histogram, operation/group breakdown and question sequence agree with backend
+Passed: 1487/768/390 layouts, 200 percent zoom, keyboard focus and equivalent chart tables
+Passed: partial observation inclusion keeps score trends separate; UTC date filtering preserves explicit cohort selection
+Passed: background history and graph reads leave live ownership/events/custom memory unchanged
+Passed: history pagination and mode filter expose real saved sessions
+Passed: pending-journal protection and canceled destructive confirmation preserve records
+Passed: single deletion and history failures offer working retries and refresh saved records
+Passed: bulk deletion removes exactly confirmed closed scope, preserves arriving records and remembered setup
+Passed: graph loading failure offers retry without modifying observations
+{"result":"passed","checks":13,"pageErrors":[]}

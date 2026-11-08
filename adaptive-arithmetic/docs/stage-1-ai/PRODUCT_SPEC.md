@@ -1,50 +1,19 @@
-# Stage 1 — Product Specification
+# Stage 1 product specification
 
-Status: Custom-practice controls and response timing/session exports explicitly approved, implemented, and verified; broader Stage 1 remains draft. Authoritative contracts: [CUSTOM_PRACTICE.md](CUSTOM_PRACTICE.md) and [TIMING_EXPORTS.md](TIMING_EXPORTS.md). See [project state](../PROJECT_STATE.md) and [decisions](../DECISIONS.md).
+Status: The complete local Stage 1 scope is implemented and verified under the comprehensive D-017 authorization, and accepted by the user on 2026-10-23 (D-023). Stage 2 planning is open; its methodology and substantive implementation remain user-owned. The stable checklist and evidence are in [FEATURE_GAPS.md](FEATURE_GAPS.md) and [ACCEPTANCE.md](ACCEPTANCE.md).
 
-## Confirmed intent and capabilities
+Build an enjoyable arithmetic trainer and an inspectable technical platform. Improvement is a goal to evaluate, not an established learning result.
 
-Build an enjoyable mental-arithmetic trainer for the user's practice and a credible technical portfolio project. Learning improvement is a goal to evaluate, not an established result.
+The app opens on Standard Zetamac: an immediate two-minute run with the verified original default question distribution and score. A discoverable disclosure explains our deliberate runtime differences and limits external score interchangeability. Custom practice preserves all approved exact signed decimal, weighted operation/group, range, preset and session controls, and remembers its setup independently.
 
-- **Zetamac-style arithmetic:** rapid arithmetic, a fixed standard benchmark preset, timed runs, scores, and performance history. Verify original mechanics before claiming exact compatibility or comparable scores.
-- **General/custom arithmetic:** configurable operations and operand ranges, multi-digit questions, decimals, and focused practice such as multiplication by 11 or 12 and two-digit addition/subtraction. Support timed and endless practice.
-- **Platform foundation:** correct generation and input, scoring, persistence, descriptive analytics, exportable question-level observations, tests, and a replaceable selection boundary. Stage 1 fixed/random policies are sufficient.
+Saved results expose correct-answer median/mean, first-input details and complete JSON/CSV downloads. History offers paginated/filterable saved sessions and full immutable question/configuration/event inspection. Graphs show comparable full-run chronology, correct-time distributions, operation/group breakdowns and within-session sequence, with explicit sample counts, missing/unfinished states, exclusion reasons and equivalent data tables. Closed-history deletion is deliberate, confirmed and protects ongoing/owned/pending data.
 
-Keep three independent concepts clear: arithmetic content specifies allowed questions; session format specifies how a run proceeds and ends; selection policy specifies which eligible question comes next. A focused operand constraint does not automatically require a separate product mode. The standard benchmark must remain nonadaptive.
+The requested 2026-11-03 improvements add prominent backend-derived score/answer-time averages and medians, including equally weighted per-run timing; History defaults to eligible full runs with an option to show non-eligible records. Reload during a run immediately starts a fresh session with the same content/duration and no countdown, preserving the old observations and remembered Custom setup. [PLATFORM.md](PLATFORM.md) defines these behaviors under D-025.
 
-## Proposed MVP boundaries — awaiting discussion
+The approved 2026-11-04 follow-up (D-026) adds best/recent score comparisons, quick date ranges and point inspection, accurate filter-empty/reset behavior, compatible History filters, distinct global/filtered deletion, persistent URL context and Back/Forward, saved-result Run again/R, durable retry-safe session creation, and optional mobile graph controls collapsed above the numeric summary. These remain descriptive/local platform features; the later performance investigation and Stage 2 learning implementation are separate.
 
-- One coherent trainer with an accessible standard-run entry point and a practice configuration flow.
-- Custom controls are approved and implemented as defined in [CUSTOM_PRACTICE.md](CUSTOM_PRACTICE.md). Further content/benchmark modes require discussion.
-- Saved custom results now provide median/mean correct-answer times, first-input details, and complete JSON/CSV downloads. History browsing/further analytics require separate design.
-- Only the minimum integration boundary required for later user-owned learning work.
+Authoritative behavior: [custom controls](CUSTOM_PRACTICE.md), [timing/export contract](TIMING_EXPORTS.md), and [complete platform decisions](PLATFORM.md). Arithmetic content, session execution and selection policy remain separate. Fixed standard and weighted random custom policies suffice; standard is nonadaptive.
 
-These describe the remaining broader product. Custom practice has an approved screen and selected visual option 1. Social features, achievements, accounts, synchronization, and public deployment require discussion.
+The selected open white/Inter/restrained blue design is retained across navigation and added screens. Keyboard controls, readable responsive layouts, chart scroll cues/tables, local fonts and explicit failure/retry states have actual Chrome verification. This is not universal assistive-technology or browser certification.
 
-## Core flows to discuss
-
-| Flow | Experience to resolve |
-| --- | --- |
-| Start a standard run | Entry point, exact preset, instructions, start/countdown behavior, duration, benchmark labeling. |
-| Configure practice | Delivered for the approved slice; [current contract](CUSTOM_PRACTICE.md). |
-| Answer and correct | Exact automatic advancement, editable raw input, and v1 response timing are delivered. Field changes are edits, not incorrect attempts. |
-| End or interrupt a session | Timed/endless, no skip/pause, focus-loss ending, unfinished records, and unknown-end lower bounds are delivered. |
-| Understand results | Median/mean correct-answer times, first-input details, and JSON/CSV exports are delivered. History, comparisons, breakdowns, and deletion access remain to design. |
-
-Custom-practice visual direction and local storage are selected. Resolve remaining experiences in small related discussions.
-
-## Analytics definitions to resolve
-
-Saved custom results use valid correct-answer times for median/mean, retain unfinished work and first-input observations, and expose no accuracy percentage. [TIMING_EXPORTS.md](TIMING_EXPORTS.md) defines these delivered metrics and displays. Additional distributions, breakdowns, history, and cross-configuration/version comparisons require separate agreement.
-
-Use the [data contract](DATA_CONTRACT.md) for authoritative measurement semantics. Show what was observed without claiming causal effects, confirmed patterns, pure cognitive speed, or training benefit. Historical comparisons need interpretable configuration/provenance and clear limits.
-
-## Non-goals for Stage 1
-
-Predictive models, automated pattern discovery, statistical confidence claims about discovered relationships, personalized training policies, and an AI coach are excluded. Stage 1 does not establish statistical validity or learning improvement. It does not select Stage 2 methodology.
-
-## Open product decisions
-
-The original benchmark's operations, sampling, timing, answer behavior, and scoring require verification. History/further analytics and research eligibility, retention/deletion, broader accessibility, product naming, and public use remain unresolved. Approved custom arithmetic, session settings, and timing/exports are implemented; option 1 remains the selected visual direction.
-
-Approval must result in reviewable [architecture](ARCHITECTURE.md), [measurement contract](DATA_CONTRACT.md), [implementation plan](IMPLEMENTATION_PLAN.md), and [acceptance criteria](ACCEPTANCE.md). Approval of a feature alone is not authorization to begin coding.
+Predictive models, automated discovery, statistical confidence claims, personalized learning policies, AI coaching, accounts/cloud synchronization, social/gamification features and public deployment are excluded. Product naming remains provisional. Stage 2 methodology and substantive implementation belong to the user after explicit Stage 1 acceptance.

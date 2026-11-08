@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "checks": [
+    "Explorer renders recorded timings, revisions, splits, exact-cohort ghosts and sample-counted profiles",
+    "Answer replay supports event stepping, playback, pause and scrubbing",
+    "Keyboard question selection and persisted user labels preserve focus and immutable raw events",
+    "Practice from selected questions opens exact singleton Custom groups without auto-starting",
+    "Same-seed challenge and reload preserve seed/exclusion and remembered setup; real edits capture versioned field telemetry",
+    "Desktop/mobile render without page overflow or JavaScript errors"
+  ],
+  "pageErrors": [],
+  "apiPort": 54979,
+  "sitePort": 54980
+}

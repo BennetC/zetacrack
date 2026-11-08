@@ -1,12 +1,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import {
-  answerMatches,
-  type Config,
-  type Question,
-  type QuestionGenerator,
-} from "./domain";
+import { answerMatches, type Config, type Question } from "./domain";
+import type { QuestionSource } from "./standard";
 import { request } from "./api";
 import { ExportActions } from "./ExportActions";
+import { rememberReloadRestart, clearReloadRestart } from "./reloadRestart";
 import { displaySeconds, type SavedSession } from "./measurements";
 import {
   hasPracticeFocus,
@@ -17,10 +14,12 @@ import {
   type StartFocusGuard,
 } from "./sessionRecovery";
 export interface Runtime {
+  replayOf?: string;
   id: string;
   config: Config;
   seed: string;
-  generator: QuestionGenerator;
+  generator: QuestionSource;
+  mode?: "standard" | "custom";
   firstQuestion: Question;
   ownership: SessionOwnership;
   startFocus: StartFocusGuard;
@@ -28,9 +27,15 @@ export interface Runtime {
 export function PracticeRun({
   runtime,
   onBack,
+  onInspect,
+  onGraphs,
+  onAgain,
 }: {
   runtime: Runtime;
   onBack: () => void;
+  onInspect?: (id: string) => void;
+  onGraphs?: (cohort: string, includePartial: boolean) => void;
+  onAgain?: () => Promise<void>;
 }) {
   const [phase, setPhase] = useState<"countdown" | "active" | "ended">(
     runtime.config.session.countdown ? "countdown" : "active",
@@ -46,19 +51,63 @@ export function PracticeRun({
     ),
     [error, setError] = useState(""),
     [journalError, setJournalError] = useState(""),
+    [restartStorageError, setRestartStorageError] = useState(""),
     [details, setDetails] = useState(false);
   const [savedResult, setSavedResult] = useState<SavedSession | null>(null);
   const [summaryError, setSummaryError] = useState("");
   const [summaryAttempt, setSummaryAttempt] = useState(0);
+  const [startingAgain, setStartingAgain] = useState(false);
+  const repeatInFlight = useRef(false);
+  async function repeat() {
+    if (!onAgain || saveState !== "saved" || repeatInFlight.current) return;
+    repeatInFlight.current = true;
+    setStartingAgain(true);
+    try {
+      await onAgain();
+    } finally {
+      repeatInFlight.current = false;
+      setStartingAgain(false);
+    }
+  }
+  useEffect(() => {
+    if (phase !== "ended" || !onAgain || saveState !== "saved") return;
+    const shortcut = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (
+        event.key.toLowerCase() === "r" &&
+        !event.repeat &&
+        !event.ctrlKey &&
+        !event.metaKey &&
+        !event.altKey &&
+        !target?.closest("input,textarea,select,[contenteditable=true]")
+      ) {
+        event.preventDefault();
+        void repeat();
+      }
+    };
+    window.addEventListener("keydown", shortcut);
+    return () => window.removeEventListener("keydown", shortcut);
+  }, [phase, saveState, onAgain]);
   const inputRef = useRef<HTMLInputElement>(null),
     origin = useRef<number | null>(null),
     questionRef = useRef(question),
     presented = useRef<string | null>(null);
+  const beforeEdit = useRef<Record<string, unknown> | null>(null);
+  const lastInput = useRef("");
   const ended = useRef(false),
     log = useRef<Observation[]>([]),
     acknowledged = useRef(0),
     queue = useRef(Promise.resolve()),
     mounted = useRef(false);
+  function clearRestart() {
+    try {
+      clearReloadRestart(runtime.id);
+    } catch {
+      setRestartStorageError(
+        "This tab’s restart information could not be cleared. Browser storage is unavailable.",
+      );
+    }
+  }
   const duration =
     runtime.config.session.format === "timed"
       ? Number(runtime.config.session.durationSeconds) * 1000
@@ -145,6 +194,9 @@ export function PracticeRun({
     if (ended.current) return;
     ended.current = true;
     const outcome = terminalOutcome(why, at, duration, origin.current !== null);
+    // Blur/hidden often precede pagehide on a browser-toolbar reload. Keep its
+    // candidate until focus returns to the ended UI or the user leaves results.
+    if (!["focus-loss", "page-exit"].includes(outcome.reason)) clearRestart();
     record(
       "session-ended",
       {
@@ -164,6 +216,25 @@ export function PracticeRun({
     void flush();
   }
   useLayoutEffect(() => {
+    if (!ended.current) {
+      try {
+        rememberReloadRestart({
+          version: 1,
+          sessionId: runtime.id,
+          mode: runtime.mode || "custom",
+          config: runtime.config,
+          replayOf: runtime.replayOf ? runtime.id : undefined,
+          challengeSeed: runtime.replayOf ? runtime.seed : undefined,
+        });
+      } catch {
+        setRestartStorageError(
+          "Automatic restart on reload is unavailable because this tab’s storage could not be saved.",
+        );
+      }
+    }
+    const focus = () => {
+      if (ended.current) clearRestart();
+    };
     const blur = () => finish("focus-loss");
     const hidden = () => {
       if (document.visibilityState !== "visible") finish("focus-loss");
@@ -182,15 +253,20 @@ export function PracticeRun({
       }
     };
     window.addEventListener("blur", blur);
+    window.addEventListener("focus", focus);
     document.addEventListener("visibilitychange", hidden);
     window.addEventListener("pagehide", leaving);
+    const navigation = () => finish("navigation");
+    window.addEventListener("popstate", navigation);
     // Keep the pending-start guard until the run's listeners are installed.
     runtime.startFocus.dispose();
     if (runtime.startFocus.lost || !hasPracticeFocus()) finish("focus-loss");
     return () => {
       window.removeEventListener("blur", blur);
+      window.removeEventListener("focus", focus);
       document.removeEventListener("visibilitychange", hidden);
       window.removeEventListener("pagehide", leaving);
+      window.removeEventListener("popstate", navigation);
     };
   }, [runtime]);
   useEffect(() => {
@@ -251,7 +327,11 @@ export function PracticeRun({
       clearInterval(tick);
     };
   }, [phase]);
-  function change(value: string, inputType: string) {
+  function change(
+    value: string,
+    inputType: string,
+    metadata: Record<string, unknown> = {},
+  ) {
     if (
       ended.current ||
       phase !== "active" ||
@@ -264,7 +344,21 @@ export function PracticeRun({
       return;
     }
     setInput(value);
-    record("input-changed", { questionId: question.id, value, inputType }, at);
+    record(
+      "input-changed",
+      {
+        questionId: question.id,
+        value,
+        inputType,
+        telemetryVersion: "answer-edits-v2",
+        beforeValue: lastInput.current,
+        ...beforeEdit.current,
+        ...metadata,
+      },
+      at,
+    );
+    beforeEdit.current = null;
+    lastInput.current = value;
     if (answerMatches(value, question.expected)) {
       record("answer-accepted", { questionId: question.id, value }, at);
       setCompleted((n) => n + 1);
@@ -272,6 +366,7 @@ export function PracticeRun({
       questionRef.current = next;
       setQuestion(next);
       setInput("");
+      lastInput.current = "";
       void flush();
     }
   }
@@ -289,6 +384,11 @@ export function PracticeRun({
     <main className="run-page">
       <header className="run-header">
         <span className="brand">Arithmetic</span>
+        {runtime.replayOf && (
+          <span className="section-help">
+            Repeated-seed challenge · excluded from benchmarks
+          </span>
+        )}
         <span>
           {runtime.config.session.format === "timed"
             ? `${Math.floor(Math.ceil(seconds) / 60)}:${String(Math.ceil(seconds) % 60).padStart(2, "0")}`
@@ -324,10 +424,25 @@ export function PracticeRun({
               inputMode="decimal"
               spellCheck={false}
               value={input}
+              onBeforeInput={(e) => {
+                beforeEdit.current = {
+                  selectionStart: e.currentTarget.selectionStart,
+                  selectionEnd: e.currentTarget.selectionEnd,
+                };
+              }}
               onChange={(e) =>
                 change(
                   e.target.value,
                   (e.nativeEvent as InputEvent).inputType || "input",
+                  {
+                    selectionAfterStart: e.target.selectionStart,
+                    selectionAfterEnd: e.target.selectionEnd,
+                    isComposing:
+                      typeof (e.nativeEvent as InputEvent).isComposing ===
+                      "boolean"
+                        ? (e.nativeEvent as InputEvent).isComposing
+                        : null,
+                  },
                 )
               }
             />
@@ -337,8 +452,16 @@ export function PracticeRun({
           </p>
         </section>
       ) : (
-        <section className="run-results">
-          <h1>Practice complete</h1>
+        <section
+          className="run-results"
+          onClickCapture={clearRestart}
+          onKeyDownCapture={clearRestart}
+        >
+          <h1>
+            {runtime.mode === "standard"
+              ? "Standard run complete"
+              : "Practice complete"}
+          </h1>
           <p className="section-help">
             {reason === "timeout"
               ? "Time is up."
@@ -358,6 +481,17 @@ export function PracticeRun({
               <span>Elapsed practice time</span>
             </div>
           </div>
+          {savedResult && (
+            <p className="section-help">
+              {savedResult.scoreState === "full"
+                ? "Full timed run"
+                : "Partial run"}{" "}
+              · Score: {savedResult.score}
+              {savedResult.scoreState === "partial"
+                ? `. ${savedResult.comparisonExclusionReasons.join("; ")}. This count is excluded from full-run score comparisons.`
+                : "."}
+            </p>
+          )}
           <div
             className="result-metrics timing-metrics"
             aria-label="Correct-answer timing"
@@ -420,7 +554,17 @@ export function PracticeRun({
             disabled={saveState !== "saved"}
           />
           <div className="result-actions">
-            <button className="primary-button" onClick={onBack}>
+            {onAgain && (
+              <button
+                className="primary-button"
+                disabled={saveState !== "saved" || startingAgain}
+                aria-keyshortcuts="r"
+                onClick={() => void repeat()}
+              >
+                {startingAgain ? "Starting…" : "Run again"}
+              </button>
+            )}
+            <button className="secondary-button" onClick={onBack}>
               Back to setup
             </button>
             <button
@@ -431,7 +575,37 @@ export function PracticeRun({
             >
               {details ? "Hide" : "Show"} question details
             </button>
+            {onInspect && (
+              <button
+                className="text-button"
+                disabled={!savedResult}
+                onClick={() => onInspect(runtime.id)}
+              >
+                Open saved session
+              </button>
+            )}
+            {onGraphs && (
+              <button
+                className="text-button"
+                disabled={!savedResult}
+                onClick={() =>
+                  savedResult &&
+                  onGraphs(
+                    savedResult.cohortKey,
+                    !savedResult.comparisonEligible,
+                  )
+                }
+              >
+                View graphs
+              </button>
+            )}
           </div>
+          {onAgain && (
+            <p className="section-help">
+              Run again with the same settings. Shortcut: R after this session
+              is saved.
+            </p>
+          )}
           {details && savedResult && (
             <ol className="question-review">
               {savedResult.questions.map((q) => {
@@ -471,6 +645,11 @@ export function PracticeRun({
       {journalError && (
         <p className="api-error" role="alert">
           {journalError}
+        </p>
+      )}
+      {restartStorageError && (
+        <p className="api-error" role="alert">
+          {restartStorageError}
         </p>
       )}
     </main>

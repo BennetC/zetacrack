@@ -1,5 +1,46 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { parseReloadRestart } from "../src/reloadRestart";
+import { standardConfig } from "../src/standard";
+import { recentDateRange, invalidDateRange } from "../src/navigation";
+import { readCreation } from "../src/sessionCreation";
+
+test("UTC quick ranges include today and cross month/leap/year boundaries", () => {
+  assert.deepEqual(recentDateRange(7, new Date("2024-03-01T00:30:00Z")), {
+    after: "2024-02-24",
+    before: "2024-03-01",
+  });
+  assert.deepEqual(recentDateRange(7, new Date("2026-01-02T23:59:59Z")), {
+    after: "2025-12-27",
+    before: "2026-01-02",
+  });
+  assert.equal(invalidDateRange("2026-02-02", "2026-02-01"), true);
+  assert.equal(invalidDateRange("2026-02-02", "2026-02-02"), false);
+  assert.equal(invalidDateRange("", "2026-02-02"), false);
+});
+
+test("pending creations retain their exact request and reject damaged recovery metadata", () => {
+  const body = {
+    creationKey: "stable-operation",
+    config: standardConfig(),
+    seed: "stable-seed",
+    mode: "standard",
+    generatorVersion: "zetamac-reverse-v1",
+    policyVersion: "equal-operations-v1",
+    measurementVersion: "response-timing-v1",
+    contentVersion: "zetamac-default-v1",
+  };
+  assert.deepEqual(readCreation(JSON.stringify(body)), body);
+  for (const bad of [
+    null,
+    {},
+    { ...body, creationKey: "" },
+    { ...body, seed: 0 },
+    { ...body, config: {} },
+    { ...body, mode: "unknown" },
+  ])
+    assert.throws(() => readCreation(JSON.stringify(bad)));
+});
 import {
   interruptedEnd,
   reconcileObservations,
@@ -29,6 +70,34 @@ const input: Observation = {
     inputType: "insertText",
   },
 };
+
+test("reload intent validates version, identity, mode and complete config without changing the snapshot", () => {
+  const intent = {
+    version: 1,
+    sessionId: "synthetic",
+    mode: "standard",
+    config: standardConfig(),
+  };
+  assert.deepEqual(parseReloadRestart(JSON.stringify(intent)), intent);
+  for (const invalid of [
+    null,
+    {},
+    { ...intent, version: 2 },
+    { ...intent, sessionId: "" },
+    { ...intent, mode: "other" },
+    { ...intent, config: {} },
+    {
+      ...intent,
+      config: {
+        ...intent.config,
+        session: { ...intent.config.session, durationSeconds: "0" },
+      },
+    },
+  ]) {
+    assert.equal(parseReloadRestart(JSON.stringify(invalid)), null);
+  }
+  assert.equal(parseReloadRestart("broken-json"), null);
+});
 
 test("stale journal preserves newer database input and assigns the next recovery sequence", () => {
   const merged = reconcileObservations(

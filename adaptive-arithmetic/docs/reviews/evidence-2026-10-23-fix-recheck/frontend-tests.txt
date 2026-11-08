@@ -1,0 +1,33 @@
+
+> web@0.0.0 test
+> tsx --test tests/domain.test.ts tests/sessionRecovery.test.ts tests/standard.test.ts
+
+✔ explicit decimal whitespace matches backend config and accepted-input rules (5.0621ms)
+✔ percentage arithmetic is exact and equal splitting preserves 100% (1.7019ms)
+✔ fixed decimal addition has no floating point artifacts (4.5287ms)
+✔ negative operands, large exact products, and operand order are preserved (0.7926ms)
+✔ all valid subtraction pairs have exactly one rank, including mixed precision (4.6809ms)
+✔ a sparse huge subtraction grid samples its single valid pair without rejection (4.1649ms)
+✔ division excludes zero and samples exact finite answers at their selected precision (14.5053ms)
+✔ invalid ranges, precision, empty selections, and impossible configurations are rejected (1.4463ms)
+✔ seed, full configuration, and generator version reproduce ordered questions (8.3993ms)
+✔ operation and group shares exclude zero weights and identify overlapping groups (44.1582ms)
+✔ partial inputs are not answers; equivalent signs and decimals are accepted exactly (0.5882ms)
+✔ timed durations require positive whole seconds and endless ignores its retained duration (0.3722ms)
+✔ stale journal preserves newer database input and assigns the next recovery sequence (23.1782ms)
+✔ unacknowledged journal tail survives, but immutable overlap and sequence gaps are rejected (1.7457ms)
+✔ matching JSON fields need not have matching property order; persisted termination is retained (0.8286ms)
+✔ recovery does not mark a solved or never-presented question unfinished (0.3516ms)
+✔ every active terminal action at the deadline becomes timeout; earlier, countdown and endless endings retain their meaning (0.5585ms)
+✔ standard reverse-addition and reverse-product rules preserve inclusive extremes (5.2009ms)
+✔ standard seed replay, independent draws, repeats and equal selection (258.7269ms)
+✔ legacy custom seeded sequence and random consumption remain unchanged (17.4189ms)
+✔ fixed and weighted policies implement the replaceable selection boundary (1.066ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1428.8421

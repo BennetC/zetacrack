@@ -8,6 +8,9 @@ import csv
 import io
 import json
 import math
+from decimal import InvalidOperation
+from server.decimal_input import exact
+from server.content import custom_trace_valid
 from statistics import mean, median
 
 
@@ -59,6 +62,19 @@ def derive_session(session):
         if question is not None:
             question["dataQualityWarnings"].append(item)
 
+    def invalidate_question(code, message, sequence, question):
+        warn(code, message, sequence, question)
+        question["_valid"] = False
+
+    def taint_timeline(code, message, sequence):
+        # `active` only identifies an unfinished presentation. Later damage
+        # cannot retroactively invalidate an independently completed interval.
+        nonlocal clock_valid
+        warn(code, message, sequence, active)
+        clock_valid = False
+        if active is not None:
+            active["_valid"] = False
+
     if session.get("measurementVersion") is None:
         warn("unversioned-measurement", "This session was recorded by an unversioned client; timing semantics are not certified as response-timing-v1.")
     if warn_config:
@@ -71,51 +87,36 @@ def derive_session(session):
         payload = event.get("payload")
         if not isinstance(payload, dict):
             payload = {}
-            warn("invalid-payload", "An observation has no object payload.", sequence, active)
-            clock_valid = False
-            if active is not None:
-                active["_valid"] = False
-        if sequence != index or not number(at) or at < previous_time:
-            warn("invalid-event-order", "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.", sequence, active)
-            clock_valid = False
-            if active is not None:
-                active["_valid"] = False
+            taint_timeline("invalid-payload", "An observation has no object payload.", sequence)
+        if type(sequence) is not int or sequence != index or not number(at) or at < previous_time:
+            taint_timeline("invalid-event-order", "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.", sequence)
         if number(at):
             previous_time = at
             observed = max(observed, at)
         if terminal is not None:
-            warn("event-after-end", "An observation follows the terminal event.", sequence, active)
-            clock_valid = False
-            if active is not None:
-                active["_valid"] = False
+            taint_timeline("event-after-end", "An observation follows the terminal event.", sequence)
 
         beyond_deadline = kind in ("question-presented", "input-changed", "answer-accepted") and number(at) and deadline is not None and at >= deadline
         if beyond_deadline:
-            warn("event-at-deadline", "Presentation/input/acceptance occurred at or after the exclusive timed deadline.", sequence, active)
-            clock_valid = False
-            if active is not None:
-                active["_valid"] = False
+            taint_timeline("event-at-deadline", "Presentation/input/acceptance occurred at or after the exclusive timed deadline.", sequence)
 
         if kind == "session-started":
             if started is not None or questions or terminal is not None:
-                warn("invalid-start", "Session start is duplicated or follows question/terminal observations.", sequence, active)
-                clock_valid = False
-                if active is not None:
-                    active["_valid"] = False
+                taint_timeline("invalid-start", "Session start is duplicated or follows question/terminal observations.", sequence)
             else:
                 started = event
         elif kind == "question-presented":
             raw = payload.get("question")
             raw = raw if isinstance(raw, dict) else {}
             if active is not None and active["outcome"] == "unfinished":
-                warn("unfinished-before-next", "A new question was presented before the preceding question was accepted.", sequence, active)
-                active["_valid"] = False
+                taint_timeline("unfinished-before-next", "A new question was presented before the preceding question was accepted.", sequence)
             operation = next((op for op in session["config"].get("operations", []) if op.get("id") == raw.get("operation")), {})
             group = next((g for g in operation.get("groups", []) if g.get("id") == raw.get("groupId")), {})
             question = {
-                "id": raw.get("id"), "index": raw.get("index"),
-                "presentationSequence": sequence, "operation": raw.get("operation"),
-                "operationVersion": operation.get("version"), "groupId": raw.get("groupId"),
+                "id": raw.get("id") if isinstance(raw.get("id"), str) else None,
+                "index": raw.get("index") if type(raw.get("index")) is int and raw["index"] >= 0 else None,
+                "presentationSequence": sequence, "operation": raw.get("operation") if isinstance(raw.get("operation"), str) and raw["operation"] in ("addition", "subtraction", "multiplication", "division") else None,
+                "operationVersion": operation.get("version"), "groupId": raw.get("groupId") if isinstance(raw.get("groupId"), str) else None,
                 "groupVersion": group.get("version"), "groupName": group.get("name"),
                 "left": raw.get("left") if isinstance(raw.get("left"), str) else None,
                 "right": raw.get("right") if isinstance(raw.get("right"), str) else None,
@@ -140,6 +141,8 @@ def derive_session(session):
                 by_id[identity] = question
             if started is None:
                 warn("missing-start", "Question was presented without a session-started observation.", sequence, question)
+            if question["index"] is None or question["operation"] is None or not question["groupId"]:
+                invalidate_question("invalid-question-identity", "Question index, operation, or group identity is unsupported; raw values remain in the event.", sequence, question)
             if not operation or not group or not isinstance(raw.get("selection"), dict):
                 warn("incomplete-provenance", "Question provenance is incomplete or not resolved by the original configuration.", sequence, question)
             if any(not isinstance(question[name], str) for name in ("left", "right", "expected")):
@@ -148,32 +151,29 @@ def derive_session(session):
             identity = payload.get("questionId")
             question = by_id.get(identity) if isinstance(identity, str) else None
             if question is None or question is not active or question["outcome"] == "correct":
-                warn("invalid-question-reference", "Input/acceptance does not refer to the current unfinished question.", sequence, question)
-                if question is not None:
-                    question["_valid"] = False
+                taint_timeline("invalid-question-reference", "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.", sequence)
                 continue
             question["_valid"] = question["_valid"] and clock_valid
             value = payload.get("value")
-            if value is not None and not isinstance(value, str):
-                warn("invalid-input-value", "Raw input is not a string; inspect the raw observation.", sequence, question)
+            legacy_missing_acceptance = kind == "answer-accepted" and value is None and session.get("measurementVersion") is None
+            if not isinstance(value, str) and not legacy_missing_acceptance:
+                invalidate_question("invalid-input-value", "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.", sequence, question)
                 value = None
             if kind == "input-changed":
                 question["inputChangeCount"] += 1
                 question["lastInput"] = value
                 if question["inputChangeCount"] == 1:
-                    question["firstInputElapsedMs"] = at if number(at) else None
+                    question["firstInputElapsedMs"] = at if isinstance(value, str) and number(at) else None
             else:
                 question["outcome"] = "correct"
                 question["acceptedElapsedMs"] = at if number(at) else None
                 question["acceptedInput"] = value
+                active = None
         elif kind == "session-ended":
             if terminal is None:
                 terminal = event
         else:
-            warn("unknown-event", "Unrecognized observation type.", sequence, active)
-            clock_valid = False
-            if active is not None:
-                active["_valid"] = False
+            taint_timeline("unknown-event", "Unrecognized observation type.", sequence)
 
     end_payload = terminal.get("payload", {}) if terminal else {}
     if not isinstance(end_payload, dict):
@@ -190,6 +190,35 @@ def derive_session(session):
 
     for question in questions:
         valid = question.pop("_valid")
+        if session.get("mode") == "custom" and not custom_trace_valid(session["config"], question):
+            valid = False
+            warn("invalid-custom-provenance", "Question ranges, precision, subtraction rules, or recorded selection do not match the original configuration; its timings are excluded.", question["presentationSequence"], question)
+        # A recorded acceptance is inspectable even if a damaged client wrote
+        # it for a wrong value. It must not become a valid correct-time sample.
+        try:
+            left, right, expected = (exact(question[k]) for k in ("left", "right", "expected"))
+            op = question["operation"]
+            calculated = left + right if op == "addition" else left - right if op == "subtraction" else left * right if op == "multiplication" else left / right if op == "division" else None
+            if calculated != expected:
+                raise ValueError("Arithmetic does not match")
+            if session.get("mode") == "standard":
+                a, b = (left, right) if op in ("addition", "multiplication") else (right, expected)
+                selection = question.get("selection")
+                pair_count = "9801" if op in ("addition", "subtraction") else "1089"
+                if (a.denominator != 1 or b.denominator != 1 or not 2 <= a <= (100 if op in ("addition", "subtraction") else 12) or not 2 <= b <= 100 or question["groupId"] != "standard-" + op or not isinstance(selection, dict) or selection.get("operationBasisPoints") != 2500 or selection.get("groupBasisPoints") != 10000 or selection.get("validPairCount") != pair_count):
+                    raise ValueError("Invalid standard content")
+        except (ValueError, TypeError, InvalidOperation, ArithmeticError):
+            valid = False
+            warn("invalid-arithmetic", "The exact arithmetic/content trace is invalid; response timings are excluded while raw records are retained.", question["presentationSequence"], question)
+        if question["outcome"] == "correct":
+            try:
+                if question["acceptedInput"] is None and session.get("measurementVersion") is None:
+                    pass  # Legacy acceptance may omit the raw string.
+                elif exact(question["acceptedInput"]) != expected:
+                    raise ValueError("Accepted input does not match")
+            except (ValueError, TypeError, InvalidOperation, ArithmeticError, UnboundLocalError):
+                valid = False
+                warn("invalid-accepted-input", "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.", question["presentationSequence"], question)
         presentation = question["presentedElapsedMs"]
         first = question["firstInputElapsedMs"]
         accepted = question["acceptedElapsedMs"]
@@ -212,16 +241,17 @@ def derive_session(session):
         "meanCorrectAnswerTimeMs": mean(values) if values else None,
     }
     start_payload = started.get("payload") if started else None
-    return {**session, "terminationState": state, "terminationReason": end_payload.get("reason"),
-            "startedAt": start_payload.get("wallAt") if isinstance(start_payload, dict) else None,
-            "endedAt": end_payload.get("wallAt") if end_known else None,
+    return {**session, "terminationState": state, "terminationReason": end_payload.get("reason") if isinstance(end_payload.get("reason"), str) else None,
+            "startedAt": start_payload.get("wallAt") if isinstance(start_payload, dict) and isinstance(start_payload.get("wallAt"), str) else None,
+            "endedAt": end_payload.get("wallAt") if end_known and isinstance(end_payload.get("wallAt"), str) else None,
             "endTimeKnown": end_known, "observedDurationMs": observed if clock_valid else None,
             "questions": questions, "summary": summary, "dataQualityWarnings": warnings}
 
 
 CSV_FIELDS = [
+    "replayOf", "annotationsJson", "interactionJson",
     "sessionId", "createdAt", "startedAt", "endedAt", "status", "terminationState", "terminationReason", "endTimeKnown",
-    "sessionFormat", "durationSeconds", "countdown", "measurementVersion", "seed", "generatorVersion", "policyVersion",
+    "sessionFormat", "durationSeconds", "countdown", "measurementVersion", "mode", "contentVersion", "cohortKey", "score", "scoreState", "comparisonEligible", "seed", "generatorVersion", "policyVersion",
     "questionId", "questionIndex", "presentationSequence", "operation", "operationVersion", "groupId", "groupVersion", "groupName",
     "left", "right", "expected", "outcome", "presentedElapsedMs", "firstInputElapsedMs", "acceptedElapsedMs",
     "correctAnswerTimeMs", "firstInputTimeMs", "observedUnfinishedDurationMs", "unfinishedDurationIsLowerBound", "inputChangeCount",
@@ -244,6 +274,8 @@ def export_csv(sessions):
             row.update(session["config"].get("session", {}))
             row.pop("format", None)
             row.update(sessionId=session["id"], sessionFormat=session["config"]["session"]["format"],
+                       annotationsJson=json_text([a for a in session.get("annotations", []) if a["presentationSequence"] == question["presentationSequence"]]),
+                       interactionJson=json_text(next((r for r in session.get("runAnalytics", {}).get("questions", []) if r["presentationSequence"] == question["presentationSequence"]), None)),
                        questionId=question["id"], questionIndex=question["index"],
                        acceptedInputJson=json_text(question["acceptedInput"]) if question["acceptedInput"] is not None else None,
                        lastInputJson=json_text(question["lastInput"]) if question["lastInput"] is not None else None,

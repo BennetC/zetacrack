@@ -1,8 +1,14 @@
 # Adaptive Arithmetic
 
-A local arithmetic practice app following selected design option 1. Configure weighted operations and multiple exercise groups, exact signed ranges, independent decimal precision, and timed or endless sessions. Save named presets in SQLite and restore the last valid setup. Correct answers advance automatically; leaving the window ends practice. Every session retains its original configuration.
+Session detail now includes a Run explorer with input replay, revisions, timing splits, ghost pace comparisons, arithmetic profiles, correction labels and Custom practice from selected questions. Same-seed challenges are explicitly excluded from benchmarks. See the [measurement contract](docs/stage-1-ai/RUN_EXPLORER.md) and [verification](docs/reviews/2026-11-05-explorer-verification.md). Typo labels are descriptive hypotheses, not established causes.
 
-Saved results show median and mean correct-answer times, with first-input time in question details. Download a finished session as JSON/CSV from results, or export every saved session below setup controls. Exports include original configurations and unfinished observations; timings remain unrounded in records. See the [timing/export contract](docs/stage-1-ai/TIMING_EXPORTS.md).
+A complete local Stage 1 arithmetic platform following selected design option 1. Open Standard Zetamac for an immediate two-minute run using the original default question distribution, or use independently remembered Custom practice with weighted operations/groups, exact signed ranges and decimals, presets, and timed/endless sessions. Correct answers advance automatically; leaving the window ends practice. Our disclosed timing/input/focus rules differ from the original game, so external scores are not interchangeable.
+
+Saved results show median/mean correct-answer times and first-input details. History offers pagination, filters, original configurations, exact questions, raw inputs/events and provenance. Graphs show comparable full-run score/timing chronology, distributions, operation/group breakdowns and per-session sequence with unfinished observations. JSON/CSV downloads retain snapshots and raw precision. Sessions are kept locally until confirmed deletion; ongoing/owned/pending data is protected. See the [complete platform contract](docs/stage-1-ai/PLATFORM.md).
+
+Graphs also show numeric average/median scores, pooled answer times and equally weighted run timing. History opens with eligible full runs only; **Show non-eligible runs** reveals excluded sessions. Reloading during practice immediately starts a fresh run with the same content/duration and no countdown, retaining the interrupted observations and remembered Custom settings.
+
+The approved follow-up adds best/latest-10 score comparisons, quick date ranges, inspectable graph points, persistent filtered URLs/Back/Forward, separate matching/all-history deletion and **Run again** (R after saving). Pending Start requests retain a stable operation key so a lost response can be retried or recovered without creating an orphan. Mobile graph controls collapse to bring the scores into the first viewport. Current verified preview: [127.0.0.1:4175](http://127.0.0.1:4175), API 8019; the original 4173/8017 processes may still serve older code until their owner restarts them.
 
 ## Run locally on Windows
 
@@ -22,7 +28,7 @@ Start both services:
 .\scripts\start.ps1
 ```
 
-[Open custom practice](http://127.0.0.1:4173). The script launches hidden processes, verifies the API/frontend connection, and writes logs into ignored `data/`. It reuses listening services after checking their responses. API: `127.0.0.1:8017`; frontend: `127.0.0.1:4173`.
+[Open the app](http://127.0.0.1:4173). The script launches hidden processes, verifies the API/frontend connection, and writes logs into ignored `data/`. It reuses listening services after checking their responses. API: `127.0.0.1:8017`; frontend: `127.0.0.1:4173`.
 
 Presets, remembered setup, immutable sessions, and observations live in `data/arithmetic.sqlite3`. Use a SQLite-aware backup tool, or stop the API before copying the database and its WAL files. `ARITHMETIC_DB` can select a separate database before launch.
 
@@ -48,14 +54,21 @@ npm run build
 npm run test:browser
 npm run test:regressions
 npm run test:exports
+npm run test:stage1
+npm run test:review-fixes
+npm run test:improvements
+npm run test:next-improvements
+npm run test:sites
 ```
 
-Browser checks require installed Chrome (or `CHROME_PATH`). The baseline harness uses free ports 8018/4174; recovery regressions and timing/export checks choose dynamic ports. They use isolated servers/databases and synthetic data, and stop their own servers afterward. Run browser suites sequentially on Windows.
+Browser checks require installed Chrome (or `CHROME_PATH`). The baseline harness uses free ports 8018/4174; recovery, timing/export and complete-platform checks choose dynamic ports. They use isolated servers/databases and synthetic data, and stop their own servers afterward. Run browser suites sequentially on Windows.
 
-Actual results after the 2026-10-09 timing/export implementation: 16 frontend tests, 34 backend tests, 10 baseline browser checks, 8 recovery/deadline checks, 6 timing/export browser checks, typecheck, and build passed. The earlier independent reviewer rechecked the four runtime fixes; this new slice has its own verification evidence. The selected UI is preserved; [visual QA](design-qa.md) records desktop/mobile inspection. Recovery/data-loss limits are in the [contract](docs/stage-1-ai/CUSTOM_PRACTICE.md).
+Actual complete-platform verification on 2026-10-09: 20 frontend and 65 backend tests, 10 baseline / 8 recovery / 6 timing-export / 13 complete-platform browser checks, typecheck/build and 4 protected packaging tests. [Acceptance](docs/stage-1-ai/ACCEPTANCE.md) and [visual QA](design-qa.md) record traces, responsive/zoom/keyboard inspection and practical limits. Fixtures use isolated synthetic databases and never delete normal practice data.
+
+Latest requested review repairs, 2026-10-15: **95 backend / 21 frontend / 45 browser / 4 packaging** checks pass, plus typecheck/build. [Resolution report](docs/reviews/2026-10-15-fix-verification.md) records all five repaired findings and reproducible regression evidence. Its replay preparation script runs the original browser suites on dynamic ports and new evidence paths, preserving the historical reports. Independent patch review and human acceptance remain separate.
 
 ## Scope and next work
 
-See the [approved custom-practice contract](docs/stage-1-ai/CUSTOM_PRACTICE.md), [timing/export contract](docs/stage-1-ai/TIMING_EXPORTS.md), [actual handoff](docs/stage-1-ai/HANDOFF.md), and [project state](docs/PROJECT_STATE.md). Standard benchmark fidelity, history browsing and further analytics, retention/deletion controls, and deployment remain future work.
+See the [complete platform contract](docs/stage-1-ai/PLATFORM.md), [custom-practice contract](docs/stage-1-ai/CUSTOM_PRACTICE.md), [timing/export contract](docs/stage-1-ai/TIMING_EXPORTS.md), [handoff](docs/stage-1-ai/HANDOFF.md), and [project state](docs/PROJECT_STATE.md). All F01–F27 local Stage 1 requirements are delivered; the user accepted Stage 1 on 2026-10-23 (D-023). Accounts/cloud synchronization, deployment and permanent naming are outside this completion scope.
 
-Stage 1 builds the approved platform. Stage 2 remains the user's learning-system investigation and implementation. Full Stage 1 completion and user acceptance are separate from this delivered slice. The product name remains provisional. Read [AGENTS.md](AGENTS.md) and [DECISIONS.md](docs/DECISIONS.md) before continuing.
+Stage 2 planning opened on 2026-10-23. Start with the [research brief](docs/stage-2-user/RESEARCH_BRIEF.md) and [planning kickoff](docs/stage-2-user/IMPLEMENTATION_PLAN.md). The user owns the learning-system investigation/design/implementation; the agent assists with research, teaching, critique and review. The first investigation and methodology remain open; no learning-engine implementation is authorized. Implementation, verification and human acceptance are separate. The product name remains provisional. Read [AGENTS.md](AGENTS.md) and [DECISIONS.md](docs/DECISIONS.md) before continuing.

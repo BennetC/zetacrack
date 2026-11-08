@@ -154,7 +154,7 @@ try {
     );
     await page.evaluate(() => document.fonts.ready);
   };
-  await page.goto(siteURL);
+  await page.goto(siteURL + "?view=custom");
   await settled();
   await click("Multiplication");
   await page.screenshot({

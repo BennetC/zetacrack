@@ -1,0 +1,40 @@
+{
+  "reviewDate": "2026-10-14",
+  "gitHead": "a34d4a5c98f78e7b8d0297b0b6cb15a97d54870a",
+  "scope": "Complete current working tree, including uncommitted/untracked files",
+  "sourceSha256": {
+    "server/app.py": "79f32a06e8f558ab37ca0826586ccb8863e4983554887e46019ed99d385c047a",
+    "server/measurements.py": "31d2b0b5dbb1e4eb819bca8df77c03d1c723d84b6412e4c433c966fd324a0794",
+    "server/analytics.py": "0785c02eb7b8c0620e518c89d6134b019924731f7312de4f08e939338d18ae3d",
+    "server/content.py": "3efb6ce854e4beb92c27c000a26a8a60cdec5f3c4951aeea596fbd70e1b584cc",
+    "web/src/domain.ts": "b63d6e0ba64ca8411653875536106877597027e4bdbd8e64b6f54f9a500beb11",
+    "web/src/standard.ts": "3beecf6e2b4b66e4abed02f32c96609b1e01315d1aff47db40d55f9da68220f8",
+    "web/src/PracticeRun.tsx": "c6f92b038b3d1b1528ada01eb947a6765d57a9fee74811b912795f1a2ea8b34e",
+    "web/src/PracticeEditor.tsx": "f8331bbb36cedb8728f3fada39bd6ce6a065cb2184051002a5241a62afd62337",
+    "web/src/sessionRecovery.ts": "348e52e6dce37b58c4b776c01eb5c0bb251798a100ec568e7a55c31c4ee2a8db",
+    "web/src/SavedViews.tsx": "abc132b0e4ff46e4d53e850ce31b51c0078cdc9090ee0884229fd358c2d02829",
+    "web/src/Charts.tsx": "4211c2be815f5e4d350a90a8d5528386bc8b2905a809065f6df0251c16b67cc0"
+  },
+  "freshChecks": {
+    "backendTests": 65,
+    "frontendTests": 20,
+    "browserChecks": {
+      "baseline": 10,
+      "recovery": 8,
+      "exports": 6,
+      "platform": 13
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "packagingTests": 4,
+    "independentBackendPairCountCases": 40000,
+    "independentTypescriptSubtractionDomains": 15000,
+    "independentTypescriptRankedPairs": 184949,
+    "independentHistogramCases": 1000,
+    "actualClipboardBOMRepro": "confirmed",
+    "concurrentIdenticalAppendRequests": 200,
+    "concurrentIdenticalAppendHttp500": 67
+  },
+  "normalDataAndServices": "untouched",
+  "applicationSourceChanges": "none"
+}

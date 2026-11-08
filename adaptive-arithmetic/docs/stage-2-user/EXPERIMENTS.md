@@ -1,6 +1,6 @@
 # Stage 2 — Experiment Records and Guardrails
 
-Status: Not started. No concrete study, assignment procedure, analysis, or result is approved. This is a lightweight record template for later user-owned investigations. Read with the [research brief](RESEARCH_BRIEF.md).
+Status: Stage 2 planning opened 2026-10-23 (D-023); no experiment has started. No concrete study, assignment procedure, analysis, or result is approved. This is a lightweight record template for user-owned investigations. Read with the [research brief](RESEARCH_BRIEF.md).
 
 ## Evaluation guardrails
 
@@ -31,4 +31,4 @@ Copy this structure only when an investigation is agreed. No experiment has been
 
 ## Current study inventory
 
-No studies are selected. The multiplication-by-12 sequential example in the research brief is an illustration for discussion, not an approved experiment. Research and implementation planning remain user-owned.
+No studies are selected. Opening Stage 2 planning does not approve a study. The multiplication-by-12 sequential example in the research brief is an illustration for discussion, not an approved experiment. Research and implementation planning remain user-owned.

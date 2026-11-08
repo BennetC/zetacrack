@@ -1,4 +1,5 @@
 import { ApiError, request } from "./api";
+import { CREATION_PREFIX, readCreation } from "./sessionCreation";
 
 export interface Observation {
   sequence: number;
@@ -10,7 +11,7 @@ export const JOURNAL_PREFIX = "arithmetic.pending.";
 export const sessionLockName = (id: string) => "arithmetic.session." + id;
 
 export interface SessionOwnership {
-  release: () => void;
+  release: () => Promise<void>;
 }
 
 // A browser-owned lock outlives timer throttling and is released when its page
@@ -25,6 +26,10 @@ export function acquireSessionOwnership(
       ),
     );
   return new Promise((resolve, reject) => {
+    let unlocked!: () => void;
+    const released = new Promise<void>((done) => {
+      unlocked = done;
+    });
     void navigator.locks
       .request(sessionLockName(id), { ifAvailable: true }, async (lock) => {
         if (!lock) {
@@ -35,10 +40,19 @@ export function acquireSessionOwnership(
         const held = new Promise<void>((done) => {
           release = done;
         });
-        resolve({ release });
+        resolve({
+          release: () => {
+            release();
+            return released;
+          },
+        });
         await held;
       })
-      .catch(reject);
+      .then(unlocked)
+      .catch((error) => {
+        unlocked();
+        reject(error);
+      });
   });
 }
 
@@ -172,6 +186,55 @@ export function terminalOutcome(
 
 export async function recoverPending(): Promise<string[]> {
   const errors: string[] = [];
+  // A creation may have committed even when its response never reached the
+  // browser. Resolve its durable operation key before recovering observations.
+  try {
+    for (const key of Object.keys(localStorage).filter((key) =>
+      key.startsWith(CREATION_PREFIX),
+    )) {
+      let creationOwner: SessionOwnership | null = null;
+      let sessionOwner: SessionOwnership | null = null;
+      try {
+        creationOwner = await acquireSessionOwnership(
+          "creation." + key.slice(CREATION_PREFIX.length),
+        );
+        if (!creationOwner) continue;
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const body = readCreation(raw);
+        if (key !== CREATION_PREFIX + body.creationKey)
+          throw new Error(
+            "Pending start identity differs from its storage key.",
+          );
+        const session = await request<{ id: string }>(
+          "/api/sessions",
+          "POST",
+          body,
+        );
+        sessionOwner = await acquireSessionOwnership(session.id);
+        if (!sessionOwner) continue;
+        const persisted = await request<{ events: Observation[] }>(
+          "/api/sessions/" + session.id,
+        );
+        if (!localStorage.getItem(JOURNAL_PREFIX + session.id)) {
+          localStorage.setItem(
+            JOURNAL_PREFIX + session.id,
+            JSON.stringify({ id: session.id, events: persisted.events }),
+          );
+        }
+        localStorage.removeItem(key);
+      } catch (e) {
+        errors.push(`Pending start: ${(e as Error).message}`);
+      } finally {
+        await sessionOwner?.release();
+        await creationOwner?.release();
+      }
+    }
+  } catch (e) {
+    errors.push(
+      "Pending starts could not be inspected. " + (e as Error).message,
+    );
+  }
   let keys: string[];
   try {
     keys = Object.keys(localStorage).filter((key) =>

@@ -1,0 +1,332 @@
+{
+  "synthetic": true,
+  "apiPort": 49677,
+  "sitePort": 49678,
+  "checks": [
+    "Untouched editor restores the newest live setup response after reversed StrictMode reads and navigation, without autosaving loaded controls",
+    "Invalid deliberate edits survive delayed initialization/navigation without overwriting stored memory; repair persists while History is open",
+    "Untouched editor after initial connection failure restores remembered settings on in-place retry",
+    "Cross-tab 25-to-5 shrink preserves mode/text filters; a held corrective fetch renders loading with no false empty/impossible range on observed animation frames",
+    "A stale History response completing after a new text filter cannot restore former rows or pagination"
+  ],
+  "pageErrors": [],
+  "details": {
+    "pageCorrection": {
+      "during": {
+        "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+        "paint": [
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\n25 matching sessions · Newest first\n\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nPrevious page\n21–25 of 25\nNext page\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 5
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\n25 matching sessions · Newest first\n\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nPrevious page\n21–25 of 25\nNext page\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 5
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\n25 matching sessions · Newest first\n\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nPrevious page\n21–25 of 25\nNext page\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 5
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\n25 matching sessions · Newest first\n\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nPrevious page\n21–25 of 25\nNext page\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 5
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\n25 matching sessions · Newest first\n\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nCustom practice\n\n23.10.2026, 00:14:57\n\n77 seconds · ended · manual-end\n0\nPartial count\n—\nMedian · 0 timed answers\nView session\nPrevious page\n21–25 of 25\nNext page\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 5
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          }
+        ],
+        "dom": [
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\n5 matching sessions · Newest first\n\nNo saved sessions match these filters. Start a run or adjust the filters.\n\nPrevious page\n1–5 of 5\nNext page\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          },
+          {
+            "text": "Session history\n\nYour saved practice, with its original settings and observations.\n\nRefresh history\nMode\nAll modes\nStandard\nCustom\nLegacy / unspecified\nState\nAll states\nObserved end\nOngoing\nIncomplete / unknown end\nFrom date (UTC)\nThrough date (UTC)\nConfiguration contains\n\nLoading saved data…\n\nLocal data\n\nKept locally until you delete them. Ongoing, owned, and pending sessions are protected. This app has no third-party tracking or cloud synchronization.\n\nExport all sessions\nExport JSON\nExport CSV\nClear closed history",
+            "rows": 0
+          }
+        ]
+      },
+      "finalRows": 5,
+      "finalRange": "1–5 of 5"
+    },
+    "historyRequests": [
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=S",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Sc",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Sco",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scop",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scope",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+H",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+Hi",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+His",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+Hist",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+Histo",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+Histor",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+History",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=20&limit=20&mode=custom&configuration=Scoped+History",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=20&limit=20&mode=custom&configuration=Scoped+History",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+History",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=Scoped+History",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=N",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+m",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+ma",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+mat",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matc",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+match",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matchi",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matchin",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+c",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+co",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+con",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+conf",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+confi",
+        "method": "GET"
+      },
+      {
+        "url": "http://127.0.0.1:49678/api/sessions?offset=0&limit=20&mode=custom&configuration=No+matching+config",
+        "method": "GET"
+      }
+    ]
+  }
+}

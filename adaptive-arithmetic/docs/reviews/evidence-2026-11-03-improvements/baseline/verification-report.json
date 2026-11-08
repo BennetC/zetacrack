@@ -1,0 +1,25 @@
+{
+  "result": "passed",
+  "checks": [
+    "two-level shares render correctly",
+    "inline range and percentage validation blocks Start",
+    "add, duplicate and remove groups preserve shares",
+    "desktop, tablet and mobile stay within viewport",
+    "named preset save and rename reach SQLite",
+    "exact answer auto-advances; real focus loss ends; raw inputs and unfinished question persist",
+    "update/delete preserve immutable session snapshot",
+    "optional countdown is excluded from timed practice; timeout retains unfinished question",
+    "endless practice ends manually and retains unfinished work",
+    "last valid setup restores after reload"
+  ],
+  "consoleErrors": [],
+  "viewport": {
+    "width": 1487,
+    "height": 1058,
+    "density": 1
+  },
+  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\browser-verification-1793711123208.sqlite3",
+  "siteURL": "http://127.0.0.1:51409",
+  "sessionId": "f9fb72c2-94f9-4e16-9264-bc83f9886b4f",
+  "syntheticVerificationData": true
+}

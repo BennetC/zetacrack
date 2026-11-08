@@ -1,0 +1,21 @@
+{
+  "unchanged": true,
+  "tables": {
+    "sessions": {
+      "count": 336,
+      "sha256": "7c884811f1bb148f933fece590eb3796fab723ee183c7aecfb02acac03746f23"
+    },
+    "observations": {
+      "count": 63072,
+      "sha256": "b76af996afefb596ef2d61e402e6662d13a6a9e3e220dc6c5d1f5752c24556fe"
+    },
+    "presets": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "settings": {
+      "count": 1,
+      "sha256": "707071a8e03aa87eb6139558ef481b245d7b0a5d63328799d24729fe8802eccb"
+    }
+  }
+}

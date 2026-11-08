@@ -1,0 +1,199 @@
+.run-explorer {
+  margin: 36px 0;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 30px;
+}
+.explorer-eyebrow {
+  color: #64748b;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 600;
+}
+.explorer-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 26px 0;
+}
+.explorer-metrics > div {
+  border-left: 2px solid #dbeafe;
+  padding-left: 14px;
+}
+.explorer-metrics strong {
+  display: block;
+  font-size: 25px;
+  font-weight: 500;
+  color: #0f172a;
+}
+.explorer-metrics span,
+.profile-cell span,
+.split-card span {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 5px;
+}
+.explorer-controls {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.run-explorer label {
+  color: #475569;
+  font-size: 13px;
+}
+.run-explorer select,
+.run-explorer input:not([type="checkbox"]):not([type="range"]) {
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 5px;
+  max-width: 100%;
+}
+.explorer-controls input[type="number"] {
+  width: 84px;
+}
+.explorer-svg {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.explorer-svg svg {
+  width: 100%;
+  min-width: 520px;
+  font:
+    11px Inter,
+    sans-serif;
+  color: #64748b;
+}
+.question-mark {
+  cursor: pointer;
+}
+.question-mark:focus {
+  outline: none;
+}
+.question-mark:focus circle {
+  stroke: #0f172a;
+  stroke-width: 5px;
+}
+.explorer-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 30px 0;
+  align-items: start;
+}
+.replay-card {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 8px;
+}
+.replay-expression {
+  font-size: clamp(20px, 3vw, 32px);
+  padding: 20px 0;
+  overflow-wrap: anywhere;
+}
+.replay-expression output {
+  display: inline-block;
+  border-bottom: 2px solid #2563eb;
+  min-width: 65px;
+  text-align: center;
+}
+.replay-card input[type="range"] {
+  width: 100%;
+  accent-color: #2563eb;
+}
+.reel-button {
+  border: 1px solid #dbeafe;
+  border-radius: 4px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+.breakdown-select {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 14px 4px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+}
+.breakdown-select span:first-child,
+.breakdown-select strong {
+  position: relative;
+  z-index: 1;
+}
+.time-fill {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #eff6ff;
+}
+.split-grid,
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.split-card,
+.profile-cell {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 15px;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.split-card strong,
+.profile-cell strong {
+  display: block;
+  font-size: 19px;
+  color: #0f172a;
+  margin-top: 8px;
+  font-weight: 500;
+}
+.run-explorer small {
+  display: block;
+  color: #64748b;
+  font-size: 11px;
+  margin-top: 5px;
+}
+.selected-question {
+  background: #eff6ff;
+}
+.run-explorer .table-scroll {
+  margin: 18px 0;
+}
+.run-explorer th {
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .explorer-columns {
+    grid-template-columns: 1fr;
+  }
+  .explorer-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .explorer-controls {
+    gap: 8px;
+  }
+  .explorer-controls label {
+    max-width: 100%;
+  }
+  .profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "synthetic": true,
+  "observations": {
+    "graphs": {
+      "url": "http://127.0.0.1:55486/?view=graphs",
+      "headings": [
+        "Practice graphs",
+        "Full-run statistics",
+        "Scores",
+        "Answer times",
+        "Run-level timing",
+        "Comparable full-run history",
+        "Score over time",
+        "Correct-answer time over time",
+        "Correct-answer time distribution",
+        "Operation and group breakdown",
+        "Operations",
+        "Exercise groups"
+      ],
+      "buttons": [
+        {
+          "text": "Standard Zetamac",
+          "disabled": false
+        },
+        {
+          "text": "Custom practice",
+          "disabled": false
+        },
+        {
+          "text": "History",
+          "disabled": false
+        },
+        {
+          "text": "Graphs",
+          "disabled": false
+        },
+        {
+          "text": "Refresh graphs",
+          "disabled": false
+        },
+        {
+          "text": "Open session",
+          "disabled": false
+        },
+        {
+          "text": "Open session",
+          "disabled": false
+        },
+        {
+          "text": "Open session",
+          "disabled": false
+        }
+      ],
+      "labels": [
+        "Comparison group\nChoose a group\nStandard Zetamac · 120 seconds · addition, subtraction, multiplication, division · 84bc0fb4 (4 runs)",
+        "From date (UTC)",
+        "Through date (UTC)",
+        "Include partial / ongoing observations in distribution and breakdown",
+        "Session for response sequence\nChoose a saved session\n4.11.2026, 21:47:13 · full · a2f2e94c\n4.11.2026, 21:47:13 · full · f6a14cd1\n4.11.2026, 21:47:13 · full · 51de29d3"
+      ]
+    },
+    "chartPoints": {
+      "count": 14,
+      "focusable": 0,
+      "clickable": 0
+    },
+    "emptyDateMessage": "No saved history yet. Complete a run to see real observations here.",
+    "history": {
+      "url": "http://127.0.0.1:55486/?view=history",
+      "headings": [
+        "Session history",
+        "Local data",
+        "Export all sessions"
+      ],
+      "buttons": [
+        {
+          "text": "Standard Zetamac",
+          "disabled": false
+        },
+        {
+          "text": "Custom practice",
+          "disabled": false
+        },
+        {
+          "text": "History",
+          "disabled": false
+        },
+        {
+          "text": "Graphs",
+          "disabled": false
+        },
+        {
+          "text": "Refresh history",
+          "disabled": false
+        },
+        {
+          "text": "Standard Zetamac",
+          "disabled": false
+        },
+        {
+          "text": "View session",
+          "disabled": false
+        },
+        {
+          "text": "Standard Zetamac",
+          "disabled": false
+        },
+        {
+          "text": "View session",
+          "disabled": false
+        },
+        {
+          "text": "Standard Zetamac",
+          "disabled": false
+        },
+        {
+          "text": "View session",
+          "disabled": false
+        },
+        {
+          "text": "Previous page",
+          "disabled": true
+        },
+        {
+          "text": "Next page",
+          "disabled": true
+        },
+        {
+          "text": "Export JSON",
+          "disabled": false
+        },
+        {
+          "text": "Export CSV",
+          "disabled": false
+        },
+        {
+          "text": "Clear closed history",
+          "disabled": false
+        }
+      ],
+      "labels": [
+        "Mode\nAll modes\nStandard\nCustom\nLegacy / unspecified",
+        "State\nAll states\nObserved end\nOngoing\nIncomplete / unknown end",
+        "From date (UTC)",
+        "Through date (UTC)",
+        "Configuration contains",
+        "Show non-eligible runs"
+      ]
+    },
+    "conflictingFilters": {
+      "eligibleOnly": true,
+      "state": "ongoing"
+    },
+    "filteredDeletion": {
+      "visibleTotal": 0,
+      "previewCount": 4,
+      "confirmation": "Permanently delete these 4 closed sessions from all local history? 0 owned/pending sessions are protected. Presets and your custom setup remain."
+    },
+    "detailURL": "http://127.0.0.1:55486/?view=history",
+    "detailLostOnReload": true,
+    "results": {
+      "url": "http://127.0.0.1:55486/",
+      "headings": [
+        "Standard run complete"
+      ],
+      "buttons": [
+        {
+          "text": "Export JSON",
+          "disabled": false
+        },
+        {
+          "text": "Export CSV",
+          "disabled": false
+        },
+        {
+          "text": "Back to setup",
+          "disabled": false
+        },
+        {
+          "text": "Show question details",
+          "disabled": false
+        },
+        {
+          "text": "Open saved session",
+          "disabled": false
+        },
+        {
+          "text": "View graphs",
+          "disabled": false
+        }
+      ],
+      "labels": []
+    },
+    "noRunAgain": true,
+    "lostResponseId": "f6207c5f-77b7-4dbe-852f-f190a61c904d",
+    "lostResponse": {
+      "created": 1,
+      "status": "open",
+      "eventCount": 0,
+      "journalExists": false
+    },
+    "retryCreatedDifferentId": true,
+    "originalStillOpen": true,
+    "mobilePageOverflow": false
+  },
+  "pageErrors": []
+}

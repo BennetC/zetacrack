@@ -1,5 +1,5 @@
 {
-  "id": "a41898bd-23e6-4d0a-8760-d42a1a6a69e1",
+  "id": "fbe56e55-2a8e-4336-8672-aa23079dfe83",
   "config": {
     "operations": [
       {
@@ -76,7 +76,7 @@
               "max": "2",
               "min": "1"
             },
-            "id": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+            "id": "fdc6fb63-2b8b-4312-8e1c-98c312e90ca1",
             "name": "Division group",
             "second": {
               "decimalPlaces": 3,
@@ -99,27 +99,29 @@
     },
     "version": 1
   },
-  "seed": "ba1dd30f-805a-4029-93b8-0a7250ca26dc",
+  "seed": "88f7e379-5202-48dc-b882-fc0eaeafff1c",
   "generatorVersion": "exact-grid-v1",
   "policyVersion": "hierarchical-shares-v1",
   "measurementVersion": "response-timing-v1",
-  "createdAt": "2026-10-09T14:13:14.951384+00:00",
+  "mode": "custom",
+  "contentVersion": "custom-grid-v1",
+  "createdAt": "2026-10-09T15:59:37.245040+00:00",
   "status": "ended",
   "events": [
     {
       "elapsedMs": 0,
       "payload": {
-        "wallAt": "2026-10-09T14:13:14.977Z"
+        "wallAt": "2026-10-09T15:59:37.285Z"
       },
       "sequence": 0,
       "type": "session-started"
     },
     {
-      "elapsedMs": 0.6000000089406967,
+      "elapsedMs": 1.8999999910593033,
       "payload": {
         "question": {
           "expected": "0.125",
-          "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+          "groupId": "fdc6fb63-2b8b-4312-8e1c-98c312e90ca1",
           "id": "q-0",
           "index": 0,
           "left": "0.25",
@@ -136,7 +138,7 @@
       "type": "question-presented"
     },
     {
-      "elapsedMs": 39,
+      "elapsedMs": 24.399999991059303,
       "payload": {
         "inputType": "insertText",
         "questionId": "q-0",
@@ -146,7 +148,7 @@
       "type": "input-changed"
     },
     {
-      "elapsedMs": 53.5,
+      "elapsedMs": 55.70000000298023,
       "payload": {
         "inputType": "deleteContentBackward",
         "questionId": "q-0",
@@ -156,7 +158,7 @@
       "type": "input-changed"
     },
     {
-      "elapsedMs": 67.30000001192093,
+      "elapsedMs": 63.8999999910593,
       "payload": {
         "inputType": "insertText",
         "questionId": "q-0",
@@ -166,7 +168,7 @@
       "type": "input-changed"
     },
     {
-      "elapsedMs": 72.30000001192093,
+      "elapsedMs": 68.3999999910593,
       "payload": {
         "inputType": "insertText",
         "questionId": "q-0",
@@ -176,7 +178,7 @@
       "type": "input-changed"
     },
     {
-      "elapsedMs": 77.6000000089407,
+      "elapsedMs": 71.8999999910593,
       "payload": {
         "inputType": "insertText",
         "questionId": "q-0",
@@ -186,7 +188,7 @@
       "type": "input-changed"
     },
     {
-      "elapsedMs": 85.90000000596046,
+      "elapsedMs": 75.29999999701977,
       "payload": {
         "inputType": "insertText",
         "questionId": "q-0",
@@ -196,7 +198,7 @@
       "type": "input-changed"
     },
     {
-      "elapsedMs": 85.90000000596046,
+      "elapsedMs": 75.29999999701977,
       "payload": {
         "questionId": "q-0",
         "value": ".125"
@@ -205,11 +207,11 @@
       "type": "answer-accepted"
     },
     {
-      "elapsedMs": 88.20000000298023,
+      "elapsedMs": 76.70000000298023,
       "payload": {
         "question": {
           "expected": "0.125",
-          "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+          "groupId": "fdc6fb63-2b8b-4312-8e1c-98c312e90ca1",
           "id": "q-1",
           "index": 1,
           "left": "0.125",
@@ -226,12 +228,12 @@
       "type": "question-presented"
     },
     {
-      "elapsedMs": 120.70000000298023,
+      "elapsedMs": 100.3999999910593,
       "payload": {
         "endTimeKnown": true,
         "reason": "focus-loss",
         "unfinishedQuestionId": "q-1",
-        "wallAt": "2026-10-09T14:13:15.098Z"
+        "wallAt": "2026-10-09T15:59:37.386Z"
       },
       "sequence": 10,
       "type": "session-ended"
@@ -239,10 +241,10 @@
   ],
   "terminationState": "ended",
   "terminationReason": "focus-loss",
-  "startedAt": "2026-10-09T14:13:14.977Z",
-  "endedAt": "2026-10-09T14:13:15.098Z",
+  "startedAt": "2026-10-09T15:59:37.285Z",
+  "endedAt": "2026-10-09T15:59:37.386Z",
   "endTimeKnown": true,
-  "observedDurationMs": 120.70000000298023,
+  "observedDurationMs": 100.3999999910593,
   "questions": [
     {
       "id": "q-0",
@@ -250,7 +252,7 @@
       "presentationSequence": 1,
       "operation": "division",
       "operationVersion": 1,
-      "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+      "groupId": "fdc6fb63-2b8b-4312-8e1c-98c312e90ca1",
       "groupVersion": 1,
       "groupName": "Division group",
       "left": "0.25",
@@ -262,11 +264,11 @@
         "validPairCount": "2"
       },
       "outcome": "correct",
-      "presentedElapsedMs": 0.6000000089406967,
-      "acceptedElapsedMs": 85.90000000596046,
-      "firstInputElapsedMs": 39,
-      "correctAnswerTimeMs": 85.29999999701977,
-      "firstInputTimeMs": 38.3999999910593,
+      "presentedElapsedMs": 1.8999999910593033,
+      "acceptedElapsedMs": 75.29999999701977,
+      "firstInputElapsedMs": 24.399999991059303,
+      "correctAnswerTimeMs": 73.40000000596046,
+      "firstInputTimeMs": 22.5,
       "observedUnfinishedDurationMs": null,
       "unfinishedDurationIsLowerBound": null,
       "acceptedInput": ".125",
@@ -280,7 +282,7 @@
       "presentationSequence": 9,
       "operation": "division",
       "operationVersion": 1,
-      "groupId": "58e33bea-dee6-4cba-a654-c1a1ed39ae6d",
+      "groupId": "fdc6fb63-2b8b-4312-8e1c-98c312e90ca1",
       "groupVersion": 1,
       "groupName": "Division group",
       "left": "0.125",
@@ -292,12 +294,12 @@
         "validPairCount": "2"
       },
       "outcome": "unfinished",
-      "presentedElapsedMs": 88.20000000298023,
+      "presentedElapsedMs": 76.70000000298023,
       "acceptedElapsedMs": null,
       "firstInputElapsedMs": null,
       "correctAnswerTimeMs": null,
       "firstInputTimeMs": null,
-      "observedUnfinishedDurationMs": 32.5,
+      "observedUnfinishedDurationMs": 23.69999998807907,
       "unfinishedDurationIsLowerBound": false,
       "acceptedInput": null,
       "lastInput": null,
@@ -310,8 +312,88 @@
     "correctQuestionCount": 1,
     "unfinishedQuestionCount": 1,
     "validCorrectAnswerCount": 1,
-    "medianCorrectAnswerTimeMs": 85.29999999701977,
-    "meanCorrectAnswerTimeMs": 85.29999999701977
+    "medianCorrectAnswerTimeMs": 73.40000000596046,
+    "meanCorrectAnswerTimeMs": 73.40000000596046
   },
-  "dataQualityWarnings": []
+  "dataQualityWarnings": [],
+  "cohortKey": "eb417d98b3d135d7ae5ad7fbf2a5cfcbd1d39e67db7585b4d749d327b2a422be",
+  "cohortLabel": "Custom practice · endless · division · eb417d98",
+  "score": 1,
+  "comparisonEligible": false,
+  "comparisonExclusionReasons": [
+    "Interrupted or untimed run",
+    "Run did not record its full fixed duration"
+  ],
+  "scoreState": "partial",
+  "analysis": {
+    "cohorts": [
+      {
+        "key": "eb417d98b3d135d7ae5ad7fbf2a5cfcbd1d39e67db7585b4d749d327b2a422be",
+        "label": "Custom practice · endless · division · eb417d98",
+        "mode": "custom",
+        "sessionCount": 1,
+        "eligibleSessionCount": 0
+      }
+    ],
+    "selectedCohortKey": "eb417d98b3d135d7ae5ad7fbf2a5cfcbd1d39e67db7585b4d749d327b2a422be",
+    "selectedSessionCount": 1,
+    "eligibleSessionCount": 0,
+    "excludedSessionCount": 1,
+    "exclusionReasons": {
+      "Interrupted or untimed run": 1,
+      "Run did not record its full fixed duration": 1
+    },
+    "includePartialObservations": true,
+    "observationSessionCount": 1,
+    "summary": {
+      "presentedQuestionCount": 2,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 1,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 73.40000000596046,
+      "meanCorrectAnswerTimeMs": 73.40000000596046
+    },
+    "histogram": [
+      {
+        "lowerMs": 73.40000000596046,
+        "upperMs": 73.40000000596046,
+        "upperInclusive": true,
+        "count": 1
+      }
+    ],
+    "breakdown": [
+      {
+        "level": "operation",
+        "operation": "division",
+        "groupId": null,
+        "label": "division",
+        "presentedQuestionCount": 2,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 1,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 73.40000000596046,
+        "meanCorrectAnswerTimeMs": 73.40000000596046
+      },
+      {
+        "level": "group",
+        "operation": "division",
+        "groupId": "fdc6fb63-2b8b-4312-8e1c-98c312e90ca1",
+        "label": "Division group",
+        "presentedQuestionCount": 2,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 1,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 73.40000000596046,
+        "meanCorrectAnswerTimeMs": 73.40000000596046
+      }
+    ],
+    "trend": [],
+    "sessions": [
+      {
+        "id": "fbe56e55-2a8e-4336-8672-aa23079dfe83",
+        "createdAt": "2026-10-09T15:59:37.245040+00:00",
+        "scoreState": "partial"
+      }
+    ]
+  }
 }

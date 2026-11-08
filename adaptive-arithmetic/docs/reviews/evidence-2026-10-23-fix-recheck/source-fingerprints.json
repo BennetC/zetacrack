@@ -1,0 +1,17 @@
+{
+  "server/app.py": "021e2d4b8a0fd0d4236ad33404dc6e749d7f4630ff2ed42346da4571fa0b7130",
+  "server/measurements.py": "a2fe70854fd29a43ec6672bb4482b2e0ac78080130b73ede6d67155c26d74432",
+  "server/analytics.py": "2d51428062ef69271db84d01b7c86e06cf7af1ca46d97a0fa237a52134b8811b",
+  "server/content.py": "eea30630eb934830367386e8a570afcdcd1dfe3ffdad17b522ffc8d99346dc5c",
+  "server/decimal_input.py": "6f9269c020af4486784e9c5746f5a43ed7d14ad7153a593e9c98c024d30ce923",
+  "web/src/PracticeEditor.tsx": "6d8b9185029024d6b6d40964fa8f7007f666cdd42b381c12254089d7b1d12cff",
+  "web/src/PracticeRun.tsx": "c6f92b038b3d1b1528ada01eb947a6765d57a9fee74811b912795f1a2ea8b34e",
+  "web/src/SavedViews.tsx": "897a5c759070ea10219b844857cfca8a8e93849305acc07f0460c9e0a9545440",
+  "web/src/domain.ts": "198b00c33b99df2a575fbaad9d19cc24a5ee725ff600612c3b6989194dc23b6e",
+  "web/src/Charts.tsx": "4211c2be815f5e4d350a90a8d5528386bc8b2905a809065f6df0251c16b67cc0",
+  "tests/test_review_fixes.py": "cae062dc31474106a97bd2385415a35cf0bb3a726d1017c75b0b2c2994545f76",
+  "web/tests/review-fixes-browser.mjs": "0570cf4a7c16621871719e413224a1ab5c1afd38c9938f08e0131f76e531ed23",
+  "docs/reviews/2026-10-14-feature-review.md": "9685463abbb245fa2c469bb3d990b17703c9c17317facf82284cf69d3a817f20",
+  "docs/reviews/2026-10-14-correctness-review.md": "894173f8d8ee9bafe87b19c6254ae549d2a1c25771662655fb6fc30921f10281",
+  "docs/reviews/2026-10-15-fix-verification.md": "ecb4ad53e5516df6899a4b1ff5476cb5a9f8788632012b57d032b530b7998ba8"
+}

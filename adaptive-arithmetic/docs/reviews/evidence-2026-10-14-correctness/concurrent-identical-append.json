@@ -1,0 +1,22 @@
+{
+  "synthetic": true,
+  "schedule": "Two SELECTs for the same absent sequence complete before either INSERT.",
+  "responses": [
+    {
+      "status": 200,
+      "body": "{\"saved\":true}"
+    },
+    {
+      "status": 500,
+      "body": "Internal Server Error"
+    }
+  ],
+  "stored": [
+    {
+      "elapsedMs": 0.0,
+      "payload": {},
+      "sequence": 0,
+      "type": "session-started"
+    }
+  ]
+}

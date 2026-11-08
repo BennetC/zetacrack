@@ -1,0 +1,13 @@
+Passed: background app cannot recover a live session; exact answers still save; StrictMode does not release ownership or duplicate events
+Passed: stale journal after quota failure reconciles newer SQLite input; abandoned page releases its ownership; recovery completes without collision
+Passed: malformed/conflicting journals remain isolated and immutable; healthy recovery continues; recovery warning survives successful setup save and can be retried
+Passed: recovery re-fetches after a late unload append conflict instead of retaining a conflicting synthetic end
+Passed: focus lost during delayed Start ends once without presenting questions, including countdown and returning before response
+Passed: failed Start cleans up focus guard; failed terminal save retains journal/ownership; real run unmount releases only after queued writes and recovery saves original end
+Passed: delayed focus-loss, manual-end and page-exit callbacks at/after timed deadline all record one timeout at exactly 1000 ms
+Passed: earlier real focus loss keeps its reason/time; ending in countdown remains manual at zero with no presented question
+{
+  "result": "passed",
+  "checks": 8,
+  "pageErrors": []
+}

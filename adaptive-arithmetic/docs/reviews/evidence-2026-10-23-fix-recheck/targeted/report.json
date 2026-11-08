@@ -1,0 +1,469 @@
+{
+  "synthetic": true,
+  "apiPort": 49322,
+  "sitePort": 49323,
+  "checks": [
+    "FR-02: group/range/session edits survive reversed delayed StrictMode initialization",
+    "FR-02: custom memory survives navigation and reload independently of Standard",
+    "FR-02: failed initialization retries in place without discarding newer edits",
+    "C02: actual BOM clipboard paste retains one valid saved/exported/comparable response",
+    "C01: pagehide beacon and queued ordinary flush overlap with idempotent success",
+    "FR-01: refreshing offset 20 after cross-tab deletion reveals the sole survivor",
+    "FR-01: zero totals and changing mode/text filters show truthful empty/page bounds",
+    "FR-01: a 21-to-20 exact page boundary clamps to page one; deleting that page shows zero"
+  ],
+  "pageErrors": [],
+  "details": {
+    "delayedSetup": {
+      "strictModeRequests": 2,
+      "before": {
+        "name": "Fresh edit while connecting",
+        "min": "12",
+        "max": "44",
+        "duration": "300",
+        "countdown": true,
+        "startDisabled": true
+      },
+      "saved": {
+        "operations": [
+          {
+            "groups": [
+              {
+                "allowNegative": false,
+                "first": {
+                  "decimalPlaces": 0,
+                  "max": "44",
+                  "min": "12"
+                },
+                "id": "builtin-group-0",
+                "name": "Fresh edit while connecting",
+                "second": {
+                  "decimalPlaces": 0,
+                  "max": "99",
+                  "min": "10"
+                },
+                "share": "100",
+                "version": 1
+              }
+            ],
+            "id": "addition",
+            "share": "100",
+            "version": 1
+          }
+        ],
+        "session": {
+          "countdown": true,
+          "durationSeconds": "300",
+          "format": "timed"
+        },
+        "version": 1
+      }
+    },
+    "clipboard": {
+      "inputCodePoints": [
+        "feff",
+        "38",
+        "34",
+        "37"
+      ],
+      "appendStatuses": [
+        200,
+        200,
+        200
+      ],
+      "saved": {
+        "id": "f015fbac-84f7-4b17-8f92-2c538761b0c3",
+        "config": {
+          "operations": [
+            {
+              "groups": [
+                {
+                  "allowNegative": false,
+                  "first": {
+                    "decimalPlaces": 0,
+                    "max": "100",
+                    "min": "2"
+                  },
+                  "id": "standard-addition",
+                  "name": "Standard addition",
+                  "second": {
+                    "decimalPlaces": 0,
+                    "max": "100",
+                    "min": "2"
+                  },
+                  "share": "100",
+                  "version": 1
+                }
+              ],
+              "id": "addition",
+              "share": "25",
+              "version": 1
+            },
+            {
+              "groups": [
+                {
+                  "allowNegative": false,
+                  "first": {
+                    "decimalPlaces": 0,
+                    "max": "100",
+                    "min": "2"
+                  },
+                  "id": "standard-subtraction",
+                  "name": "Standard subtraction",
+                  "second": {
+                    "decimalPlaces": 0,
+                    "max": "100",
+                    "min": "2"
+                  },
+                  "share": "100",
+                  "version": 1
+                }
+              ],
+              "id": "subtraction",
+              "share": "25",
+              "version": 1
+            },
+            {
+              "groups": [
+                {
+                  "allowNegative": false,
+                  "first": {
+                    "decimalPlaces": 0,
+                    "max": "12",
+                    "min": "2"
+                  },
+                  "id": "standard-multiplication",
+                  "name": "Standard multiplication",
+                  "second": {
+                    "decimalPlaces": 0,
+                    "max": "100",
+                    "min": "2"
+                  },
+                  "share": "100",
+                  "version": 1
+                }
+              ],
+              "id": "multiplication",
+              "share": "25",
+              "version": 1
+            },
+            {
+              "groups": [
+                {
+                  "allowNegative": false,
+                  "first": {
+                    "decimalPlaces": 0,
+                    "max": "12",
+                    "min": "2"
+                  },
+                  "id": "standard-division",
+                  "name": "Standard division",
+                  "second": {
+                    "decimalPlaces": 0,
+                    "max": "100",
+                    "min": "2"
+                  },
+                  "share": "100",
+                  "version": 1
+                }
+              ],
+              "id": "division",
+              "share": "25",
+              "version": 1
+            }
+          ],
+          "session": {
+            "countdown": false,
+            "durationSeconds": "120",
+            "format": "timed"
+          },
+          "version": 1
+        },
+        "seed": "5a647fa1-77d2-4546-bff4-18633f955d95",
+        "generatorVersion": "zetamac-reverse-v1",
+        "policyVersion": "equal-operations-v1",
+        "measurementVersion": "response-timing-v1",
+        "mode": "standard",
+        "contentVersion": "zetamac-default-v1",
+        "createdAt": "2026-10-22T22:09:53.106324+00:00",
+        "status": "ended",
+        "events": [
+          {
+            "elapsedMs": 0,
+            "payload": {
+              "wallAt": "2026-10-22T22:09:53.146Z"
+            },
+            "sequence": 0,
+            "type": "session-started"
+          },
+          {
+            "elapsedMs": 1.800000011920929,
+            "payload": {
+              "question": {
+                "expected": "847",
+                "groupId": "standard-multiplication",
+                "id": "q-0",
+                "index": 0,
+                "left": "11",
+                "operation": "multiplication",
+                "right": "77",
+                "selection": {
+                  "groupBasisPoints": 10000,
+                  "operationBasisPoints": 2500,
+                  "validPairCount": "1089"
+                }
+              }
+            },
+            "sequence": 1,
+            "type": "question-presented"
+          },
+          {
+            "elapsedMs": 63.5,
+            "payload": {
+              "inputType": "insertFromPaste",
+              "questionId": "q-0",
+              "value": "﻿847"
+            },
+            "sequence": 2,
+            "type": "input-changed"
+          },
+          {
+            "elapsedMs": 63.5,
+            "payload": {
+              "questionId": "q-0",
+              "value": "﻿847"
+            },
+            "sequence": 3,
+            "type": "answer-accepted"
+          },
+          {
+            "elapsedMs": 65.39999997615814,
+            "payload": {
+              "question": {
+                "expected": "11",
+                "groupId": "standard-division",
+                "id": "q-1",
+                "index": 1,
+                "left": "33",
+                "operation": "division",
+                "right": "3",
+                "selection": {
+                  "groupBasisPoints": 10000,
+                  "operationBasisPoints": 2500,
+                  "validPairCount": "1089"
+                }
+              }
+            },
+            "sequence": 4,
+            "type": "question-presented"
+          },
+          {
+            "elapsedMs": 120000,
+            "payload": {
+              "endTimeKnown": true,
+              "reason": "timeout",
+              "unfinishedQuestionId": "q-1",
+              "wallAt": "2026-10-22T22:09:53.222Z"
+            },
+            "sequence": 5,
+            "type": "session-ended"
+          }
+        ],
+        "terminationState": "ended",
+        "terminationReason": "timeout",
+        "startedAt": "2026-10-22T22:09:53.146Z",
+        "endedAt": "2026-10-22T22:09:53.222Z",
+        "endTimeKnown": true,
+        "observedDurationMs": 120000,
+        "questions": [
+          {
+            "id": "q-0",
+            "index": 0,
+            "presentationSequence": 1,
+            "operation": "multiplication",
+            "operationVersion": 1,
+            "groupId": "standard-multiplication",
+            "groupVersion": 1,
+            "groupName": "Standard multiplication",
+            "left": "11",
+            "right": "77",
+            "expected": "847",
+            "selection": {
+              "groupBasisPoints": 10000,
+              "operationBasisPoints": 2500,
+              "validPairCount": "1089"
+            },
+            "outcome": "correct",
+            "presentedElapsedMs": 1.800000011920929,
+            "acceptedElapsedMs": 63.5,
+            "firstInputElapsedMs": 63.5,
+            "correctAnswerTimeMs": 61.69999998807907,
+            "firstInputTimeMs": 61.69999998807907,
+            "observedUnfinishedDurationMs": null,
+            "unfinishedDurationIsLowerBound": null,
+            "acceptedInput": "﻿847",
+            "lastInput": "﻿847",
+            "inputChangeCount": 1,
+            "dataQualityWarnings": []
+          },
+          {
+            "id": "q-1",
+            "index": 1,
+            "presentationSequence": 4,
+            "operation": "division",
+            "operationVersion": 1,
+            "groupId": "standard-division",
+            "groupVersion": 1,
+            "groupName": "Standard division",
+            "left": "33",
+            "right": "3",
+            "expected": "11",
+            "selection": {
+              "groupBasisPoints": 10000,
+              "operationBasisPoints": 2500,
+              "validPairCount": "1089"
+            },
+            "outcome": "unfinished",
+            "presentedElapsedMs": 65.39999997615814,
+            "acceptedElapsedMs": null,
+            "firstInputElapsedMs": null,
+            "correctAnswerTimeMs": null,
+            "firstInputTimeMs": null,
+            "observedUnfinishedDurationMs": 119934.60000002384,
+            "unfinishedDurationIsLowerBound": false,
+            "acceptedInput": null,
+            "lastInput": null,
+            "inputChangeCount": 0,
+            "dataQualityWarnings": []
+          }
+        ],
+        "summary": {
+          "presentedQuestionCount": 2,
+          "correctQuestionCount": 1,
+          "unfinishedQuestionCount": 1,
+          "validCorrectAnswerCount": 1,
+          "medianCorrectAnswerTimeMs": 61.69999998807907,
+          "meanCorrectAnswerTimeMs": 61.69999998807907
+        },
+        "dataQualityWarnings": [],
+        "cohortKey": "84bc0fb455e5a45da8e9908eff97b3a3eb462ce4237b855365241cb066a7b544",
+        "cohortLabel": "Standard Zetamac · 120 seconds · addition, subtraction, multiplication, division · 84bc0fb4",
+        "score": 1,
+        "comparisonEligible": true,
+        "comparisonExclusionReasons": [],
+        "scoreState": "full",
+        "analysis": {
+          "cohorts": [
+            {
+              "key": "84bc0fb455e5a45da8e9908eff97b3a3eb462ce4237b855365241cb066a7b544",
+              "label": "Standard Zetamac · 120 seconds · addition, subtraction, multiplication, division · 84bc0fb4",
+              "mode": "standard",
+              "sessionCount": 1,
+              "eligibleSessionCount": 1
+            }
+          ],
+          "selectedCohortKey": "84bc0fb455e5a45da8e9908eff97b3a3eb462ce4237b855365241cb066a7b544",
+          "selectedSessionCount": 1,
+          "eligibleSessionCount": 1,
+          "excludedSessionCount": 0,
+          "exclusionReasons": {},
+          "includePartialObservations": true,
+          "observationSessionCount": 1,
+          "summary": {
+            "presentedQuestionCount": 2,
+            "correctQuestionCount": 1,
+            "unfinishedQuestionCount": 1,
+            "validCorrectAnswerCount": 1,
+            "medianCorrectAnswerTimeMs": 61.69999998807907,
+            "meanCorrectAnswerTimeMs": 61.69999998807907
+          },
+          "histogram": [
+            {
+              "lowerMs": 61.69999998807907,
+              "upperMs": 61.69999998807907,
+              "upperInclusive": true,
+              "count": 1
+            }
+          ],
+          "breakdown": [
+            {
+              "level": "operation",
+              "operation": "multiplication",
+              "groupId": null,
+              "label": "multiplication",
+              "presentedQuestionCount": 1,
+              "correctQuestionCount": 1,
+              "unfinishedQuestionCount": 0,
+              "validCorrectAnswerCount": 1,
+              "medianCorrectAnswerTimeMs": 61.69999998807907,
+              "meanCorrectAnswerTimeMs": 61.69999998807907
+            },
+            {
+              "level": "operation",
+              "operation": "division",
+              "groupId": null,
+              "label": "division",
+              "presentedQuestionCount": 1,
+              "correctQuestionCount": 0,
+              "unfinishedQuestionCount": 1,
+              "validCorrectAnswerCount": 0,
+              "medianCorrectAnswerTimeMs": null,
+              "meanCorrectAnswerTimeMs": null
+            },
+            {
+              "level": "group",
+              "operation": "multiplication",
+              "groupId": "standard-multiplication",
+              "label": "Standard multiplication",
+              "presentedQuestionCount": 1,
+              "correctQuestionCount": 1,
+              "unfinishedQuestionCount": 0,
+              "validCorrectAnswerCount": 1,
+              "medianCorrectAnswerTimeMs": 61.69999998807907,
+              "meanCorrectAnswerTimeMs": 61.69999998807907
+            },
+            {
+              "level": "group",
+              "operation": "division",
+              "groupId": "standard-division",
+              "label": "Standard division",
+              "presentedQuestionCount": 1,
+              "correctQuestionCount": 0,
+              "unfinishedQuestionCount": 1,
+              "validCorrectAnswerCount": 0,
+              "medianCorrectAnswerTimeMs": null,
+              "meanCorrectAnswerTimeMs": null
+            }
+          ],
+          "trend": [
+            {
+              "sessionId": "f015fbac-84f7-4b17-8f92-2c538761b0c3",
+              "createdAt": "2026-10-22T22:09:53.106324+00:00",
+              "score": 1,
+              "presentedQuestionCount": 2,
+              "correctQuestionCount": 1,
+              "unfinishedQuestionCount": 1,
+              "validCorrectAnswerCount": 1,
+              "medianCorrectAnswerTimeMs": 61.69999998807907,
+              "meanCorrectAnswerTimeMs": 61.69999998807907
+            }
+          ],
+          "sessions": [
+            {
+              "id": "f015fbac-84f7-4b17-8f92-2c538761b0c3",
+              "createdAt": "2026-10-22T22:09:53.106324+00:00",
+              "scoreState": "full"
+            }
+          ]
+        }
+      }
+    },
+    "shrinkingHistory": {
+      "originalCount": 25,
+      "deletedInAnotherTab": 24,
+      "matchingTotal": 1,
+      "visibleRows": 1,
+      "range": "1–1 of 1"
+    }
+  }
+}

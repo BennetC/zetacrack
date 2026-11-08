@@ -1,0 +1,1040 @@
+{
+  "synthetic": true,
+  "contention": {
+    "compatibleRequests": 384,
+    "compatibleStatusCounts": {
+      "200": 384
+    },
+    "conflictingRequests": 128,
+    "conflictingStatusCounts": {
+      "409": 120,
+      "200": 8
+    },
+    "atomicRollbackTrials": 8
+  },
+  "timingCases": {
+    "valid": {
+      "expected": [
+        10
+      ],
+      "actual": [
+        10.0
+      ],
+      "warnings": [],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "unknown-reference": {
+      "expected": [
+        null
+      ],
+      "actual": [
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "invalid-value": {
+      "expected": [
+        null
+      ],
+      "actual": [
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "invalid-index": {
+      "expected": [
+        null
+      ],
+      "actual": [
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-identity",
+          "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+          "sequence": 1
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "stale-after-complete": {
+      "expected": [
+        10,
+        null
+      ],
+      "actual": [
+        10.0,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "gap-after-complete": {
+      "expected": [
+        10,
+        null
+      ],
+      "actual": [
+        10.0,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 5
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 6
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "input-changed-malformed-false": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "answer-accepted-malformed-false": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 3
+        },
+        {
+          "code": "invalid-accepted-input",
+          "message": "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.",
+          "sequence": 1
+        },
+        {
+          "code": "invalid-content-trace",
+          "message": "Arithmetic, accepted input, or standard provenance is inconsistent; this run is excluded from full-run comparisons.",
+          "sequence": null
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "input-changed-malformed-true": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "answer-accepted-malformed-true": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 3
+        },
+        {
+          "code": "invalid-accepted-input",
+          "message": "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.",
+          "sequence": 1
+        },
+        {
+          "code": "invalid-content-trace",
+          "message": "Arithmetic, accepted input, or standard provenance is inconsistent; this run is excluded from full-run comparisons.",
+          "sequence": null
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "input-changed-malformed-list": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "answer-accepted-malformed-list": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 3
+        },
+        {
+          "code": "invalid-accepted-input",
+          "message": "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.",
+          "sequence": 1
+        },
+        {
+          "code": "invalid-content-trace",
+          "message": "Arithmetic, accepted input, or standard provenance is inconsistent; this run is excluded from full-run comparisons.",
+          "sequence": null
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "input-changed-malformed-object": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "answer-accepted-malformed-object": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 3
+        },
+        {
+          "code": "invalid-accepted-input",
+          "message": "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.",
+          "sequence": 1
+        },
+        {
+          "code": "invalid-content-trace",
+          "message": "Arithmetic, accepted input, or standard provenance is inconsistent; this run is excluded from full-run comparisons.",
+          "sequence": null
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "input-changed-malformed-number": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "answer-accepted-malformed-number": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 3
+        },
+        {
+          "code": "invalid-accepted-input",
+          "message": "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.",
+          "sequence": 1
+        },
+        {
+          "code": "invalid-content-trace",
+          "message": "Arithmetic, accepted input, or standard provenance is inconsistent; this run is excluded from full-run comparisons.",
+          "sequence": null
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "input-changed-malformed-null": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 2
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "answer-accepted-malformed-null": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-input-value",
+          "message": "Raw input is not a string; inspect the raw observation. Its interval cannot certify a field change or correct answer.",
+          "sequence": 3
+        },
+        {
+          "code": "invalid-accepted-input",
+          "message": "The accepted input is not a permitted exact answer; its timing is excluded while the raw input is retained.",
+          "sequence": 1
+        },
+        {
+          "code": "invalid-content-trace",
+          "message": "Arithmetic, accepted input, or standard provenance is inconsistent; this run is excluded from full-run comparisons.",
+          "sequence": null
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "index-False": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-identity",
+          "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+          "sequence": 1
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "index--1": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-identity",
+          "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+          "sequence": 1
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "index-None": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-identity",
+          "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+          "sequence": 1
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "index-'0'": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-identity",
+          "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+          "sequence": 1
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "index-0.5": {
+      "expected": [
+        null,
+        10,
+        10
+      ],
+      "actual": [
+        null,
+        10.0,
+        10.0
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-identity",
+          "message": "Question index, operation, or group identity is unsupported; raw values remain in the event.",
+          "sequence": 1
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "current-reference-None": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "current-reference-False": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "current-reference-[]": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "current-reference-{}": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "current-reference-'unseen'": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "current-reference-'q0'": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "repeated-accept": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 4
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "stale-between": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 4
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "unknown-between": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 4
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "repeated-start": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-start",
+          "message": "Session start is duplicated or follows question/terminal observations.",
+          "sequence": 4
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "gap-start-3": {
+      "expected": [
+        null,
+        null,
+        null
+      ],
+      "actual": [
+        null,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 5
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 6
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 7
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 8
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 9
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 10
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 11
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 12
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "gap-start-4": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 6
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 7
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 8
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 9
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 10
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 11
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 12
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "gap-start-5": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 7
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 8
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 9
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 10
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 11
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 12
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "gap-start-7": {
+      "expected": [
+        10,
+        10,
+        null
+      ],
+      "actual": [
+        10.0,
+        10.0,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 9
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 10
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 11
+        },
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 12
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "clock-just-after-acceptance": {
+      "expected": [
+        10,
+        null,
+        null
+      ],
+      "actual": [
+        10.0,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "invalid-event-order",
+          "message": "Observation sequence is incomplete or its elapsed time is invalid/decreases; affected timings are unavailable.",
+          "sequence": 4
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    },
+    "duplicate-presentation-identity": {
+      "expected": [
+        null,
+        null,
+        null
+      ],
+      "actual": [
+        null,
+        null,
+        null
+      ],
+      "warnings": [
+        {
+          "code": "duplicate-question-id",
+          "message": "Question identity was presented more than once.",
+          "sequence": 4
+        },
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 5
+        },
+        {
+          "code": "invalid-question-reference",
+          "message": "Input/acceptance does not refer to the current unfinished question; current and later timings are unavailable.",
+          "sequence": 6
+        },
+        {
+          "code": "unfinished-before-next",
+          "message": "A new question was presented before the preceding question was accepted.",
+          "sequence": 7
+        }
+      ],
+      "rawRetained": true,
+      "summaryCsvJsonGraphAgreement": true
+    }
+  },
+  "grammar": {
+    "allowedCodePoints": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      32,
+      160,
+      5760,
+      8192,
+      8193,
+      8194,
+      8195,
+      8196,
+      8197,
+      8198,
+      8199,
+      8200,
+      8201,
+      8202,
+      8232,
+      8233,
+      8239,
+      8287,
+      12288,
+      65279
+    ],
+    "rejectedCodePoints": [
+      0,
+      28,
+      29,
+      30,
+      31,
+      133,
+      6158,
+      8203,
+      8288,
+      1633,
+      65297
+    ],
+    "hugeExactDigits": 303,
+    "hugeExactValid": true
+  },
+  "timingCaseCount": 39
+}

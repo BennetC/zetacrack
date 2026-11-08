@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "checks": [
+    "A committed lost response retries with the same session and seed; another tab cannot recover its live pending creation",
+    "Run again and R produce fresh identities/seeds with the same setup, reset runtime state, and wait for saved results",
+    "Page disappearance after a lost creation response reconciles the operation and closes the same abandoned record without inventing a new run",
+    "Best/latest-10/previous-10 values, quick UTC date ranges, reversed-range validation, truthful empty states and Clear filters preserve the selected cohort",
+    "Keyboard/touch point inspection opens a URL-addressable session; reload and browser Back/Forward preserve detail and original graph filters",
+    "Ongoing/incomplete visibility cooperates with eligibility; History filters and selected details survive reload and return navigation",
+    "Delete matching runs uses the exact filtered scope across pages, preserves hidden and arriving runs; global deletion is explicit and cancelable",
+    "Mobile starts with optional controls collapsed and numeric scores in the first viewport; controls expand, desktop reflows, and reload still starts a fresh run"
+  ],
+  "pageErrors": [],
+  "apiPort": 50203,
+  "sitePort": 50204
+}

@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "checks": [
+    "Graphs display backend score, pooled timing and equally weighted run timing; partial toggle leaves headline statistics unchanged; desktop/mobile render",
+    "History defaults to eligible only, opt-in shows excluded, filtering/paging counts are correct, and external deletion clamps the page",
+    "Standard reload/repeated reload/blur-before-reload create fresh runs exactly once and preserve previous raw observations",
+    "Manual-ended results reload returns to setup without creating a run",
+    "Custom countdown and active timed reload skip countdown, preserve content/duration and leave remembered settings unchanged",
+    "Endless reload restarts; returning focus to focus-loss results clears restart intent",
+    "Timed-out results reload does not start another run",
+    "Failed automatic start offers retry; replacement does not await setup or recovery; recovery warning and retained journal remain accessible during the new run",
+    "Background-tab reload leaves owned practice untouched; copied markers and History entry do not start runs"
+  ],
+  "pageErrors": [],
+  "apiPort": 63609,
+  "sitePort": 63610
+}

@@ -194,7 +194,7 @@ try {
     const page = await browser.newPage();
     page.on("pageerror", (error) => pageErrors.push(error.message));
     await page.bringToFront();
-    await page.goto(siteURL);
+    await page.goto(siteURL + "?view=custom");
     await page.waitForFunction(
       () =>
         document.querySelector(".start-button")?.textContent ===
@@ -269,7 +269,7 @@ try {
   assert(await held(owner, ownerId), "StrictMode released the live owner lock");
   const client = await browser.target().createCDPSession();
   await client.send("Target.createTarget", {
-    url: siteURL + "/?background-review",
+    url: siteURL + "/?view=custom&background-review",
     background: true,
   });
   const backgroundTarget = await browser.waitForTarget((target) =>
@@ -357,6 +357,7 @@ try {
   });
   await quotaPage.close();
   await background.bringToFront();
+  await until(async () => !(await held(background, quotaId)), "closed quota page releases its browser lock");
   assert.deepEqual(await recover(background), []);
   const quotaTrace = await read(quotaId);
   assert.equal(quotaTrace.events.length, 4);

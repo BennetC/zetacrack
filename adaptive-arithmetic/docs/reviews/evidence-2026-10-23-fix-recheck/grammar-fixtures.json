@@ -1,0 +1,1397 @@
+{
+  "synthetic": true,
+  "allowed": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    32,
+    160,
+    5760,
+    8192,
+    8193,
+    8194,
+    8195,
+    8196,
+    8197,
+    8198,
+    8199,
+    8200,
+    8201,
+    8202,
+    8232,
+    8233,
+    8239,
+    8287,
+    12288,
+    65279
+  ],
+  "rejected": [
+    0,
+    28,
+    29,
+    30,
+    31,
+    133,
+    6158,
+    8203,
+    8288,
+    1633,
+    65297
+  ],
+  "fixtures": [
+    {
+      "cp": 9,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "\t100\t",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "\t100\t",
+                "first": {
+                  "min": "\t+0010.000\t",
+                  "max": "\t+0010.000\t",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "\t11\t",
+                  "max": "\t11\t",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "\t10\t",
+        "right": "\t11\t",
+        "expected": "\t21\t",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "\t+0021.000\t"
+    },
+    {
+      "cp": 10,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "\n100\n",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "\n100\n",
+                "first": {
+                  "min": "\n+0010.000\n",
+                  "max": "\n+0010.000\n",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "\n11\n",
+                  "max": "\n11\n",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "\n10\n",
+        "right": "\n11\n",
+        "expected": "\n21\n",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "\n+0021.000\n"
+    },
+    {
+      "cp": 11,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "\u000b100\u000b",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "\u000b100\u000b",
+                "first": {
+                  "min": "\u000b+0010.000\u000b",
+                  "max": "\u000b+0010.000\u000b",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "\u000b11\u000b",
+                  "max": "\u000b11\u000b",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "\u000b10\u000b",
+        "right": "\u000b11\u000b",
+        "expected": "\u000b21\u000b",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "\u000b+0021.000\u000b"
+    },
+    {
+      "cp": 12,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "\f100\f",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "\f100\f",
+                "first": {
+                  "min": "\f+0010.000\f",
+                  "max": "\f+0010.000\f",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "\f11\f",
+                  "max": "\f11\f",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "\f10\f",
+        "right": "\f11\f",
+        "expected": "\f21\f",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "\f+0021.000\f"
+    },
+    {
+      "cp": 13,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "\r100\r",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "\r100\r",
+                "first": {
+                  "min": "\r+0010.000\r",
+                  "max": "\r+0010.000\r",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "\r11\r",
+                  "max": "\r11\r",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "\r10\r",
+        "right": "\r11\r",
+        "expected": "\r21\r",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "\r+0021.000\r"
+    },
+    {
+      "cp": 32,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 160,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 5760,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8192,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8193,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8194,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8195,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8196,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8197,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8198,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8199,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8200,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8201,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8202,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8232,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8233,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8239,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 8287,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": " 100 ",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": " 100 ",
+                "first": {
+                  "min": " +0010.000 ",
+                  "max": " +0010.000 ",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": " 11 ",
+                  "max": " 11 ",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": " 10 ",
+        "right": " 11 ",
+        "expected": " 21 ",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": " +0021.000 "
+    },
+    {
+      "cp": 12288,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "　100　",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "　100　",
+                "first": {
+                  "min": "　+0010.000　",
+                  "max": "　+0010.000　",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "　11　",
+                  "max": "　11　",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "　10　",
+        "right": "　11　",
+        "expected": "　21　",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "　+0021.000　"
+    },
+    {
+      "cp": 65279,
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "addition",
+            "version": 1,
+            "share": "﻿100﻿",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "﻿100﻿",
+                "first": {
+                  "min": "﻿+0010.000﻿",
+                  "max": "﻿+0010.000﻿",
+                  "decimalPlaces": 0
+                },
+                "second": {
+                  "min": "﻿11﻿",
+                  "max": "﻿11﻿",
+                  "decimalPlaces": 0
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "addition",
+        "groupId": "builtin-group-0",
+        "left": "﻿10﻿",
+        "right": "﻿11﻿",
+        "expected": "﻿21﻿",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "﻿+0021.000﻿"
+    },
+    {
+      "cp": "huge",
+      "config": {
+        "version": 1,
+        "operations": [
+          {
+            "id": "multiplication",
+            "version": 1,
+            "share": "100",
+            "groups": [
+              {
+                "id": "builtin-group-0",
+                "version": 1,
+                "name": "Two-digit addition",
+                "share": "100",
+                "first": {
+                  "min": "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.125",
+                  "max": "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.125",
+                  "decimalPlaces": 3
+                },
+                "second": {
+                  "min": "-.125",
+                  "max": "-.125",
+                  "decimalPlaces": 3
+                },
+                "allowNegative": false
+              }
+            ]
+          }
+        ],
+        "session": {
+          "format": "timed",
+          "durationSeconds": "120",
+          "countdown": false
+        }
+      },
+      "q": {
+        "id": "q-0",
+        "index": 0,
+        "operation": "multiplication",
+        "groupId": "builtin-group-0",
+        "left": "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.125",
+        "right": "-0.125",
+        "expected": "-124999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.890625",
+        "selection": {
+          "operationBasisPoints": 10000,
+          "groupBasisPoints": 10000,
+          "validPairCount": "1"
+        }
+      },
+      "input": "﻿-124999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999.890625﻿"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Passed: setup downloads valid empty JSON and header-only CSV
+Passed: real typing, deletion, paste and unfinished input agree with saved timing summary
+Passed: save failure gates export/summary; save and summary retries succeed
+Passed: JSON/CSV browser downloads match session reads; export failure supports retry
+Passed: setup/results and added controls fit desktop, tablet and mobile widths
+Passed: countdown is excluded; another tab exports persisted live observations without ending/recovering their owner
+{
+  "result": "passed",
+  "checks": 6,
+  "pageErrors": []
+}

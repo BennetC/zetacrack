@@ -1,0 +1,21 @@
+{
+  "result": "passed",
+  "checks": [
+    "background app cannot recover a live session; exact answers still save; StrictMode does not release ownership or duplicate events",
+    "stale journal after quota failure reconciles newer SQLite input; abandoned page releases its ownership; recovery completes without collision",
+    "malformed/conflicting journals remain isolated and immutable; healthy recovery continues; recovery warning survives successful setup save and can be retried",
+    "recovery re-fetches after a late unload append conflict instead of retaining a conflicting synthetic end",
+    "focus lost during delayed Start ends once without presenting questions, including countdown and returning before response",
+    "failed Start cleans up focus guard; failed terminal save retains journal/ownership; real run unmount releases only after queued writes and recovery saves original end",
+    "delayed focus-loss, manual-end and page-exit callbacks at/after timed deadline all record one timeout at exactly 1000 ms",
+    "earlier real focus loss keeps its reason/time; ending in countdown remains manual at zero with no presented question"
+  ],
+  "pageErrors": [],
+  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\review-fixes-1793829300317.sqlite3",
+  "apiURL": "http://127.0.0.1:49213",
+  "siteURL": "http://127.0.0.1:63734",
+  "syntheticVerificationData": true,
+  "normalPreviewUntouched": true,
+  "sourceSessionId": "ab74c3cd-6eb9-41af-b6ab-909f6c2f4680",
+  "staleJournalSessionId": "a5b26bf9-b647-47e2-a27b-282784771fbb"
+}

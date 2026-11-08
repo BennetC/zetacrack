@@ -9,6 +9,9 @@ export interface QualityWarning {
 }
 export interface DerivedQuestion {
   id: string | null;
+  index: number | null;
+  groupId: string | null;
+  groupName: string | null;
   presentationSequence: number;
   operation: Question["operation"] | null;
   left: string | null;
@@ -20,15 +23,42 @@ export interface DerivedQuestion {
   observedUnfinishedDurationMs: number | null;
   unfinishedDurationIsLowerBound: boolean | null;
   lastInput: string | null;
+  acceptedInput: string | null;
   inputChangeCount: number;
 }
 export interface SavedSession {
+  replayOf?: string | null;
+  annotations?: {
+    presentationSequence: number;
+    label: string;
+    revision: number;
+  }[];
   id: string;
+  seed: string;
+  createdAt: string;
+  startedAt: string | null;
+  endedAt: string | null;
+  generatorVersion: string;
+  policyVersion: string;
+  mode: "standard" | "custom" | null;
+  contentVersion: string | null;
+  status: "open" | "ended";
+  terminationState: "ended" | "ongoing" | "incomplete";
+  terminationReason: string | null;
+  endTimeKnown: boolean;
+  cohortKey: string;
+  cohortLabel: string;
+  score: number;
+  scoreState: "full" | "partial";
+  comparisonEligible: boolean;
+  comparisonExclusionReasons: string[];
   config: Config;
   measurementVersion: string | null;
   events: Observation[];
   questions: DerivedQuestion[];
   summary: {
+    presentedQuestionCount: number;
+    unfinishedQuestionCount: number;
     correctQuestionCount: number;
     validCorrectAnswerCount: number;
     medianCorrectAnswerTimeMs: number | null;

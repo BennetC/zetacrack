@@ -10,6 +10,7 @@ import {
   splitEqually,
   subtractionDomain,
   validateConfig,
+  parseDecimal,
   type Config,
   type NumberRange,
 } from "../src/domain";
@@ -19,6 +20,30 @@ const range = (min: string, max: string, decimalPlaces = 0): NumberRange => ({
   decimalPlaces,
 });
 const config = () => structuredClone(builtins()[0].config);
+test("explicit decimal whitespace matches backend config and accepted-input rules", () => {
+  const permitted =
+    "\u0009\u000a\u000b\u000c\u000d\u0020\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000\ufeff";
+  for (const space of permitted) {
+    assert(answerMatches(space + "+21.000" + space, "21"));
+    assert.equal(basisPoints(space + "100" + space), 10000);
+    assert.equal(decimalText(parseDecimal(space + "-1.2500" + space)), "-1.25");
+  }
+  for (const unsupported of [
+    "\u0085",
+    "\u001c",
+    "\u001d",
+    "\u001e",
+    "\u001f",
+    "\u180e",
+    "\u200b",
+    "\u2060",
+    "\u0661",
+    "\uff11",
+  ]) {
+    assert(!answerMatches(unsupported + "21" + unsupported, "21"));
+    assert.throws(() => basisPoints(unsupported + "100" + unsupported));
+  }
+});
 test("percentage arithmetic is exact and equal splitting preserves 100%", () => {
   assert.equal(basisPoints("33.33"), 3333);
   assert.throws(() => basisPoints("33.333"));

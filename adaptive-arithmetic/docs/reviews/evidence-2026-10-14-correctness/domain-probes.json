@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "randomizedSignedMixedPrecisionDomains": 15000,
+  "orderedPairsEnumerated": 184949,
+  "precisions": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "result": "passed"
+}

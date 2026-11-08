@@ -34,7 +34,7 @@ Wait-PracticeReady 'http://127.0.0.1:8017/api/setup' {
 }
 Wait-PracticeReady 'http://127.0.0.1:4173' {
     param($Content)
-    return $Content.Contains('<title>Custom practice')
+    return $Content.Contains('<title>Arithmetic practice')
 }
 Wait-PracticeReady 'http://127.0.0.1:4173/api/setup' {
     param($Content)

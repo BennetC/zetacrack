@@ -1,0 +1,17 @@
+{
+  "result": "passed",
+  "checks": [
+    "setup downloads valid empty JSON and header-only CSV",
+    "real typing, deletion, paste and unfinished input agree with saved timing summary",
+    "save failure gates export/summary; save and summary retries succeed",
+    "JSON/CSV browser downloads match session reads; export failure supports retry",
+    "setup/results and added controls fit desktop, tablet and mobile widths",
+    "countdown is excluded; another tab exports persisted live observations without ending/recovering their owner"
+  ],
+  "pageErrors": [],
+  "database": "C:\\Users\\benne\\Projects\\zetacrack\\adaptive-arithmetic\\data\\timing-exports-1792071512707.sqlite3",
+  "apiURL": "http://127.0.0.1:52794",
+  "siteURL": "http://127.0.0.1:52795",
+  "syntheticVerificationData": true,
+  "sessionId": "42954b28-cf8b-43f8-ae3a-564f7c22c7a9"
+}

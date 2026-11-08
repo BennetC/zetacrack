@@ -1,0 +1,6 @@
+Passed: Untouched editor restores the newest live setup response after reversed StrictMode reads and navigation, without autosaving loaded controls
+Passed: Invalid deliberate edits survive delayed initialization/navigation without overwriting stored memory; repair persists while History is open
+Passed: Untouched editor after initial connection failure restores remembered settings on in-place retry
+Passed: Cross-tab 25-to-5 shrink preserves mode/text filters; a held corrective fetch renders loading with no false empty/impossible range on observed animation frames
+Passed: A stale History response completing after a new text filter cannot restore former rows or pagination
+{"checks":5,"pageErrors":[]}

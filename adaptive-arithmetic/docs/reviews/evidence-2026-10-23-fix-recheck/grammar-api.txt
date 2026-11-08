@@ -1,0 +1,1 @@
+{"acceptedClientApiFixtures": 26, "rejectedConfigurations": 11, "hugeProductExact": true}

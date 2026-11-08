@@ -10,11 +10,14 @@ from typing import Literal
 from urllib.parse import urlparse
 from uuid import uuid4
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Query
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.responses import JSONResponse, Response
 
 from server.measurements import TIMING_DEFINITIONS, derive_session, export_csv
+from server.analytics import enrich, filter_sessions, analytics, standard_config
+from server.decimal_input import decimal_lexeme
+from server.run_analytics import profile
 
 
 class Model(BaseModel):
@@ -57,10 +60,12 @@ class Config(Model):
 
 
 def ticks(text: str, precision: int) -> int:
-    if not re.fullmatch(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)", text.strip(), flags=re.ASCII):
+    try:
+        value = decimal_lexeme(text)
+    except ValueError:
         raise ValueError("Enter a decimal number without separators or exponents.")
-    negative = text.strip().startswith("-")
-    parts = text.strip().lstrip("+-").split(".")
+    negative = value.startswith("-")
+    parts = value.lstrip("+-").split(".")
     fraction = parts[1] if len(parts) > 1 else ""
     if len(fraction) > precision and any(c != "0" for c in fraction[precision:]):
         raise ValueError("Bounds must fit the selected decimal places.")
@@ -141,11 +146,24 @@ class Rename(Model):
 
 
 class SessionWrite(Model):
+    replayOf: str | None = None
+    creationKey: str | None = Field(None, min_length=1, max_length=128)
     config: Config
     seed: str
-    generatorVersion: Literal["exact-grid-v1"]
-    policyVersion: Literal["hierarchical-shares-v1"]
+    generatorVersion: Literal["exact-grid-v1", "zetamac-reverse-v1"]
+    policyVersion: Literal["hierarchical-shares-v1", "equal-operations-v1"]
     measurementVersion: Literal["response-timing-v1"] | None = None
+    mode: Literal["standard", "custom"] | None = None
+    contentVersion: Literal["zetamac-default-v1", "custom-grid-v1"] | None = None
+
+
+class DeleteSelection(Model):
+    sessionIds: list[str]
+
+
+class AnnotationWrite(Model):
+    label: Literal["mistyped", "recalculated", "unsure", "unlabelled"]
+    expectedRevision: int = Field(ge=0)
 
 
 class Event(Model):
@@ -193,6 +211,15 @@ def create_app(database: str | Path) -> FastAPI:
         # Additive migration: historical observations/configurations stay intact.
         if "measurement_version" not in {row["name"] for row in db.execute("PRAGMA table_info(sessions)")}:
             db.execute("ALTER TABLE sessions ADD COLUMN measurement_version TEXT")
+        for column in ("mode", "content_version"):
+            if column not in {row["name"] for row in db.execute("PRAGMA table_info(sessions)")}:
+                db.execute(f"ALTER TABLE sessions ADD COLUMN {column} TEXT")
+        if "creation_key" not in {row["name"] for row in db.execute("PRAGMA table_info(sessions)")}:
+            db.execute("ALTER TABLE sessions ADD COLUMN creation_key TEXT")
+        db.execute("CREATE UNIQUE INDEX IF NOT EXISTS session_creation_key ON sessions(creation_key) WHERE creation_key IS NOT NULL")
+        if "replay_of" not in {row["name"] for row in db.execute("PRAGMA table_info(sessions)")}:
+            db.execute("ALTER TABLE sessions ADD COLUMN replay_of TEXT")
+        db.execute("CREATE TABLE IF NOT EXISTS question_annotations(session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE, presentation_sequence INTEGER NOT NULL, label TEXT NOT NULL, revision INTEGER NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(session_id,presentation_sequence))")
     app = FastAPI(title="Arithmetic local API", version="1.0.0")
 
     @app.middleware("http")
@@ -266,14 +293,40 @@ def create_app(database: str | Path) -> FastAPI:
     @app.post("/api/sessions", status_code=201)
     def start_session(body: SessionWrite):
         validate(body.config)
+        if body.mode == "standard":
+            if (body.config.model_dump() != standard_config() or body.generatorVersion != "zetamac-reverse-v1" or body.policyVersion != "equal-operations-v1" or body.contentVersion != "zetamac-default-v1" or body.measurementVersion != "response-timing-v1"):
+                raise HTTPException(422, detail="Standard Zetamac requires its fixed versioned rules and 120-second settings.")
+        elif body.generatorVersion != "exact-grid-v1" or body.policyVersion != "hierarchical-shares-v1" or body.contentVersion not in (None, "custom-grid-v1"):
+            raise HTTPException(422, detail="Custom and legacy sessions require the exact-grid generator and weighted policy.")
+        if body.mode == "custom" and body.contentVersion != "custom-grid-v1":
+            raise HTTPException(422, detail="New custom sessions require custom-grid-v1 content provenance.")
         identity = str(uuid4())
         with connection() as db:
-            db.execute("INSERT INTO sessions(id,config,seed,generator,policy,created_at,measurement_version) VALUES(?,?,?,?,?,?,?)", (identity, encoded(body.config.model_dump()), body.seed, body.generatorVersion, body.policyVersion, now(), body.measurementVersion))
+            db.execute("BEGIN IMMEDIATE")
+            values = (encoded(body.config.model_dump()), body.seed, body.generatorVersion, body.policyVersion, body.measurementVersion, body.mode, body.contentVersion, body.replayOf)
+            if body.creationKey:
+                previous = db.execute("SELECT * FROM sessions WHERE creation_key=?", (body.creationKey,)).fetchone()
+                if previous:
+                    original = tuple(previous[key] for key in ("config", "seed", "generator", "policy", "measurement_version", "mode", "content_version", "replay_of"))
+                    if original != values:
+                        raise HTTPException(409, detail="This start request already belongs to a different session setup.")
+                    return {"id": previous["id"]}
+            if body.replayOf:
+                source = db.execute("SELECT * FROM sessions WHERE id=?", (body.replayOf,)).fetchone()
+                source_config = json.loads(source["config"]) if source else None
+                if source_config and not body.config.session.countdown:
+                    source_config["session"]["countdown"] = False
+                if source is None or encoded(source_config) != values[0] or tuple(source[k] for k in ("seed", "generator", "policy", "measurement_version", "mode", "content_version")) != values[1:7]:
+                    raise HTTPException(422, detail="A challenge must repeat an existing run's exact configuration, seed and provenance.")
+            db.execute("INSERT INTO sessions(id,config,seed,generator,policy,measurement_version,mode,content_version,replay_of,created_at,creation_key) VALUES(?,?,?,?,?,?,?,?,?,?,?)", (identity, *values, now(), body.creationKey))
         return {"id":identity}
 
     @app.post("/api/sessions/{identity}/observations")
     def observations(identity: str, body: EventBatch):
         with connection() as db:
+            # Serialize the existence checks with the inserts. A normal flush
+            # and pagehide beacon can otherwise both observe an absent sequence.
+            db.execute("BEGIN IMMEDIATE")
             if not db.execute("SELECT 1 FROM sessions WHERE id=?", (identity,)).fetchone():
                 raise HTTPException(404, detail="Session not found.")
             for event in body.events:
@@ -299,9 +352,102 @@ def create_app(database: str | Path) -> FastAPI:
             sessions = []
             for row in rows:
                 events = [json.loads(record[0]) for record in db.execute("SELECT event FROM observations WHERE session_id=? ORDER BY sequence", (row["id"],))]
-                sessions.append(derive_session({"id":row["id"], "config":json.loads(row["config"]), "seed":row["seed"], "generatorVersion":row["generator"], "policyVersion":row["policy"], "measurementVersion":row["measurement_version"], "createdAt":row["created_at"], "status":row["status"], "events":events}))
+                annotations = [{"presentationSequence": a["presentation_sequence"], "label": a["label"], "revision": a["revision"], "updatedAt": a["updated_at"]} for a in db.execute("SELECT * FROM question_annotations WHERE session_id=? ORDER BY presentation_sequence", (row["id"],))]
+                sessions.append(enrich(derive_session({"id":row["id"], "config":json.loads(row["config"]), "seed":row["seed"], "generatorVersion":row["generator"], "policyVersion":row["policy"], "measurementVersion":row["measurement_version"], "mode":row["mode"], "contentVersion":row["content_version"], "replayOf":row["replay_of"], "annotations":annotations, "createdAt":row["created_at"], "status":row["status"], "events":events})))
             exported_at = now()
         return sessions, exported_at
+
+    @app.get("/api/sessions")
+    def session_history(offset: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100), mode: Literal["standard", "custom", "legacy"] | None = None,
+                        status: Literal["ended", "ongoing", "incomplete"] | None = None, after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
+                        before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), configuration: str | None = None, eligibleOnly: bool = False):
+        sessions, snapshot_at = read_sessions()
+        selected = filter_sessions(sessions, mode, status, after, before, configuration)
+        if eligibleOnly:
+            selected = [session for session in selected if session["comparisonEligible"]]
+        records = [{key: value for key, value in session.items() if key not in ("events", "questions", "analysis", "runAnalytics")} for session in selected[offset:offset + limit]]
+        return {"sessions": records, "total": len(selected), "offset": offset, "limit": limit, "snapshotAt": snapshot_at}
+
+    @app.get("/api/analytics")
+    def session_analytics(cohort: str | None = None, includePartial: bool = False, after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$")):
+        sessions, snapshot_at = read_sessions()
+        return {**analytics(filter_sessions(sessions, after=after, before=before), cohort, includePartial), "snapshotAt": snapshot_at, "totalSavedSessionCount": len(sessions)}
+
+    @app.get("/api/explorer/{identity}")
+    def explorer(identity: str):
+        sessions, snapshot = read_sessions()
+        selected = next((s for s in sessions if s["id"] == identity), None)
+        if selected is None:
+            raise HTTPException(404, detail="Session not found.")
+        peers = [s for s in sessions if s["cohortKey"] == selected["cohortKey"] and s["comparisonEligible"] and s["id"] != identity]
+        baselines = {}
+        for s in peers:
+            if (s["createdAt"], s["id"]) >= (selected["createdAt"], selected["id"]):
+                continue
+            for r in s["runAnalytics"]["questions"]:
+                if r["totalMs"] is not None:
+                    key = "|".join([r["operation"], r["features"][1], r["features"][4]])
+                    baselines.setdefault(key, []).append(r["totalMs"])
+        from statistics import median
+        return {"snapshotAt": snapshot, "profile": profile(peers + [selected]), "profileSessionCount": len(peers) + 1,
+                "baselines": {key: {"count": len(values), "medianMs": median(values)} for key, values in baselines.items()},
+                "comparisons": [{"id": s["id"], "createdAt": s["createdAt"], "score": s["score"], "runAnalytics": s["runAnalytics"]} for s in peers],
+                "historicalProfile": profile([s for s in peers if (s["createdAt"], s["id"]) < (selected["createdAt"], selected["id"])])}
+
+    @app.put("/api/sessions/{identity}/annotations/{sequence}")
+    def annotate(identity: str, sequence: int, body: AnnotationWrite):
+        with connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            session = db.execute("SELECT status FROM sessions WHERE id=?", (identity,)).fetchone()
+            event = db.execute("SELECT event FROM observations WHERE session_id=? AND sequence=?", (identity, sequence)).fetchone()
+            if session is None or event is None or json.loads(event[0]).get("type") != "question-presented":
+                raise HTTPException(404, detail="Question not found.")
+            if session["status"] != "ended":
+                raise HTTPException(409, detail="Label questions after ending the run.")
+            previous = db.execute("SELECT revision FROM question_annotations WHERE session_id=? AND presentation_sequence=?", (identity, sequence)).fetchone()
+            revision = previous[0] if previous else 0
+            if revision != body.expectedRevision:
+                raise HTTPException(409, detail="This label changed in another page. Refresh the session before editing it.")
+            db.execute("INSERT INTO question_annotations VALUES(?,?,?,?,?) ON CONFLICT(session_id,presentation_sequence) DO UPDATE SET label=excluded.label,revision=excluded.revision,updated_at=excluded.updated_at", (identity, sequence, body.label, revision + 1, now()))
+        return {"revision": revision + 1, "label": body.label}
+
+    @app.get("/api/sessions/deletion-preview")
+    def deletion_preview(mode: Literal["standard", "custom", "legacy"] | None = None,
+                         status: Literal["ended", "ongoing", "incomplete"] | None = None,
+                         after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
+                         before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
+                         configuration: str | None = None, eligibleOnly: bool = False):
+        sessions, snapshot_at = read_sessions()
+        sessions = filter_sessions(sessions, mode, status, after, before, configuration)
+        if eligibleOnly:
+            sessions = [session for session in sessions if session["comparisonEligible"]]
+        ids = [s["id"] for s in sessions if s["status"] == "ended" and any(e.get("type") == "session-ended" for e in s["events"])]
+        return {"sessionIds": ids, "count": len(ids), "protectedCount": len(sessions) - len(ids), "snapshotAt": snapshot_at}
+
+    def delete_closed(ids):
+        identities = list(dict.fromkeys(ids))
+        with connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            for identity in identities:
+                row = db.execute("SELECT status FROM sessions WHERE id=?", (identity,)).fetchone()
+                if row is None:
+                    raise HTTPException(409, detail="The selected history changed. Refresh the deletion scope and try again.")
+                terminal = any(json.loads(record[0]).get("type") == "session-ended" for record in db.execute("SELECT event FROM observations WHERE session_id=?", (identity,)))
+                if row["status"] != "ended" or not terminal:
+                    raise HTTPException(409, detail="Ongoing or pending sessions are protected from deletion.")
+            for identity in identities:
+                db.execute("DELETE FROM observations WHERE session_id=?", (identity,))
+                db.execute("DELETE FROM sessions WHERE id=?", (identity,))
+        return {"deletedCount": len(identities)}
+
+    @app.delete("/api/sessions")
+    def delete_history(body: DeleteSelection):
+        # Only the exact confirmed preview IDs are deleted; newly arriving rows stay.
+        return delete_closed(body.sessionIds)
+
+    @app.delete("/api/sessions/{identity}")
+    def delete_session(identity: str):
+        return delete_closed([identity])
 
     @app.get("/api/sessions/{identity}")
     def read_session(identity: str):

@@ -1,0 +1,12 @@
+{
+  "normalPreviewReady": true,
+  "url": "http://127.0.0.1:4173",
+  "apiPort": 8017,
+  "uiPort": 4173,
+  "apiPid": 29840,
+  "uiPid": 8620,
+  "historicalTablesUnchanged": true,
+  "normalPracticeStarted": false,
+  "normalWriteRequests": 0,
+  "normalRecordsDumped": false
+}

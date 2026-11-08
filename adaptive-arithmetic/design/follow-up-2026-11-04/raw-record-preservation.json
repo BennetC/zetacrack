@@ -1,0 +1,10 @@
+{
+  "verified": true,
+  "tables": [
+    "sessions",
+    "observations",
+    "presets",
+    "settings"
+  ],
+  "originalValuesUnchanged": true
+}

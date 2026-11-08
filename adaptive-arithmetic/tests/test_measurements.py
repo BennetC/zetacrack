@@ -136,7 +136,9 @@ def test_exports_agree_with_results_and_preserve_snapshot_exact_decimals_and_inp
     assert json.loads(rows[0]["configJson"]) == config
     assert json.loads(rows[0]["acceptedInputJson"]) == json.loads(rows[0]["lastInputJson"]) == inputs
     assert rows[1]["acceptedInputJson"] == "" and json.loads(rows[1]["lastInputJson"]) == ""
-    assert float(rows[0]["correctAnswerTimeMs"]) == result["questions"][0]["correctAnswerTimeMs"]
+    # Arbitrary raw accepted strings are retained, but cannot certify a correct
+    # response-time observation. Export and results both keep it null.
+    assert rows[0]["correctAnswerTimeMs"] == "" and result["questions"][0]["correctAnswerTimeMs"] is None
     assert client.get("/api/exports/sessions?format=json").json()["sessions"] == [result]
     assert client.get("/api/exports/sessions?format=csv").text == response.text
 

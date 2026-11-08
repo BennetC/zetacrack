@@ -1,0 +1,174 @@
+{
+  "synthetic": true,
+  "acceptedFixtures": [
+    {
+      "codePoint": 9,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 10,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 11,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 12,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 13,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 32,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 160,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 5760,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8192,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8193,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8194,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8195,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8196,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8197,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8198,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8199,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8200,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8201,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8202,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8232,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8233,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8239,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 8287,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 12288,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": 65279,
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    },
+    {
+      "codePoint": "huge",
+      "eligible": true,
+      "rawAndExactPreserved": true,
+      "savedSummaryJsonCsvGraphAgree": true
+    }
+  ],
+  "rejectedConfigurationCodePoints": [
+    0,
+    28,
+    29,
+    30,
+    31,
+    133,
+    6158,
+    8203,
+    8288,
+    1633,
+    65297
+  ]
+}
