@@ -554,7 +554,14 @@ export function SessionDetail({
             </ul>
           )}
           <ExportActions sessionId={id} />
-          <RunExplorer key={id} session={data} onRefresh={retry} />
+          {data.runAnalytics ? (
+            <RunExplorer key={id} session={data} onRefresh={retry} />
+          ) : (
+            <ReadState
+              error="Run explorer data is unavailable. Retry loading this session."
+              retry={retry}
+            />
+          )}
           <SequenceChart questions={data.questions} />
           <ObservationCharts data={data.analysis} />
           <section className="chart-section">

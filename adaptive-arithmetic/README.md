@@ -8,7 +8,9 @@ Saved results show median/mean correct-answer times and first-input details. His
 
 Graphs also show numeric average/median scores, pooled answer times and equally weighted run timing. History opens with eligible full runs only; **Show non-eligible runs** reveals excluded sessions. Reloading during practice immediately starts a fresh run with the same content/duration and no countdown, retaining the interrupted observations and remembered Custom settings.
 
-The approved follow-up adds best/latest-10 score comparisons, quick date ranges, inspectable graph points, persistent filtered URLs/Back/Forward, separate matching/all-history deletion and **Run again** (R after saving). Pending Start requests retain a stable operation key so a lost response can be retried or recovered without creating an orphan. Mobile graph controls collapse to bring the scores into the first viewport. Current verified preview: [127.0.0.1:4175](http://127.0.0.1:4175), API 8019; the original 4173/8017 processes may still serve older code until their owner restarts them.
+The approved follow-up adds best/latest-10 score comparisons, quick date ranges, inspectable graph points, persistent filtered URLs/Back/Forward, separate matching/all-history deletion and **Run again** (R after saving). Pending Start requests retain a stable operation key so a lost response can be retried or recovered without creating an orphan. Mobile graph controls collapse to bring the scores into the first viewport.
+
+Reload now keeps the run layout visible while the fresh session starts. History and Graphs reuse unchanged session derivations and defer replay work. Pace and ghost comparisons use exact completion steps, with visible loading, failure and missing-comparison states. Current verified preview: [127.0.0.1:4173](http://127.0.0.1:4173), API 8017, refreshed on 2026-11-08. [Verification and measured performance](docs/reviews/2026-11-08-performance-verification.md).
 
 ## Run locally on Windows
 

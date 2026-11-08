@@ -293,12 +293,14 @@ def test_history_read_snapshot_survives_concurrent_atomic_deletion(tmp_path, mon
     with TestClient(create_app(tmp_path / "concurrent.sqlite3")) as client:
         identities = [create(client) for _ in range(2)]
         for identity in identities: trace(client, identity)
-        entered, proceed = Event(), Event(); original = module.derive_session
+        entered, proceed = Event(), Event(); original = module.add_details
         def blocked(session):
             if not entered.is_set():
                 entered.set(); assert proceed.wait(5)
             return original(session)
-        monkeypatch.setattr(module, "derive_session", blocked)
+        # Detailed export materialization still occurs inside the read snapshot
+        # even when prior detail reads have warmed the session derivation cache.
+        monkeypatch.setattr(module, "add_details", blocked)
         results = []
         reader = Thread(target=lambda: results.append(client.get("/api/exports/sessions?format=json")))
         reader.start(); assert entered.wait(5)

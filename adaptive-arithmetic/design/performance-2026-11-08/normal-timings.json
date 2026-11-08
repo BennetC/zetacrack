@@ -1,0 +1,32 @@
+{
+  "before": {
+    "historyMs": 4570,
+    "analyticsMs": 3857
+  },
+  "after": [
+    {
+      "route": "/api/sessions?limit=1&eligibleOnly=true",
+      "status": 200,
+      "ms": 2814,
+      "bytes": 2297
+    },
+    {
+      "route": "/api/sessions?limit=1&eligibleOnly=true",
+      "status": 200,
+      "ms": 44,
+      "bytes": 2297
+    },
+    {
+      "route": "/api/analytics",
+      "status": 200,
+      "ms": 131,
+      "bytes": 65857
+    },
+    {
+      "route": "/api/analytics",
+      "status": 200,
+      "ms": 136,
+      "bytes": 65857
+    }
+  ]
+}

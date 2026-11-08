@@ -1,7 +1,13 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { practiceSelection, type RunQuestion } from "../src/explorer";
-import { replayFrameAt, boundedTarget } from "../src/explorer";
+import {
+  replayFrameAt,
+  boundedTarget,
+  paceSteps,
+  typicalPaceSteps,
+  scoreAt,
+} from "../src/explorer";
 import { QuestionGenerator, validateConfig } from "../src/domain";
 
 test("selected signed decimal questions reproduce exactly, including reverse division", () => {
@@ -44,4 +50,62 @@ test("replay stepping can anchor to the scrubbed frame and target pace stays fin
   assert.equal(boundedTarget("-10"), 0);
   assert.equal(boundedTarget("100001"), 100000);
   assert.equal(boundedTarget("60"), 60);
+});
+
+test("pace retains exact early, simultaneous and end-boundary completions", () => {
+  const run = {
+    questions: [
+      { acceptedMs: 119999.99 },
+      { acceptedMs: null },
+      { acceptedMs: 0.1 },
+      { acceptedMs: 0.1 },
+      { acceptedMs: 120000 },
+    ],
+  };
+  assert.deepEqual(paceSteps(run, 120000), [
+    [0, 0],
+    [0.1, 0],
+    [0.1, 1],
+    [0.1, 1],
+    [0.1, 2],
+    [119999.99, 2],
+    [119999.99, 3],
+    [120000, 3],
+    [120000, 4],
+    [120000, 4],
+  ]);
+  assert.equal(scoreAt(run, 0), 0);
+  assert.equal(scoreAt(run, 0.1), 2);
+  assert.equal(scoreAt(run, 120000), 4);
+  assert.deepEqual(paceSteps({ questions: [] }, 0), [
+    [0, 0],
+    [0, 0],
+  ]);
+});
+
+test("typical pace is the exact pointwise median, including zero-score peers", () => {
+  const runs = [
+    { questions: [{ acceptedMs: 100 }, { acceptedMs: 200 }] },
+    { questions: [{ acceptedMs: 200 }, { acceptedMs: 300 }] },
+  ];
+  assert.deepEqual(typicalPaceSteps(runs, 400), [
+    [0, 0],
+    [100, 0],
+    [100, 0.5],
+    [200, 0.5],
+    [200, 1.5],
+    [300, 1.5],
+    [300, 2],
+    [400, 2],
+  ]);
+  assert.equal(
+    typicalPaceSteps([...runs, { questions: [] }], 400).at(-1)?.[1],
+    2,
+  );
+  assert.equal(
+    typicalPaceSteps([...runs, { questions: [] }, { questions: [] }], 400).at(
+      -1,
+    )?.[1],
+    1,
+  );
 });

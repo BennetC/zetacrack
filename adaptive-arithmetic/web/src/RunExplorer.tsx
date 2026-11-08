@@ -1,9 +1,11 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import { request } from "./api";
 import { displaySeconds as seconds, type SavedSession } from "./measurements";
 import {
   practiceSelection,
   scoreAt,
+  paceSteps,
+  typicalPaceSteps,
   replayFrameAt,
   boundedTarget,
   type ExplorerContext,
@@ -275,8 +277,15 @@ export function RunExplorer({
   const y = (ms: number) => 220 - (Math.min(ms, max) / max) * 180;
   const peers = context?.comparisons || [];
   const previous = [...peers]
-    .filter((p) => p.createdAt < session.createdAt)
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
+    .filter(
+      (p) =>
+        p.createdAt < session.createdAt ||
+        (p.createdAt === session.createdAt && p.id < session.id),
+    )
+    .sort(
+      (a, b) =>
+        b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id),
+    )[0];
   const best = [...peers].sort((a, b) => b.score - a.score)[0];
   const peer =
     ghost === "previous"
@@ -284,13 +293,34 @@ export function RunExplorer({
       : ghost === "best"
         ? best
         : peers.find((p) => p.id === ghost);
+  const hasComparison =
+    duration !== null &&
+    (ghost === "target"
+      ? duration > 0
+      : ghost === "typical"
+        ? peers.length > 0
+        : Boolean(peer));
+  const paceDuration = duration ?? 0;
+  const medianSteps = useMemo(
+    () =>
+      ghost === "typical"
+        ? typicalPaceSteps(
+            (context?.comparisons || []).map((p) => p.runAnalytics),
+            paceDuration,
+          )
+        : [],
+    [ghost, context, paceDuration],
+  );
   const paceMax = Math.max(
     1,
     stats.completed,
-    ...peers.map((p) => p.score),
+    ghost === "typical"
+      ? (medianSteps.at(-1)?.[1] ?? 0)
+      : peer
+        ? scoreAt(peer.runAnalytics, paceDuration)
+        : 0,
     ghost === "target" ? boundedTarget(target) : 0,
   );
-  const paceDuration = Math.max(1, duration ?? 1);
   const typical = (time: number) => {
     const scores = peers
       .map((p) => scoreAt(p.runAnalytics, time))
@@ -303,18 +333,21 @@ export function RunExplorer({
   };
   const ghostAt = (time: number) =>
     ghost === "target"
-      ? (boundedTarget(target) * time) / paceDuration
+      ? (boundedTarget(target) * time) / (paceDuration || 1)
       : ghost === "typical"
         ? typical(time)
         : peer
           ? scoreAt(peer.runAnalytics, time)
           : 0;
-  const pacePoints = (fn: (n: number) => number) =>
-    Array.from(
-      { length: 101 },
-      (_, i) =>
-        `${48 + i * 7.8},${220 - (fn((i * paceDuration) / 100) / paceMax) * 180}`,
-    ).join(" ");
+  const plotPace = (points: [number, number][]) =>
+    points
+      .map(
+        ([time, score]) =>
+          `${48 + (time / (paceDuration || 1)) * 780},${220 - (score / paceMax) * 180}`,
+      )
+      .join(" ");
+  const stepPoints = (source: Parameters<typeof paceSteps>[0]) =>
+    plotPace(paceSteps(source, paceDuration));
   async function annotate(label: string) {
     if (!current) return;
     setLabelBusy(true);
@@ -765,7 +798,11 @@ export function RunExplorer({
       <div className="explorer-controls">
         <label>
           Compare with{" "}
-          <select value={ghost} onChange={(e) => setGhost(e.target.value)}>
+          <select
+            aria-label="Pace comparison"
+            value={ghost}
+            onChange={(e) => setGhost(e.target.value)}
+          >
             <option value="previous">Previous eligible run</option>
             <option value="best">Best eligible run</option>
             <option value="typical">Typical trajectory (median)</option>
@@ -795,6 +832,32 @@ export function RunExplorer({
         but contain different random questions. Typical uses {peers.length}{" "}
         other eligible runs; it is a reference curve, not a prediction.
       </p>
+      {ghost !== "target" &&
+        (contextError ? (
+          <p role="alert">
+            Comparison data could not load. {contextError}{" "}
+            <button
+              className="text-button"
+              onClick={() => setRetry((n) => n + 1)}
+            >
+              Retry pace comparison
+            </button>
+          </p>
+        ) : !context ? (
+          <p role="status">Loading pace comparisons…</p>
+        ) : !hasComparison ? (
+          <p role="status">
+            {ghost === "previous"
+              ? "No earlier eligible run in this exact comparison group."
+              : "No other eligible run in this exact comparison group."}{" "}
+            Choose Target pace to set a reference.
+          </p>
+        ) : null)}
+      {duration === null && (
+        <p role="status">
+          The observed duration is unknown; elapsed pace is unavailable.
+        </p>
+      )}
       <div className="explorer-svg">
         <svg
           viewBox="0 0 880 260"
@@ -809,16 +872,25 @@ export function RunExplorer({
             0
           </text>
           <polyline
-            points={pacePoints((t) => scoreAt(run, t))}
+            points={duration === null ? "" : stepPoints(run)}
             fill="none"
             stroke="#2563eb"
             strokeWidth="3"
           />
-          {(ghost === "target" ||
-            (ghost === "typical" && peers.length > 0) ||
-            peer) && (
+          {hasComparison && duration !== null && (
             <polyline
-              points={pacePoints(ghostAt)}
+              points={
+                peer
+                  ? stepPoints(peer.runAnalytics)
+                  : plotPace(
+                      ghost === "typical"
+                        ? medianSteps
+                        : [
+                            [0, 0],
+                            [paceDuration, boundedTarget(target)],
+                          ],
+                    )
+              }
               fill="none"
               stroke="#64748b"
               strokeWidth="2"
@@ -837,7 +909,7 @@ export function RunExplorer({
         <p>
           At question {current.index} ({seconds(current.acceptedMs)}):{" "}
           {scoreAt(run, current.acceptedMs)} completions
-          {ghost === "target" || (ghost === "typical" && peers.length) || peer
+          {hasComparison
             ? ` · ${(scoreAt(run, current.acceptedMs) - ghostAt(current.acceptedMs)).toFixed(1)} relative to comparison`
             : " · no eligible comparison yet"}
           .
@@ -856,17 +928,13 @@ export function RunExplorer({
             </thead>
             <tbody>
               {Array.from(
-                { length: 11 },
+                { length: duration === null ? 0 : duration === 0 ? 1 : 11 },
                 (_, i) => (i * paceDuration) / 10,
               ).map((t) => (
                 <tr key={t}>
                   <td>{seconds(t)}</td>
                   <td>{scoreAt(run, t)}</td>
-                  <td>
-                    {ghost === "target" || peers.length
-                      ? ghostAt(t).toFixed(1)
-                      : "—"}
-                  </td>
+                  <td>{hasComparison ? ghostAt(t).toFixed(1) : "—"}</td>
                 </tr>
               ))}
             </tbody>

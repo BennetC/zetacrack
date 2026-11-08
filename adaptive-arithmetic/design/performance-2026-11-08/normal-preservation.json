@@ -1,0 +1,11 @@
+{
+  "unchanged": true,
+  "digest": "17745768a692a823ae14977a849f6ecb12f7cc916cde6330bc020de7a181423b",
+  "tables": [
+    "sessions",
+    "observations",
+    "presets",
+    "settings",
+    "question_annotations"
+  ]
+}

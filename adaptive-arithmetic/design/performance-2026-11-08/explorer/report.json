@@ -1,0 +1,18 @@
+{
+  "synthetic": true,
+  "checks": [
+    "Explorer renders recorded timings, revisions, splits, exact-cohort ghosts and sample-counted profiles",
+    "Pace SVG renders finite exact completion steps, previous, target and median comparisons",
+    "Answer replay supports event stepping, playback, pause and scrubbing",
+    "Keyboard question selection and persisted user labels preserve focus and immutable raw events",
+    "Practice from selected questions opens exact singleton Custom groups without auto-starting",
+    "Reload preserves the run layout without a setup flash and focuses the fresh answer after creation",
+    "Same-seed challenge and reload preserve seed/exclusion and remembered setup; real edits capture versioned field telemetry",
+    "Missing earlier ghosts and comparison failures have explicit states and recover in place",
+    "An older session response without explorer data keeps the saved session usable and supports retry",
+    "Desktop/mobile render without page overflow or JavaScript errors"
+  ],
+  "pageErrors": [],
+  "apiPort": 52096,
+  "sitePort": 52097
+}

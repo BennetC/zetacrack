@@ -1122,6 +1122,20 @@ p {
   gap: 22px;
   text-align: center;
 }
+.reload-transition .reload-question-placeholder {
+  width: 260px;
+  height: 84px;
+  margin: 30px auto;
+  border-radius: 6px;
+  background: #f1f5f9;
+}
+.reload-transition .reload-answer-placeholder {
+  width: 230px;
+  height: 68px;
+  margin: 24px auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
 .run-center h1 {
   font-size: 76px;
   line-height: 1.2;

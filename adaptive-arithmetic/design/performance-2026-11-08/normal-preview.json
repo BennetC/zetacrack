@@ -1,0 +1,18 @@
+{
+  "errors": [],
+  "mutations": [],
+  "times": [
+    {
+      "view": "history",
+      "ms": 1571
+    },
+    {
+      "view": "graphs",
+      "ms": 1425
+    },
+    {
+      "view": "pace-comparison",
+      "ms": 4271
+    }
+  ]
+}

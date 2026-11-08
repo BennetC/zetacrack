@@ -1,5 +1,7 @@
 """Local persistence API. The arithmetic interaction itself runs in the browser."""
 from contextlib import contextmanager
+from collections import OrderedDict
+from threading import Lock
 from datetime import datetime, timezone
 import json
 import os
@@ -15,9 +17,9 @@ from pydantic import BaseModel, ConfigDict, Field
 from starlette.responses import JSONResponse, Response
 
 from server.measurements import TIMING_DEFINITIONS, derive_session, export_csv
-from server.analytics import enrich, filter_sessions, analytics, standard_config
+from server.analytics import enrich, add_details, filter_sessions, analytics, standard_config
 from server.decimal_input import decimal_lexeme
-from server.run_analytics import profile
+from server.run_analytics import profile, describe_run
 
 
 class Model(BaseModel):
@@ -221,6 +223,11 @@ def create_app(database: str | Path) -> FastAPI:
             db.execute("ALTER TABLE sessions ADD COLUMN replay_of TEXT")
         db.execute("CREATE TABLE IF NOT EXISTS question_annotations(session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE, presentation_sequence INTEGER NOT NULL, label TEXT NOT NULL, revision INTEGER NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(session_id,presentation_sequence))")
     app = FastAPI(title="Arithmetic local API", version="1.0.0")
+    # Cache only derived reads, never observations. Signatures are read in the
+    # same transaction as metadata/events, including writes from other workers.
+    session_cache = OrderedDict()
+    cache_lock = Lock()
+    cache_event_count = 0
 
     @app.middleware("http")
     async def local_origin(request: Request, call_next):
@@ -341,19 +348,51 @@ def create_app(database: str | Path) -> FastAPI:
                     db.execute("UPDATE sessions SET status='ended' WHERE id=?", (identity,))
         return {"saved":True}
 
-    def read_sessions(identity: str | None = None):
+    def read_sessions(identity: str | None = None, detailed=True):
+        nonlocal cache_event_count
         with connection() as db:
             # Explicit read transaction pins metadata and every event query to
             # one SQLite snapshot, even when another tab appends concurrently.
             db.execute("BEGIN")
-            rows = db.execute("SELECT * FROM sessions WHERE id=?", (identity,)).fetchall() if identity is not None else db.execute("SELECT * FROM sessions ORDER BY created_at,id").fetchall()
+            query = """SELECT s.*,
+                (SELECT COUNT(*) FROM observations WHERE session_id=s.id) AS event_count,
+                (SELECT MAX(sequence) FROM observations WHERE session_id=s.id) AS last_sequence
+                FROM sessions s"""
+            rows = db.execute(query + " WHERE s.id=?", (identity,)).fetchall() if identity is not None else db.execute(query + " ORDER BY created_at,id").fetchall()
             if identity is not None and not rows:
                 raise HTTPException(404, detail="Session not found.")
+            annotations_by_id = {}
+            annotation_rows = db.execute("SELECT * FROM question_annotations WHERE session_id=? ORDER BY presentation_sequence", (identity,)) if identity is not None else db.execute("SELECT * FROM question_annotations ORDER BY session_id,presentation_sequence")
+            for a in annotation_rows:
+                annotations_by_id.setdefault(a["session_id"], []).append({"presentationSequence": a["presentation_sequence"], "label": a["label"], "revision": a["revision"], "updatedAt": a["updated_at"]})
+            signatures = {row["id"]: (tuple(row), encoded(annotations_by_id.get(row["id"], []))) for row in rows}
+            # Gather hits before filling misses so a large scan cannot evict its
+            # own later hits. Bound memory without an all-history replay cache.
+            with cache_lock:
+                hits = {}
+                for row in rows:
+                    cached = session_cache.get(row["id"])
+                    if cached and cached[0] == signatures[row["id"]]:
+                        hits[row["id"]] = cached[1]
+                        session_cache.move_to_end(row["id"])
             sessions = []
             for row in rows:
-                events = [json.loads(record[0]) for record in db.execute("SELECT event FROM observations WHERE session_id=? ORDER BY sequence", (row["id"],))]
-                annotations = [{"presentationSequence": a["presentation_sequence"], "label": a["label"], "revision": a["revision"], "updatedAt": a["updated_at"]} for a in db.execute("SELECT * FROM question_annotations WHERE session_id=? ORDER BY presentation_sequence", (row["id"],))]
-                sessions.append(enrich(derive_session({"id":row["id"], "config":json.loads(row["config"]), "seed":row["seed"], "generatorVersion":row["generator"], "policyVersion":row["policy"], "measurementVersion":row["measurement_version"], "mode":row["mode"], "contentVersion":row["content_version"], "replayOf":row["replay_of"], "annotations":annotations, "createdAt":row["created_at"], "status":row["status"], "events":events})))
+                session = hits.get(row["id"])
+                if session is None:
+                    events = [json.loads(record[0]) for record in db.execute("SELECT event FROM observations WHERE session_id=? ORDER BY sequence", (row["id"],))]
+                    annotations = annotations_by_id.get(row["id"], [])
+                    session = enrich(derive_session({"id":row["id"], "config":json.loads(row["config"]), "seed":row["seed"], "generatorVersion":row["generator"], "policyVersion":row["policy"], "measurementVersion":row["measurement_version"], "mode":row["mode"], "contentVersion":row["content_version"], "replayOf":row["replay_of"], "annotations":annotations, "createdAt":row["created_at"], "status":row["status"], "events":events}), detailed=False)
+                    with cache_lock:
+                        previous = session_cache.get(row["id"])
+                        if previous:
+                            cache_event_count -= len(previous[1]["events"])
+                        session_cache[row["id"]] = (signatures[row["id"]], session)
+                        cache_event_count += len(events)
+                        session_cache.move_to_end(row["id"])
+                        while len(session_cache) > 2048 or cache_event_count > 250_000:
+                            _, removed = session_cache.popitem(last=False)
+                            cache_event_count -= len(removed[1]["events"])
+                sessions.append(add_details(session) if detailed else session)
             exported_at = now()
         return sessions, exported_at
 
@@ -361,7 +400,7 @@ def create_app(database: str | Path) -> FastAPI:
     def session_history(offset: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100), mode: Literal["standard", "custom", "legacy"] | None = None,
                         status: Literal["ended", "ongoing", "incomplete"] | None = None, after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
                         before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), configuration: str | None = None, eligibleOnly: bool = False):
-        sessions, snapshot_at = read_sessions()
+        sessions, snapshot_at = read_sessions(detailed=False)
         selected = filter_sessions(sessions, mode, status, after, before, configuration)
         if eligibleOnly:
             selected = [session for session in selected if session["comparisonEligible"]]
@@ -370,16 +409,18 @@ def create_app(database: str | Path) -> FastAPI:
 
     @app.get("/api/analytics")
     def session_analytics(cohort: str | None = None, includePartial: bool = False, after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$")):
-        sessions, snapshot_at = read_sessions()
+        sessions, snapshot_at = read_sessions(detailed=False)
         return {**analytics(filter_sessions(sessions, after=after, before=before), cohort, includePartial), "snapshotAt": snapshot_at, "totalSavedSessionCount": len(sessions)}
 
     @app.get("/api/explorer/{identity}")
     def explorer(identity: str):
-        sessions, snapshot = read_sessions()
+        sessions, snapshot = read_sessions(detailed=False)
         selected = next((s for s in sessions if s["id"] == identity), None)
         if selected is None:
             raise HTTPException(404, detail="Session not found.")
         peers = [s for s in sessions if s["cohortKey"] == selected["cohortKey"] and s["comparisonEligible"] and s["id"] != identity]
+        selected = {**selected, "runAnalytics": describe_run(selected)}
+        peers = [{**s, "runAnalytics": describe_run(s)} for s in peers]
         baselines = {}
         for s in peers:
             if (s["createdAt"], s["id"]) >= (selected["createdAt"], selected["id"]):
@@ -391,7 +432,8 @@ def create_app(database: str | Path) -> FastAPI:
         from statistics import median
         return {"snapshotAt": snapshot, "profile": profile(peers + [selected]), "profileSessionCount": len(peers) + 1,
                 "baselines": {key: {"count": len(values), "medianMs": median(values)} for key, values in baselines.items()},
-                "comparisons": [{"id": s["id"], "createdAt": s["createdAt"], "score": s["score"], "runAnalytics": s["runAnalytics"]} for s in peers],
+                "comparisons": [{"id": s["id"], "createdAt": s["createdAt"], "score": s["score"],
+                                 "runAnalytics": {"questions": [{"acceptedMs": q["acceptedMs"]} for q in s["runAnalytics"]["questions"] if q["acceptedMs"] is not None]}} for s in peers],
                 "historicalProfile": profile([s for s in peers if (s["createdAt"], s["id"]) < (selected["createdAt"], selected["id"])])}
 
     @app.put("/api/sessions/{identity}/annotations/{sequence}")
@@ -417,7 +459,7 @@ def create_app(database: str | Path) -> FastAPI:
                          after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
                          before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
                          configuration: str | None = None, eligibleOnly: bool = False):
-        sessions, snapshot_at = read_sessions()
+        sessions, snapshot_at = read_sessions(detailed=False)
         sessions = filter_sessions(sessions, mode, status, after, before, configuration)
         if eligibleOnly:
             sessions = [session for session in sessions if session["comparisonEligible"]]
@@ -425,6 +467,7 @@ def create_app(database: str | Path) -> FastAPI:
         return {"sessionIds": ids, "count": len(ids), "protectedCount": len(sessions) - len(ids), "snapshotAt": snapshot_at}
 
     def delete_closed(ids):
+        nonlocal cache_event_count
         identities = list(dict.fromkeys(ids))
         with connection() as db:
             db.execute("BEGIN IMMEDIATE")
@@ -438,6 +481,11 @@ def create_app(database: str | Path) -> FastAPI:
             for identity in identities:
                 db.execute("DELETE FROM observations WHERE session_id=?", (identity,))
                 db.execute("DELETE FROM sessions WHERE id=?", (identity,))
+        with cache_lock:
+            for identity in identities:
+                removed = session_cache.pop(identity, None)
+                if removed:
+                    cache_event_count -= len(removed[1]["events"])
         return {"deletedCount": len(identities)}
 
     @app.delete("/api/sessions")

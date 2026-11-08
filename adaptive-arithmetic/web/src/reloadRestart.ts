@@ -31,9 +31,8 @@ export function parseReloadRestart(raw: string): ReloadRestart | null {
 }
 
 // Intent belongs to this tab and this navigation, not to any shared journal.
-export function consumeReloadRestart(view: string): ReloadRestart | null {
+export function peekReloadRestart(view: string): ReloadRestart | null {
   const raw = sessionStorage.getItem(RESTART_KEY);
-  sessionStorage.removeItem(RESTART_KEY);
   const navigation = performance.getEntriesByType("navigation")[0] as
     | PerformanceNavigationTiming
     | undefined;
@@ -44,6 +43,12 @@ export function consumeReloadRestart(view: string): ReloadRestart | null {
   )
     return null;
   return parseReloadRestart(raw);
+}
+
+export function consumeReloadRestart(view: string): ReloadRestart | null {
+  const intent = peekReloadRestart(view);
+  sessionStorage.removeItem(RESTART_KEY);
+  return intent;
 }
 
 export function rememberReloadRestart(value: ReloadRestart) {

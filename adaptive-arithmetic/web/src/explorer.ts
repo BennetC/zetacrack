@@ -82,7 +82,7 @@ export interface ExplorerContext {
     id: string;
     createdAt: string;
     score: number;
-    runAnalytics: RunAnalytics;
+    runAnalytics: PaceRun;
   }[];
   profile: ProfileRow[];
   profileSessionCount: number;
@@ -139,10 +139,82 @@ export function practiceSelection(questions: RunQuestion[]): Config {
   return config;
 }
 
-export function scoreAt(run: RunAnalytics, time: number) {
+export type PaceRun = { questions: { acceptedMs: number | null }[] };
+
+export function scoreAt(run: PaceRun, time: number) {
   return run.questions.filter(
     (q) => q.acceptedMs !== null && q.acceptedMs <= time,
   ).length;
+}
+
+// Draw every actual completion as a step, including ties and the exact end.
+// Fixed sampling can hide short runs and invent sloping progress between answers.
+export function paceSteps(run: PaceRun, duration: number): [number, number][] {
+  const times = run.questions
+    .flatMap((q) =>
+      q.acceptedMs !== null &&
+      Number.isFinite(q.acceptedMs) &&
+      q.acceptedMs >= 0 &&
+      q.acceptedMs <= duration
+        ? [q.acceptedMs]
+        : [],
+    )
+    .sort((a, b) => a - b);
+  const points: [number, number][] = [[0, 0]];
+  times.forEach((time, i) => points.push([time, i], [time, i + 1]));
+  points.push([duration, times.length]);
+  return points;
+}
+
+export function typicalPaceSteps(
+  runs: PaceRun[],
+  duration: number,
+): [number, number][] {
+  if (!runs.length)
+    return [
+      [0, 0],
+      [duration, 0],
+    ];
+  const events = runs
+    .flatMap((run, index) =>
+      run.questions.flatMap((q) =>
+        q.acceptedMs !== null &&
+        Number.isFinite(q.acceptedMs) &&
+        q.acceptedMs >= 0 &&
+        q.acceptedMs <= duration
+          ? [{ time: q.acceptedMs, index }]
+          : [],
+      ),
+    )
+    .sort((a, b) => a.time - b.time);
+  const counts = runs.map(() => 0),
+    frequencies = [runs.length];
+  const points: [number, number][] = [[0, 0]];
+  let value = 0;
+  for (let i = 0; i < events.length; ) {
+    const time = events[i].time;
+    points.push([time, value]);
+    do {
+      const index = events[i++].index;
+      frequencies[counts[index]]--;
+      const count = ++counts[index];
+      frequencies[count] = (frequencies[count] || 0) + 1;
+    } while (i < events.length && events[i].time === time);
+    let cumulative = 0,
+      lower = -1;
+    for (let score = 0; score < frequencies.length; score++) {
+      cumulative += frequencies[score] || 0;
+      if (lower < 0 && cumulative > Math.floor((runs.length - 1) / 2))
+        lower = score;
+      if (cumulative > Math.floor(runs.length / 2)) {
+        value = (lower + score) / 2;
+        break;
+      }
+    }
+    points.push([time, value]);
+  }
+  points.push([duration, value]);
+  return points;
 }
 
 export function replayFrameAt(question: RunQuestion, cursor: number) {

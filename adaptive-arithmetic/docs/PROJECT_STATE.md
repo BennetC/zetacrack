@@ -2,6 +2,22 @@
 
 Workflow authority, read with the [working agreement](../AGENTS.md) and [decision log](DECISIONS.md). Updated 2026-11-08.
 
+## Orbit logging and GitHub handoff, 2026-11-08
+
+The user requested logging the completed changes in Orbit and then corrected “deploy” to **push to GitHub** (D-030). Production deployment was withdrawn before any rollout or deployment task was saved. Only the reviewed changes and their synthetic verification evidence are prepared for the authorized push to `BennetC/zetacrack`; normal records, credentials, dependencies and builds remain excluded.
+
+Orbit readback confirms **task647 completed, review648 completed, verification104 passed**. Implementation attempt230 and fresh independent reviewer attempt231 are finished at revision2. [Independent review](reviews/2026-11-08-performance-independent-review.md) found no actionable defects after fresh 114 backend/28 frontend/TypeScript/10 explorer-browser scenarios, cache interleaving/revision/deletion probes and deterministic pace property checks. The earlier “independent review not performed” statement describes the original implementation checkpoint and is superseded by this review.
+
+The actual closed implementation turn was backfilled through supported observed-source collection; reviewer activity and typed usage are now saved after its source turn closed. Token coverage remains partial and source-population completeness unknown. This parent reporting/push turn remains provisional with configured collection queued for actual closure; no timing or token values were invented or recorded as human work. The task was initially created with Orbit's human-work default; only this newly created task's work type was corrected to AI through the existing authenticated assessment endpoint before its implementation finish succeeded. Prior completed tasks were left unchanged.
+
+## Reload, saved-read performance and pace repairs, 2026-11-08
+
+The user explicitly requested smoother in-run reload, faster History/Graphs loading, and repair of Pace & ghost comparison (D-029). These focused platform changes are implemented and verified; user acceptance is separate. Reload retains the run layout through replacement creation and focuses the new answer. History/Graphs skip replay construction and reuse bounded, snapshot-validated session derivations. Pace renders exact completion steps, including the pointwise median, and has explicit loading/error/missing-peer states. An old session response without explorer data no longer crashes session detail.
+
+Actual checks: **114 backend / 28 frontend / 46 browser / four packaging checks**, TypeScript and build passed. [Verification and limits](reviews/2026-11-08-performance-verification.md) include the measured request timings, actual browser trace, synthetic screenshots and unchanged normal-data fingerprint. Repeated History requests measured 44 ms (previous preview 4570 ms); Graphs 131–136 ms (3857 ms). The first post-restart all-session read still took 2814 ms to populate the in-memory cache. This is an observed local comparison, not a load-test guarantee.
+
+Current refreshed preview: [127.0.0.1:4173](http://127.0.0.1:4173), API8017, existing normal SQLite. The old default API omitted `runAnalytics` and caused an actual session-detail JavaScript crash; its verified local process was replaced with the current source. API supervised session90391 / process5488 remains running; existing default Vite tracks the current source. Older 4175/4176 previews retain their separate API processes. The temporary 4177/8021 preview was stopped. Original practice observations, configurations, labels, presets and settings are unchanged. No Orbit task mutation or Stage 2 implementation is part of this request.
+
 ## GitHub publication authorization, 2026-11-08
 
 The user explicitly requested publishing the current project as public `BennetC/zetacrack` and making its precursor `BennetC/CarryTheOne` private (D-028). This authorizes repository publication with the existing Git history and current implementation. Local practice databases, credentials, dependencies and generated builds remain excluded by Git ignore rules. The application directory remains `adaptive-arithmetic/`; the repository name is `zetacrack`.
@@ -9,11 +25,11 @@ The user explicitly requested publishing the current project as public `BennetC/
 | Item | Status |
 | --- | --- |
 | Documentation bootstrap | Complete |
-| Current activity | D-027: Orbit499 completed, review503/verification25 passed. Measured source timing recovered: 3041 combined agent seconds; old unknown report12 excluded. Token evidence recovered locally; typed import rejected HTTP404 |
+| Current activity | D-030: task647/review648 completed, verification104 passed; reviewed changes prepared for the explicitly requested GitHub push. Production deployment withdrawn. Prior D-027 Orbit closure remains unchanged |
 | Custom-practice controls | Approved, implemented, and verified after runtime/recovery fixes |
 | Response timing and session exports | Explicit implementation approval on 2026-10-09; median/mean correct-answer times, first-input details, JSON/CSV downloads implemented and verified; [contract](stage-1-ai/TIMING_EXPORTS.md) |
 | Custom architecture/configuration | React/TypeScript, FastAPI, SQLite; [contract](stage-1-ai/CUSTOM_PRACTICE.md) |
-| Verification | D-027: 111 backend / 26 frontend / 68 browser / 4 packaging checks, typecheck/build passed. Earlier independent evidence remains preserved |
+| Verification | D-029 checks passed; D-030 independent review also passed with fresh checks and cache/pace probes. Earlier full-suite and independent evidence remains preserved |
 | Remaining Stage 1 | None within the accepted local scope; documented platform and measurement limits remain |
 | Full Stage 1 user acceptance | Received 2026-10-23: “stage 1 is done, let's start planning stage 2.” Gates C and D satisfied |
 | Stage 2 | Planning started; user owns investigation/design/substantive implementation. No study, algorithm, or learning-engine implementation authorized |

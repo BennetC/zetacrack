@@ -40,6 +40,7 @@ import {
 } from "./sessionCreation";
 import {
   consumeReloadRestart,
+  peekReloadRestart,
   clearReloadRestart,
   type ReloadRestart,
 } from "./reloadRestart";
@@ -257,6 +258,15 @@ export function App() {
     [busy, setBusy] = useState(false),
     [runtime, setRuntime] = useState<Runtime | null>(null);
   const [restartError, setRestartError] = useState("");
+  const [reloadPreview, setReloadPreview] = useState<ReloadRestart | null>(
+    () => {
+      try {
+        return peekReloadRestart(view);
+      } catch {
+        return null;
+      }
+    },
+  );
   const [startError, setStartError] = useState("");
   const pendingCreation = useRef<CreationRequest | null>(null);
   useEffect(() => {
@@ -332,6 +342,7 @@ export function App() {
             );
             if (!ownership) {
               restartIntent.current = null;
+              setReloadPreview(null);
               setRestartError(
                 "The previous run is still owned by another tab. Start a run from setup.",
               );
@@ -340,6 +351,7 @@ export function App() {
             await ownership.release();
             void restartRun();
           } catch (e) {
+            setReloadPreview(null);
             setRestartError(
               `Automatic restart could not check session ownership. ${(e as Error).message}`,
             );
@@ -347,6 +359,7 @@ export function App() {
         })();
       }
     } catch {
+      setReloadPreview(null);
       setRestartError(
         "Automatic restart is unavailable because this tab’s restart information could not be read. Start a run from setup.",
       );
@@ -611,6 +624,7 @@ export function App() {
       setRestartError(
         "The fresh run could not be started. Your previous run’s recovery data is retained.",
       );
+    setReloadPreview(null);
   }
   async function start(
     standard = false,
@@ -816,6 +830,31 @@ export function App() {
           }}
         />
       </>
+    );
+  if (reloadPreview)
+    return (
+      <main
+        className="run-page"
+        aria-busy="true"
+        data-testid="reload-transition"
+      >
+        <header className="run-header">
+          <span className="brand">Arithmetic</span>
+          <span>
+            {reloadPreview.config.session.format === "timed"
+              ? `${Math.floor(Number(reloadPreview.config.session.durationSeconds) / 60)}:${String(Number(reloadPreview.config.session.durationSeconds) % 60).padStart(2, "0")}`
+              : "Endless practice"}
+          </span>
+          <button className="secondary-button" disabled>
+            End session
+          </button>
+        </header>
+        <section className="run-center reload-transition" role="status">
+          <p className="section-help">Starting fresh run…</p>
+          <div className="reload-question-placeholder" aria-hidden="true" />
+          <div className="reload-answer-placeholder" aria-hidden="true" />
+        </section>
+      </main>
     );
   const navigation = (
     <>

@@ -37,7 +37,7 @@ def aggregate(questions):
             "medianCorrectAnswerTimeMs": median(times) if times else None, "meanCorrectAnswerTimeMs": mean(times) if times else None}
 
 
-def enrich(session):
+def enrich(session, detailed=True):
     """Add comparison provenance/eligibility; never rewrite old observations."""
     mode = session.get("mode")
     identity = {key: session.get(key) for key in ("mode", "contentVersion", "generatorVersion", "policyVersion", "measurementVersion")}
@@ -105,9 +105,15 @@ def enrich(session):
     session.update(cohortKey=key, cohortLabel=f"{title} · {duration} · {operation_names} · {key[:8]}",
                    score=session["summary"]["correctQuestionCount"], comparisonEligible=not reasons,
                    comparisonExclusionReasons=list(dict.fromkeys(reasons)), scoreState="full" if not reasons else "partial")
-    session["runAnalytics"] = describe_run(session)
-    session["analysis"] = analytics([session], key, include_partial=True)
+    if detailed:
+        session = add_details(session)
     return session
+
+
+def add_details(session):
+    """Build replay and single-run charts only when their consumer needs them."""
+    return {**session, "runAnalytics": describe_run(session),
+            "analysis": analytics([session], session["cohortKey"], include_partial=True)}
 
 
 def filter_sessions(sessions, mode=None, status=None, after=None, before=None, configuration=None):

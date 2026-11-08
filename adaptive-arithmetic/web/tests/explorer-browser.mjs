@@ -11,7 +11,9 @@ const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../..",
 );
-const evidence = path.join(root, "design/explorer-2026-11-05");
+const evidence =
+  process.env.ARITHMETIC_EVIDENCE_DIR ||
+  path.join(root, "design/explorer-2026-11-05");
 await mkdir(evidence, { recursive: true });
 await mkdir(path.join(root, "data"), { recursive: true });
 async function freePort() {
@@ -200,6 +202,44 @@ try {
     defaultViewport: { width: 1440, height: 1000 },
   });
   page = await browser.newPage();
+  let failComparisons = false,
+    omitExplorer = false,
+    holdCreation = false,
+    releaseCreation;
+  await page.setRequestInterception(true);
+  page.on("request", async (req) => {
+    if (omitExplorer && /\/api\/sessions\/[^/?]+$/.test(req.url())) {
+      const saved = await api(new URL(req.url()).pathname);
+      delete saved.runAnalytics;
+      await req.respond({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(saved),
+      });
+    } else if (failComparisons && req.url().includes("/api/explorer/")) {
+      await req.respond({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ detail: "Synthetic comparison failure" }),
+      });
+    } else {
+      if (
+        holdCreation &&
+        req.url().endsWith("/api/sessions") &&
+        req.method() === "POST"
+      )
+        await new Promise((resolve) => {
+          releaseCreation = resolve;
+        });
+      await req.continue();
+    }
+  });
+  await page.evaluateOnNewDocument(() => {
+    window.__sawSetup = false;
+    new MutationObserver(() => {
+      if (document.querySelector(".product-nav")) window.__sawSetup = true;
+    }).observe(document, { childList: true, subtree: true });
+  });
   page.on("pageerror", (e) => pageErrors.push(e.message));
   await page.bringToFront();
   await page.goto(siteURL);
@@ -282,6 +322,42 @@ try {
   note(
     "Explorer renders recorded timings, revisions, splits, exact-cohort ghosts and sample-counted profiles",
   );
+  const paceSelector =
+    'svg[aria-label="Cumulative valid completions over elapsed time"]';
+  const curves = await page.$$eval(paceSelector + " polyline", (els) =>
+    els.map((el) =>
+      el
+        .getAttribute("points")
+        .split(" ")
+        .map((p) => p.split(",").map(Number)),
+    ),
+  );
+  assert.equal(curves.length, 2);
+  assert(curves.every((points) => points.flat().every(Number.isFinite)));
+  assert(
+    curves.every((points) =>
+      points.some(
+        (p, i) => i && p[0] === points[i - 1][0] && p[1] < points[i - 1][1],
+      ),
+    ),
+  );
+  await (
+    await page.$(paceSelector)
+  ).screenshot({ path: path.join(evidence, "pace-comparison.png") });
+  await page.select('select[aria-label="Pace comparison"]', "target");
+  assert.equal(
+    await page.$$eval(paceSelector + " polyline", (els) => els.length),
+    2,
+  );
+  await page.select('select[aria-label="Pace comparison"]', "typical");
+  assert.equal(
+    await page.$$eval(paceSelector + " polyline", (els) => els.length),
+    2,
+  );
+  await page.select('select[aria-label="Pace comparison"]', "previous");
+  note(
+    "Pace SVG renders finite exact completion steps, previous, target and median comparisons",
+  );
   await button("Next edit");
   assert.notEqual(
     await page.$eval('output[aria-label="Replayed answer"]', (el) =>
@@ -294,11 +370,29 @@ try {
   await button("Pause replay");
   await page.focus('input[aria-label="Replay position"]');
   await page.keyboard.press("End");
-  await page.waitForFunction(expected => document.querySelector('output[aria-label="Replayed answer"]').textContent === expected, {}, fixture.questions[0].expected);
+  await page.waitForFunction(
+    (expected) =>
+      document.querySelector('output[aria-label="Replayed answer"]')
+        .textContent === expected,
+    {},
+    fixture.questions[0].expected,
+  );
   await button("Previous edit");
-  assert.equal(await page.$eval('output[aria-label="Replayed answer"]', el => el.textContent), fixture.questions[0].expected.slice(0, -1));
+  assert.equal(
+    await page.$eval(
+      'output[aria-label="Replayed answer"]',
+      (el) => el.textContent,
+    ),
+    fixture.questions[0].expected.slice(0, -1),
+  );
   await button("Next edit");
-  assert.equal(await page.$eval('output[aria-label="Replayed answer"]', el => el.textContent), fixture.questions[0].expected);
+  assert.equal(
+    await page.$eval(
+      'output[aria-label="Replayed answer"]',
+      (el) => el.textContent,
+    ),
+    fixture.questions[0].expected,
+  );
   note("Answer replay supports event stepping, playback, pause and scrubbing");
   const mark = await page.$(
     '.question-mark[aria-label^="Inspect question 2:"]',
@@ -346,7 +440,10 @@ try {
   await page.type('input[aria-label="Your answer"]', "x");
   await page.focus('input[aria-label="Your answer"]');
   await page.keyboard.press("Backspace");
-  await input('input[aria-label="Your answer"]', "unknown-composition-metadata");
+  await input(
+    'input[aria-label="Your answer"]',
+    "unknown-composition-metadata",
+  );
   // A live challenge must survive deletion of its older, closed ancestor.
   await api(`/api/sessions/${id}`, "DELETE");
   const freshResponse = page.waitForResponse(
@@ -355,9 +452,27 @@ try {
       r.request().method() === "POST" &&
       r.status() === 201,
   );
-  await page.reload();
+  holdCreation = true;
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForSelector('[data-testid="reload-transition"]');
+  assert.equal(await page.$(".product-nav"), null);
+  await screenshot("reload-transition");
+  await until(() => Boolean(releaseCreation), "held restart creation");
+  holdCreation = false;
+  releaseCreation();
   const freshId = (await (await freshResponse).json()).id;
   await page.waitForSelector('input[aria-label="Your answer"]');
+  assert.equal(await page.evaluate(() => window.__sawSetup), false);
+  assert.equal(
+    await page.$eval(
+      'input[aria-label="Your answer"]',
+      (el) => el === document.activeElement,
+    ),
+    true,
+  );
+  note(
+    "Reload preserves the run layout without a setup flash and focuses the fresh answer after creation",
+  );
   await delay(650);
   const fresh = await api(`/api/sessions/${freshId}`);
   assert.equal(fresh.replayOf, challenge.id);
@@ -370,12 +485,49 @@ try {
   assert.equal(edit.payload.telemetryVersion, "answer-edits-v2");
   assert.equal(typeof edit.payload.beforeValue, "string");
   assert.equal(typeof edit.payload.isComposing, "boolean");
-  assert(challengeSaved.events.some(e => e.type === "input-changed" && e.payload.isComposing === null));
+  assert(
+    challengeSaved.events.some(
+      (e) => e.type === "input-changed" && e.payload.isComposing === null,
+    ),
+  );
   note(
     "Same-seed challenge and reload preserve seed/exclusion and remembered setup; real edits capture versioned field telemetry",
   );
   await page.goto(`${siteURL}/?view=history&session=${first}`);
   await text("Run explorer");
+  await text("No earlier eligible run in this exact comparison group.");
+  assert.equal(
+    await page.$$eval(paceSelector + " polyline", (els) => els.length),
+    1,
+  );
+  await page.select('select[aria-label="Pace comparison"]', "target");
+  assert.equal(
+    await page.$$eval(paceSelector + " polyline", (els) => els.length),
+    2,
+  );
+  failComparisons = true;
+  await page.reload();
+  await text("Synthetic comparison failure");
+  assert.equal(
+    await page.$$eval(paceSelector + " polyline", (els) => els.length),
+    1,
+  );
+  failComparisons = false;
+  await button("Retry pace comparison");
+  await text("No earlier eligible run in this exact comparison group.");
+  note(
+    "Missing earlier ghosts and comparison failures have explicit states and recover in place",
+  );
+  omitExplorer = true;
+  await page.reload();
+  await text("Run explorer data is unavailable.");
+  await text("Exact question records");
+  omitExplorer = false;
+  await button("Retry loading");
+  await text("Run explorer");
+  note(
+    "An older session response without explorer data keeps the saved session usable and supports retry",
+  );
   await delay(500);
   await screenshot("explorer-desktop");
   await page.$eval(".run-explorer", (el) => el.scrollIntoView());
