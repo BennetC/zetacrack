@@ -37,7 +37,11 @@ Initial screenshots exposed inherited run-center sizing that compressed the pane
 
 The existing default API was an older process without `/api/optiver/analytics`. After verifying its command/process identity, it was refreshed on port8017. Current API process50172 is supervised by execution session59967; the existing frontend on4173 serves updated source. Other older previews were left in place. A normal-browser read-only verification recorded no API mutations or JavaScript errors. Ignored before/after digests match for sessions, observations, presets, settings and question annotations. No schema migration or historical observation rewrite was needed.
 
-Browser suites use fresh isolated databases/origins; synthetic scores/screenshots are software evidence, not user-performance or learning evidence. No Stage 2 engine, Orbit record change, GitHub push or production deployment was performed.
+Browser suites use fresh isolated databases/origins; synthetic scores/screenshots are software evidence, not user-performance or learning evidence. At the original 11 November implementation checkpoint, no Stage 2 engine, Orbit record change, GitHub push or production deployment was performed. The later GitHub handoff is recorded below.
+
+## GitHub handoff, 12 November 2026
+
+At the user's request, implementation, tests, synthetic evidence and updated root/app READMEs plus product/platform/data/timing/handoff contracts were published as [ba07a7e](https://github.com/BennetC/zetacrack/commit/ba07a7eb53918428f01557a90be571eda70b1c23) on the existing repository's `main` branch. A successful push and remote-ref readback confirmed the full SHA. Fresh pre-push checks passed: 138 backend tests, 33 frontend tests, TypeScript, production build and four packaging checks. Relative Markdown/image references and staged whitespace were checked; normal records, dependencies, builds and recognized credential patterns were excluded from staging. Browser checks above were not rerun for this documentation/publication handoff. This updates the original report's no-push status for the later authorized publication; no production rollout or Orbit mutation occurred.
 
 ## Limits
 
