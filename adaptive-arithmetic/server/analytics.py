@@ -11,6 +11,7 @@ import hashlib
 import json
 from statistics import mean, median
 from server.run_analytics import describe_run
+from server.optiver import enrich_optiver, optiver_statistics
 
 STANDARD_CONTENT = "zetamac-default-v1"
 STANDARD_GENERATOR = "zetamac-reverse-v1"
@@ -40,6 +41,9 @@ def aggregate(questions):
 def enrich(session, detailed=True):
     """Add comparison provenance/eligibility; never rewrite old observations."""
     mode = session.get("mode")
+    if mode == "optiver":
+        session = enrich_optiver(session)
+        return add_details(session) if detailed else session
     identity = {key: session.get(key) for key in ("mode", "contentVersion", "generatorVersion", "policyVersion", "measurementVersion")}
     identity["config"] = session["config"]
     if session.get("replayOf"):
@@ -112,7 +116,7 @@ def enrich(session, detailed=True):
 
 def add_details(session):
     """Build replay and single-run charts only when their consumer needs them."""
-    return {**session, "runAnalytics": describe_run(session),
+    return {**session, "runAnalytics": None if session.get("mode") == "optiver" else describe_run(session),
             "analysis": analytics([session], session["cohortKey"], include_partial=True)}
 
 
@@ -191,7 +195,8 @@ def analytics(sessions, cohort=None, include_partial=False):
             label = (records[0].get("groupName") or "Unknown group") if level == "group" else (group_key[0] or "Unknown operation")
             breakdown.append({"level": level, "operation": group_key[0], "groupId": group_key[1] if level == "group" else None, "label": label, **aggregate(records)})
     reasons = Counter(reason for s in selected if not s["comparisonEligible"] for reason in s["comparisonExclusionReasons"])
-    return {"totalSavedSessionCount": len(sessions), "cohorts": choices, "selectedCohortKey": cohort, "selectedSessionCount": len(selected), "eligibleSessionCount": len(eligible),
+    return {"optiverStatistics": optiver_statistics(selected) if any(s.get("mode") == "optiver" for s in selected) else None,
+            "totalSavedSessionCount": len(sessions), "cohorts": choices, "selectedCohortKey": cohort, "selectedSessionCount": len(selected), "eligibleSessionCount": len(eligible),
             "excludedSessionCount": len(selected) - len(eligible), "exclusionReasons": dict(reasons), "includePartialObservations": include_partial,
             "observationSessionCount": len(observations), "summary": aggregate(questions), "fullRunStatistics": full_run_statistics, "histogram": histogram(values), "breakdown": breakdown,
             "trend": [{"sessionId": s["id"], "createdAt": s["createdAt"], "score": s["score"], **s["summary"]} for s in reversed(eligible)],

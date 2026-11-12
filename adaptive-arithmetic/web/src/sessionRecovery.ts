@@ -103,6 +103,7 @@ function validateEvents(events: unknown): asserts events is Observation[] {
     "question-presented",
     "input-changed",
     "answer-accepted",
+    "answer-submitted",
     "session-ended",
   ]);
   if (!Array.isArray(events))
@@ -158,7 +159,8 @@ export function interruptedEnd(events: Observation[]): Observation {
     question &&
     events.some(
       (e) =>
-        e.type === "answer-accepted" && e.payload.questionId === question.id,
+        (e.type === "answer-accepted" || e.type === "answer-submitted") &&
+        e.payload.questionId === question.id,
     );
   return {
     sequence: events.length,

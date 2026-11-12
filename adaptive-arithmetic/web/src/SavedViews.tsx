@@ -16,6 +16,7 @@ import {
 } from "./Charts";
 import { displaySeconds, type SavedSession } from "./measurements";
 import { RunExplorer } from "./RunExplorer";
+import { OptiverReview, OptiverSummary } from "./OptiverViews";
 import type { RunAnalytics } from "./explorer";
 import {
   acquireSessionOwnership,
@@ -69,9 +70,11 @@ const date = (value: string | null) =>
 const mode = (s: SavedSession) =>
   s.mode === "standard"
     ? "Standard Zetamac"
-    : s.mode === "custom"
-      ? "Custom practice"
-      : "Legacy / unspecified";
+    : s.mode === "optiver"
+      ? "Optiver 80 in 8"
+      : s.mode === "custom"
+        ? "Custom practice"
+        : "Legacy / unspecified";
 
 async function confirmedDelete(
   ids: string[],
@@ -254,6 +257,7 @@ export function HistoryView({
         <label>
           Mode
           <select
+            aria-label="History mode"
             value={filters.mode}
             onChange={(e) => {
               setOffset(0);
@@ -264,6 +268,7 @@ export function HistoryView({
           >
             <option value="">All modes</option>
             <option value="standard">Standard</option>
+            <option value="optiver">Optiver 80 in 8</option>
             <option value="custom">Custom</option>
             <option value="legacy">Legacy / unspecified</option>
           </select>
@@ -521,6 +526,12 @@ export function SessionDetail({
             {data.scoreState === "full" ? "Full-run score" : "Partial count"}:{" "}
             {data.score}
           </p>
+          {data.optiverSummary && (
+            <OptiverSummary
+              summary={data.optiverSummary}
+              partial={!data.comparisonEligible}
+            />
+          )}
           <p className="section-help">
             {data.comparisonEligible
               ? "Eligible for comparisons within this exact cohort."
@@ -542,7 +553,9 @@ export function SessionDetail({
           </div>
           <p className="section-help">
             {data.summary.validCorrectAnswerCount} valid timed correct answers.
-            Times include entry and edits.
+            {data.mode === "optiver"
+              ? "Times include reading and choosing an answer."
+              : "Times include entry and edits."}
           </p>
           {data.dataQualityWarnings.length > 0 && (
             <ul className="quality-warnings">
@@ -554,7 +567,9 @@ export function SessionDetail({
             </ul>
           )}
           <ExportActions sessionId={id} />
-          {data.runAnalytics ? (
+          {data.mode === "optiver" ? (
+            <OptiverReview session={data} />
+          ) : data.runAnalytics ? (
             <RunExplorer key={id} session={data} onRefresh={retry} />
           ) : (
             <ReadState
@@ -562,91 +577,97 @@ export function SessionDetail({
               retry={retry}
             />
           )}
-          <SequenceChart questions={data.questions} />
-          <ObservationCharts data={data.analysis} />
-          <section className="chart-section">
-            <h2>Exact question records</h2>
-            <div
-              className="table-scroll"
-              tabIndex={0}
-              role="region"
-              aria-label="Exact questions and raw inputs"
-            >
-              <table>
-                <caption>
-                  All presented questions; input strings are displayed as JSON
-                  to preserve whitespace and empty values.
-                </caption>
-                <thead>
-                  <tr>
-                    {[
-                      "Index / identity",
-                      "Operation / group",
-                      "Exact question",
-                      "Expected",
-                      "Outcome",
-                      "Accepted input",
-                      "Last input",
-                      "Edits",
-                      "Correct / first input / unfinished",
-                    ].map((h) => (
-                      <th key={h} scope="col">
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.questions.map((q, i) => (
-                    <tr key={q.presentationSequence}>
-                      <td>
-                        {i + 1}
-                        <br />
-                        <code>{q.id ?? "Unknown"}</code>
-                      </td>
-                      <td>
-                        {q.operation ?? "Unknown"}
-                        <br />
-                        {q.groupName ?? "Unknown group"}
-                        <br />
-                        <code>{q.groupId ?? "Unknown identity"}</code>
-                      </td>
-                      <td>
-                        <code>
-                          {q.left} {q.operation} {q.right}
-                        </code>
-                      </td>
-                      <td>
-                        <code>{q.expected}</code>
-                      </td>
-                      <td>{q.outcome}</td>
-                      <td>
-                        <code>
-                          {q.acceptedInput === null
-                            ? "null"
-                            : JSON.stringify(q.acceptedInput)}
-                        </code>
-                      </td>
-                      <td>
-                        <code>
-                          {q.lastInput === null
-                            ? "null"
-                            : JSON.stringify(q.lastInput)}
-                        </code>
-                      </td>
-                      <td>{q.inputChangeCount}</td>
-                      <td>
-                        {displaySeconds(q.correctAnswerTimeMs)} /{" "}
-                        {displaySeconds(q.firstInputTimeMs)} /{" "}
-                        {q.unfinishedDurationIsLowerBound ? "at least " : ""}
-                        {displaySeconds(q.observedUnfinishedDurationMs)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+          {data.mode !== "optiver" && (
+            <>
+              <SequenceChart questions={data.questions} />
+              <ObservationCharts data={data.analysis} />
+              <section className="chart-section">
+                <h2>Exact question records</h2>
+                <div
+                  className="table-scroll"
+                  tabIndex={0}
+                  role="region"
+                  aria-label="Exact questions and raw inputs"
+                >
+                  <table>
+                    <caption>
+                      All presented questions; input strings are displayed as
+                      JSON to preserve whitespace and empty values.
+                    </caption>
+                    <thead>
+                      <tr>
+                        {[
+                          "Index / identity",
+                          "Operation / group",
+                          "Exact question",
+                          "Expected",
+                          "Outcome",
+                          "Accepted input",
+                          "Last input",
+                          "Edits",
+                          "Correct / first input / unfinished",
+                        ].map((h) => (
+                          <th key={h} scope="col">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.questions.map((q, i) => (
+                        <tr key={q.presentationSequence}>
+                          <td>
+                            {i + 1}
+                            <br />
+                            <code>{q.id ?? "Unknown"}</code>
+                          </td>
+                          <td>
+                            {q.operation ?? "Unknown"}
+                            <br />
+                            {q.groupName ?? "Unknown group"}
+                            <br />
+                            <code>{q.groupId ?? "Unknown identity"}</code>
+                          </td>
+                          <td>
+                            <code>
+                              {q.left} {q.operation} {q.right}
+                            </code>
+                          </td>
+                          <td>
+                            <code>{q.expected}</code>
+                          </td>
+                          <td>{q.outcome}</td>
+                          <td>
+                            <code>
+                              {q.acceptedInput === null
+                                ? "null"
+                                : JSON.stringify(q.acceptedInput)}
+                            </code>
+                          </td>
+                          <td>
+                            <code>
+                              {q.lastInput === null
+                                ? "null"
+                                : JSON.stringify(q.lastInput)}
+                            </code>
+                          </td>
+                          <td>{q.inputChangeCount}</td>
+                          <td>
+                            {displaySeconds(q.correctAnswerTimeMs)} /{" "}
+                            {displaySeconds(q.firstInputTimeMs)} /{" "}
+                            {q.unfinishedDurationIsLowerBound
+                              ? "at least "
+                              : ""}
+                            {displaySeconds(q.observedUnfinishedDurationMs)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </>
+          )}
           <section className="chart-section">
             <h2>Original configuration and provenance</h2>
             <dl className="provenance">
@@ -720,7 +741,11 @@ function SavedSequence({
   );
   return data ? (
     <>
-      <SequenceChart questions={data.questions} />
+      {data.mode === "optiver" ? (
+        <OptiverReview session={data} />
+      ) : (
+        <SequenceChart questions={data.questions} />
+      )}
       <button className="text-button" onClick={() => onDetail(id)}>
         Inspect this session and its raw records
       </button>
@@ -922,7 +947,13 @@ export function GraphsView({
                 : "No runs match these dates and comparison setup. Clear filters or choose another setup."}
             </p>
           )}
-          <FullRunStatistics data={data.fullRunStatistics} />
+          <FullRunStatistics
+            data={data.fullRunStatistics}
+            choiceMode={
+              data.cohorts.find((c) => c.key === data.selectedCohortKey)
+                ?.mode === "optiver"
+            }
+          />
           <p className="cohort-summary">
             {data.selectedSessionCount} saved sessions ·{" "}
             {data.eligibleSessionCount} eligible full runs ·{" "}

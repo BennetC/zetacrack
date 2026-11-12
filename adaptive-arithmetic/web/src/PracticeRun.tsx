@@ -5,6 +5,13 @@ import { request } from "./api";
 import { ExportActions } from "./ExportActions";
 import { rememberReloadRestart, clearReloadRestart } from "./reloadRestart";
 import { displaySeconds, type SavedSession } from "./measurements";
+import { OPTIVER_COUNT, type PlayMode } from "./optiver";
+import {
+  MathValue,
+  OptiverEquation,
+  OptiverReview,
+  OptiverSummary,
+} from "./OptiverViews";
 import {
   hasPracticeFocus,
   JOURNAL_PREFIX,
@@ -19,7 +26,7 @@ export interface Runtime {
   config: Config;
   seed: string;
   generator: QuestionSource;
-  mode?: "standard" | "custom";
+  mode?: PlayMode;
   firstQuestion: Question;
   ownership: SessionOwnership;
   startFocus: StartFocusGuard;
@@ -37,6 +44,11 @@ export function PracticeRun({
   onGraphs?: (cohort: string, includePartial: boolean) => void;
   onAgain?: () => Promise<void>;
 }) {
+  const isOptiver = runtime.mode === "optiver";
+  const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
+  const [netScore, setNetScore] = useState(0);
+  const choiceLocked = useRef(false),
+    feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [phase, setPhase] = useState<"countdown" | "active" | "ended">(
     runtime.config.session.countdown ? "countdown" : "active",
   );
@@ -89,6 +101,7 @@ export function PracticeRun({
     return () => window.removeEventListener("keydown", shortcut);
   }, [phase, saveState, onAgain]);
   const inputRef = useRef<HTMLInputElement>(null),
+    firstChoiceRef = useRef<HTMLButtonElement>(null),
     origin = useRef<number | null>(null),
     questionRef = useRef(question),
     presented = useRef<string | null>(null);
@@ -204,7 +217,8 @@ export function PracticeRun({
         wallAt: new Date().toISOString(),
         endTimeKnown: true,
         unfinishedQuestionId:
-          presented.current === questionRef.current.id
+          presented.current === questionRef.current.id &&
+          !(isOptiver && choiceLocked.current)
             ? questionRef.current.id
             : null,
       },
@@ -235,9 +249,12 @@ export function PracticeRun({
     const focus = () => {
       if (ended.current) clearRestart();
     };
-    const blur = () => finish("focus-loss");
+    const blur = () => {
+      if (!isOptiver) finish("focus-loss");
+    };
     const hidden = () => {
-      if (document.visibilityState !== "visible") finish("focus-loss");
+      if (!isOptiver && document.visibilityState !== "visible")
+        finish("focus-loss");
     };
     const leaving = () => {
       finish("page-exit");
@@ -260,7 +277,8 @@ export function PracticeRun({
     window.addEventListener("popstate", navigation);
     // Keep the pending-start guard until the run's listeners are installed.
     runtime.startFocus.dispose();
-    if (runtime.startFocus.lost || !hasPracticeFocus()) finish("focus-loss");
+    if (!isOptiver && (runtime.startFocus.lost || !hasPracticeFocus()))
+      finish("focus-loss");
     return () => {
       window.removeEventListener("blur", blur);
       window.removeEventListener("focus", focus);
@@ -273,6 +291,7 @@ export function PracticeRun({
     mounted.current = true;
     return () => {
       mounted.current = false;
+      if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
       // StrictMode immediately remounts effects. Release only on a real
       // unmount and after every already-enqueued write has settled.
       void queue.current.finally(() => {
@@ -287,7 +306,7 @@ export function PracticeRun({
       presented.current === question.id
     )
       return;
-    if (!hasPracticeFocus()) {
+    if (!isOptiver && !hasPracticeFocus()) {
       finish("focus-loss");
       return;
     }
@@ -303,6 +322,8 @@ export function PracticeRun({
     presented.current = question.id;
     record("question-presented", { question }, at);
     inputRef.current?.focus();
+    if (isOptiver && hasPracticeFocus())
+      firstChoiceRef.current?.focus({ preventScroll: true });
     void flush();
   }, [phase, question]);
   useEffect(() => {
@@ -370,6 +391,70 @@ export function PracticeRun({
       void flush();
     }
   }
+  function choose(optionIndex: number) {
+    if (
+      !isOptiver ||
+      ended.current ||
+      phase !== "active" ||
+      choiceLocked.current ||
+      presented.current !== question.id ||
+      questionRef.current.id !== question.id ||
+      !question.optiver
+    )
+      return;
+    const at = time();
+    if (at >= duration) {
+      finish("timeout");
+      return;
+    }
+    choiceLocked.current = true;
+    const value = question.optiver.options[optionIndex];
+    record(
+      "answer-submitted",
+      { questionId: question.id, optionIndex, value },
+      at,
+    );
+    setSelectedChoice(optionIndex);
+    setCompleted((n) => n + 1);
+    setNetScore((n) => n + (value === question.expected ? 1 : -1));
+    void flush();
+    if (question.index + 1 === OPTIVER_COUNT) {
+      finish("completed", at);
+      return;
+    }
+    feedbackTimer.current = setTimeout(() => {
+      if (ended.current) return;
+      if (time() >= duration) {
+        finish("timeout");
+        return;
+      }
+      const next = runtime.generator.next();
+      questionRef.current = next;
+      setQuestion(next);
+      setSelectedChoice(null);
+      choiceLocked.current = false;
+    }, 100);
+  }
+  useEffect(() => {
+    if (!isOptiver || phase !== "active") return;
+    const shortcut = (event: KeyboardEvent) => {
+      if (
+        event.repeat ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        (event.target instanceof HTMLElement &&
+          event.target.closest("input,textarea,select,[contenteditable=true]"))
+      )
+        return;
+      if (/^[1-4]$/.test(event.key)) {
+        event.preventDefault();
+        choose(Number(event.key) - 1);
+      }
+    };
+    window.addEventListener("keydown", shortcut);
+    return () => window.removeEventListener("keydown", shortcut);
+  }, [isOptiver, phase, question]);
   const symbols = {
     addition: "+",
     subtraction: "−",
@@ -381,19 +466,25 @@ export function PracticeRun({
     (duration === Infinity ? elapsed : duration - elapsed) / 1000,
   );
   return (
-    <main className="run-page">
+    <main
+      className={`run-page${isOptiver && phase === "active" ? " optiver-run" : ""}`}
+    >
       <header className="run-header">
-        <span className="brand">Arithmetic</span>
+        <span className="brand">
+          {isOptiver ? "Optiver 80 in 8" : "Arithmetic"}
+        </span>
         {runtime.replayOf && (
           <span className="section-help">
             Repeated-seed challenge · excluded from benchmarks
           </span>
         )}
-        <span>
-          {runtime.config.session.format === "timed"
-            ? `${Math.floor(Math.ceil(seconds) / 60)}:${String(Math.ceil(seconds) % 60).padStart(2, "0")}`
-            : "Endless practice"}
-        </span>
+        {!(isOptiver && phase === "active") && (
+          <span>
+            {runtime.config.session.format === "timed"
+              ? `${Math.floor(Math.ceil(seconds) / 60)}:${String(Math.ceil(seconds) % 60).padStart(2, "0")}`
+              : "Endless practice"}
+          </span>
+        )}
         {phase !== "ended" && (
           <button
             className="secondary-button"
@@ -408,6 +499,53 @@ export function PracticeRun({
           <p className="section-help">Get ready</p>
           <h1>{countdown}</h1>
           <p>The timer begins with the first question.</p>
+        </section>
+      ) : phase === "active" && isOptiver ? (
+        <section className="run-center">
+          <div className="optiver-test-progress">
+            <span data-testid="optiver-progress">{completed} / 80</span>
+            <span role="timer" aria-label="Time left">
+              Time left:{" "}
+              {`${Math.floor(Math.ceil(seconds) / 60)
+                .toString()
+                .padStart(
+                  2,
+                  "0",
+                )}:${String(Math.ceil(seconds) % 60).padStart(2, "0")}`}
+            </span>
+          </div>
+          <div className="optiver-question-card">
+            <h1 data-testid="arithmetic-question">
+              <OptiverEquation question={question} />
+            </h1>
+          </div>
+          <div
+            className="optiver-choices"
+            role="group"
+            aria-label="Answer choices"
+          >
+            {question.optiver?.options.map((value, i) => (
+              <button
+                ref={i === 0 ? firstChoiceRef : undefined}
+                key={question.id + ":" + i}
+                className={`optiver-choice ${selectedChoice === i ? (value === question.expected ? "correct" : "incorrect") : ""}`}
+                disabled={selectedChoice !== null}
+                aria-label={`Option ${i + 1}: ${value}`}
+                aria-keyshortcuts={String(i + 1)}
+                onClick={() => choose(i)}
+              >
+                <small aria-hidden="true">{i + 1}</small>
+                <MathValue value={value} />
+              </button>
+            ))}
+          </div>
+          <p className="optiver-feedback" role="status">
+            {selectedChoice === null
+              ? "Choose an answer · Keys 1–4 · The timer keeps running if you leave this tab."
+              : question.optiver?.options[selectedChoice] === question.expected
+                ? "Correct · +1 point"
+                : "Incorrect · −1 point"}
+          </p>
         </section>
       ) : phase === "active" ? (
         <section className="run-center">
@@ -458,23 +596,42 @@ export function PracticeRun({
           onKeyDownCapture={clearRestart}
         >
           <h1>
-            {runtime.mode === "standard"
-              ? "Standard run complete"
-              : "Practice complete"}
+            {isOptiver
+              ? "Optiver test complete"
+              : runtime.mode === "standard"
+                ? "Standard run complete"
+                : "Practice complete"}
           </h1>
           <p className="section-help">
             {reason === "timeout"
               ? "Time is up."
-              : reason === "focus-loss"
-                ? "Ended when the window lost focus."
-                : "You ended this session."}
+              : reason === "completed"
+                ? "All 80 questions answered."
+                : reason === "focus-loss"
+                  ? "Ended when the window lost focus."
+                  : "You ended this session."}
           </p>
+          {isOptiver &&
+            (savedResult?.optiverSummary ? (
+              <OptiverSummary
+                summary={savedResult.optiverSummary}
+                partial={!savedResult.comparisonEligible}
+              />
+            ) : (
+              <p className="lead">
+                Net score: {netScore} / 80 · {completed} answered
+              </p>
+            ))}
           <div className="result-metrics">
             <div>
               <strong>
-                {savedResult?.summary.correctQuestionCount ?? completed}
+                {isOptiver
+                  ? completed
+                  : (savedResult?.summary.correctQuestionCount ?? completed)}
               </strong>
-              <span>Questions completed</span>
+              <span>
+                {isOptiver ? "Questions answered" : "Questions completed"}
+              </span>
             </div>
             <div>
               <strong>{displaySeconds(elapsed)}</strong>
@@ -484,11 +641,13 @@ export function PracticeRun({
           {savedResult && (
             <p className="section-help">
               {savedResult.scoreState === "full"
-                ? "Full timed run"
+                ? isOptiver
+                  ? "Completed test"
+                  : "Full timed run"
                 : "Partial run"}{" "}
               · Score: {savedResult.score}
               {savedResult.scoreState === "partial"
-                ? `. ${savedResult.comparisonExclusionReasons.join("; ")}. This count is excluded from full-run score comparisons.`
+                ? `. ${savedResult.comparisonExclusionReasons.join("; ")}. This score is excluded from full-run comparisons.`
                 : "."}
             </p>
           )}
@@ -510,7 +669,9 @@ export function PracticeRun({
             </div>
           </div>
           <p className="section-help timing-help">
-            Times include answer entry and edits.
+            {isOptiver
+              ? "Times include reading and choosing an answer."
+              : "Times include answer entry and edits."}
             {savedResult &&
               ` Based on ${savedResult.summary.validCorrectAnswerCount} timed correct ${savedResult.summary.validCorrectAnswerCount === 1 ? "answer" : "answers"}.`}
           </p>
@@ -596,7 +757,7 @@ export function PracticeRun({
                   )
                 }
               >
-                View graphs
+                {isOptiver ? "View Optiver analytics" : "View graphs"}
               </button>
             )}
           </div>
@@ -606,7 +767,10 @@ export function PracticeRun({
               is saved.
             </p>
           )}
-          {details && savedResult && (
+          {details && savedResult && isOptiver && (
+            <OptiverReview session={savedResult} />
+          )}
+          {details && savedResult && !isOptiver && (
             <ol className="question-review">
               {savedResult.questions.map((q) => {
                 return (

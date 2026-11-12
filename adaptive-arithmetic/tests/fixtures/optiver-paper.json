@@ -1,0 +1,2190 @@
+{
+  "config": {
+    "version": 1,
+    "operations": [
+      {
+        "id": "addition",
+        "version": 1,
+        "share": "25",
+        "groups": [
+          {
+            "id": "optiver-addition",
+            "version": 1,
+            "name": "Optiver addition",
+            "share": "100",
+            "first": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "second": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "allowNegative": false
+          }
+        ]
+      },
+      {
+        "id": "subtraction",
+        "version": 1,
+        "share": "25",
+        "groups": [
+          {
+            "id": "optiver-subtraction",
+            "version": 1,
+            "name": "Optiver subtraction",
+            "share": "100",
+            "first": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "second": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "allowNegative": false
+          }
+        ]
+      },
+      {
+        "id": "multiplication",
+        "version": 1,
+        "share": "25",
+        "groups": [
+          {
+            "id": "optiver-multiplication",
+            "version": 1,
+            "name": "Optiver multiplication",
+            "share": "100",
+            "first": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "second": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "allowNegative": false
+          }
+        ]
+      },
+      {
+        "id": "division",
+        "version": 1,
+        "share": "25",
+        "groups": [
+          {
+            "id": "optiver-division",
+            "version": 1,
+            "name": "Optiver division",
+            "share": "100",
+            "first": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "second": {
+              "min": "0",
+              "max": "999",
+              "decimalPlaces": 3
+            },
+            "allowNegative": false
+          }
+        ]
+      }
+    ],
+    "session": {
+      "format": "timed",
+      "durationSeconds": "480",
+      "countdown": false
+    }
+  },
+  "questions": [
+    {
+      "id": "q-0",
+      "index": 0,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "732",
+      "right": "15",
+      "expected": "747",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "747",
+        "options": [
+          "747",
+          "757",
+          "647",
+          "737"
+        ],
+        "profileIndex": 0
+      }
+    },
+    {
+      "id": "q-1",
+      "index": 1,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "18",
+      "right": "10",
+      "expected": "18",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "28",
+        "options": [
+          "18",
+          "16",
+          "21",
+          "14"
+        ],
+        "profileIndex": 1
+      }
+    },
+    {
+      "id": "q-2",
+      "index": 2,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "2.66",
+      "right": "2.1",
+      "expected": "2.1",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "right",
+        "result": "0.56",
+        "options": [
+          "2.2",
+          "2.3",
+          "2.1",
+          "2"
+        ],
+        "profileIndex": 2
+      }
+    },
+    {
+      "id": "q-3",
+      "index": 3,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "0.09",
+      "right": "3.2",
+      "expected": "0.09",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "left",
+        "result": "3.29",
+        "options": [
+          "0.089",
+          "0.09",
+          "0.092",
+          "0.091"
+        ],
+        "profileIndex": 3
+      }
+    },
+    {
+      "id": "q-4",
+      "index": 4,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "72",
+      "right": "10",
+      "expected": "62",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "62",
+        "options": [
+          "62",
+          "60",
+          "63",
+          "61"
+        ],
+        "profileIndex": 4
+      }
+    },
+    {
+      "id": "q-5",
+      "index": 5,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "8/3",
+      "right": "8/3",
+      "expected": "8/3",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "16/3",
+        "options": [
+          "7/3",
+          "8/3",
+          "10/3",
+          "3/8"
+        ],
+        "profileIndex": 5
+      }
+    },
+    {
+      "id": "q-6",
+      "index": 6,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "0.633",
+      "right": "0.58",
+      "expected": "0.053",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.053",
+        "options": [
+          "0.063",
+          "0.073",
+          "0.053",
+          "0.043"
+        ],
+        "profileIndex": 6
+      }
+    },
+    {
+      "id": "q-7",
+      "index": 7,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "133",
+      "right": "7",
+      "expected": "19",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "19",
+        "options": [
+          "18",
+          "22",
+          "19",
+          "17"
+        ],
+        "profileIndex": 7
+      }
+    },
+    {
+      "id": "q-8",
+      "index": 8,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "88",
+      "right": "19",
+      "expected": "107",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "107",
+        "options": [
+          "109",
+          "106",
+          "97",
+          "107"
+        ],
+        "profileIndex": 8
+      }
+    },
+    {
+      "id": "q-9",
+      "index": 9,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "21",
+      "right": "9",
+      "expected": "189",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "189",
+        "options": [
+          "191",
+          "189",
+          "190",
+          "199"
+        ],
+        "profileIndex": 9
+      }
+    },
+    {
+      "id": "q-10",
+      "index": 10,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "25",
+      "right": "14",
+      "expected": "25",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "350",
+        "options": [
+          "27",
+          "25",
+          "35",
+          "26"
+        ],
+        "profileIndex": 10
+      }
+    },
+    {
+      "id": "q-11",
+      "index": 11,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "3/4",
+      "right": "1/32",
+      "expected": "1/32",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "25/32",
+        "options": [
+          "1/32",
+          "32",
+          "3/32",
+          "1/8"
+        ],
+        "profileIndex": 11
+      }
+    },
+    {
+      "id": "q-12",
+      "index": 12,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "0.58",
+      "right": "0.19",
+      "expected": "0.58",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "left",
+        "result": "0.1102",
+        "options": [
+          "5.8",
+          "0.58",
+          "58",
+          "0.058"
+        ],
+        "profileIndex": 12
+      }
+    },
+    {
+      "id": "q-13",
+      "index": 13,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "0.0658",
+      "right": "0.047",
+      "expected": "1.4",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "1.4",
+        "options": [
+          "140",
+          "1.4",
+          "0.14",
+          "14"
+        ],
+        "profileIndex": 13
+      }
+    },
+    {
+      "id": "q-14",
+      "index": 14,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "0.0072",
+      "right": "0.08",
+      "expected": "0.0072",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "left",
+        "result": "0.09",
+        "options": [
+          "0.72",
+          "0.0072",
+          "0.072",
+          "0.00072"
+        ],
+        "profileIndex": 14
+      }
+    },
+    {
+      "id": "q-15",
+      "index": 15,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "7",
+      "right": "1/7",
+      "expected": "1",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "1",
+        "options": [
+          "3/4",
+          "1",
+          "5/4",
+          "3/2"
+        ],
+        "profileIndex": 15
+      }
+    },
+    {
+      "id": "q-16",
+      "index": 16,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "5.1",
+      "right": "0.013",
+      "expected": "5.113",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "5.113",
+        "options": [
+          "5.112",
+          "5.115",
+          "5.114",
+          "5.113"
+        ],
+        "profileIndex": 16
+      }
+    },
+    {
+      "id": "q-17",
+      "index": 17,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "105",
+      "right": "70",
+      "expected": "35",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "35",
+        "options": [
+          "34",
+          "33",
+          "35",
+          "37"
+        ],
+        "profileIndex": 17
+      }
+    },
+    {
+      "id": "q-18",
+      "index": 18,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "0.085",
+      "right": "6.7",
+      "expected": "6.785",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "6.785",
+        "options": [
+          "6.784",
+          "6.786",
+          "6.785",
+          "6.787"
+        ],
+        "profileIndex": 18
+      }
+    },
+    {
+      "id": "q-19",
+      "index": 19,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "19",
+      "right": "9",
+      "expected": "9",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "right",
+        "result": "171",
+        "options": [
+          "9",
+          "13",
+          "7",
+          "12"
+        ],
+        "profileIndex": 19
+      }
+    },
+    {
+      "id": "q-20",
+      "index": 20,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "0.0602",
+      "right": "0.043",
+      "expected": "1.4",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "1.4",
+        "options": [
+          "14",
+          "0.14",
+          "140",
+          "1.4"
+        ],
+        "profileIndex": 20
+      }
+    },
+    {
+      "id": "q-21",
+      "index": 21,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "95",
+      "right": "19",
+      "expected": "19",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "right",
+        "result": "5",
+        "options": [
+          "17",
+          "19",
+          "22",
+          "20"
+        ],
+        "profileIndex": 21
+      }
+    },
+    {
+      "id": "q-22",
+      "index": 22,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "1.93",
+      "right": "1.1",
+      "expected": "0.83",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.83",
+        "options": [
+          "0.85",
+          "0.82",
+          "0.83",
+          "0.84"
+        ],
+        "profileIndex": 22
+      }
+    },
+    {
+      "id": "q-23",
+      "index": 23,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "12",
+      "right": "1/6",
+      "expected": "12",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "left",
+        "result": "2",
+        "options": [
+          "12",
+          "1/12",
+          "47/4",
+          "25/2"
+        ],
+        "profileIndex": 23
+      }
+    },
+    {
+      "id": "q-24",
+      "index": 24,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "73",
+      "right": "55",
+      "expected": "73",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "18",
+        "options": [
+          "71",
+          "75",
+          "73",
+          "74"
+        ],
+        "profileIndex": 24
+      }
+    },
+    {
+      "id": "q-25",
+      "index": 25,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "2 1/3",
+      "right": "1 1/9",
+      "expected": "1 2/9",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "1 2/9",
+        "options": [
+          "9/11",
+          "1 1/9",
+          "1 2/9",
+          "1 4/9"
+        ],
+        "profileIndex": 25
+      }
+    },
+    {
+      "id": "q-26",
+      "index": 26,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "0.94",
+      "right": "0.09",
+      "expected": "0.85",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.85",
+        "options": [
+          "0.85",
+          "0.75",
+          "0.95",
+          "1.05"
+        ],
+        "profileIndex": 26
+      }
+    },
+    {
+      "id": "q-27",
+      "index": 27,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "26",
+      "right": "6",
+      "expected": "156",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "156",
+        "options": [
+          "157",
+          "155",
+          "166",
+          "156"
+        ],
+        "profileIndex": 27
+      }
+    },
+    {
+      "id": "q-28",
+      "index": 28,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "1 1/2",
+      "right": "5/6",
+      "expected": "2/3",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "2/3",
+        "options": [
+          "2/3",
+          "1/3",
+          "1 1/2",
+          "1 1/3"
+        ],
+        "profileIndex": 28
+      }
+    },
+    {
+      "id": "q-29",
+      "index": 29,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "28",
+      "right": "3",
+      "expected": "28",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "84",
+        "options": [
+          "27",
+          "30",
+          "28",
+          "29"
+        ],
+        "profileIndex": 29
+      }
+    },
+    {
+      "id": "q-30",
+      "index": 30,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "4/3",
+      "right": "2/3",
+      "expected": "2",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "2",
+        "options": [
+          "1/2",
+          "7/4",
+          "5/2",
+          "2"
+        ],
+        "profileIndex": 30
+      }
+    },
+    {
+      "id": "q-31",
+      "index": 31,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "3.6",
+      "right": "0.031",
+      "expected": "0.1116",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.1116",
+        "options": [
+          "11.16",
+          "1.116",
+          "0.1116",
+          "0.01116"
+        ],
+        "profileIndex": 31
+      }
+    },
+    {
+      "id": "q-32",
+      "index": 32,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "513",
+      "right": "19",
+      "expected": "513",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "27",
+        "options": [
+          "413",
+          "523",
+          "513",
+          "503"
+        ],
+        "profileIndex": 32
+      }
+    },
+    {
+      "id": "q-33",
+      "index": 33,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "0.45",
+      "right": "0.14",
+      "expected": "0.14",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "right",
+        "result": "0.31",
+        "options": [
+          "0.24",
+          "0.04",
+          "0.34",
+          "0.14"
+        ],
+        "profileIndex": 33
+      }
+    },
+    {
+      "id": "q-34",
+      "index": 34,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "1 1/3",
+      "right": "5/36",
+      "expected": "1 7/36",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "1 7/36",
+        "options": [
+          "1 1/6",
+          "1 1/4",
+          "36/43",
+          "1 7/36"
+        ],
+        "profileIndex": 34
+      }
+    },
+    {
+      "id": "q-35",
+      "index": 35,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "8.9",
+      "right": "6",
+      "expected": "8.9",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "left",
+        "result": "2.9",
+        "options": [
+          "8.9",
+          "8.901",
+          "8.899",
+          "8.902"
+        ],
+        "profileIndex": 35
+      }
+    },
+    {
+      "id": "q-36",
+      "index": 36,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "3",
+      "right": "2/5",
+      "expected": "2/5",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "6/5",
+        "options": [
+          "4/5",
+          "5/2",
+          "2/5",
+          "1/5"
+        ],
+        "profileIndex": 36
+      }
+    },
+    {
+      "id": "q-37",
+      "index": 37,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "20",
+      "right": "1 1/3",
+      "expected": "1 1/3",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "15",
+        "options": [
+          "1",
+          "1 1/3",
+          "2",
+          "3/4"
+        ],
+        "profileIndex": 37
+      }
+    },
+    {
+      "id": "q-38",
+      "index": 38,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "220",
+      "right": "10",
+      "expected": "22",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "22",
+        "options": [
+          "22",
+          "23",
+          "24",
+          "32"
+        ],
+        "profileIndex": 38
+      }
+    },
+    {
+      "id": "q-39",
+      "index": 39,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "1.674",
+      "right": "3.1",
+      "expected": "3.1",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "right",
+        "result": "0.54",
+        "options": [
+          "0.31",
+          "310",
+          "3.1",
+          "31"
+        ],
+        "profileIndex": 39
+      }
+    },
+    {
+      "id": "q-40",
+      "index": 40,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "1 1/2",
+      "right": "1 1/16",
+      "expected": "1 1/16",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "2 9/16",
+        "options": [
+          "1 1/16",
+          "16/17",
+          "1 3/16",
+          "1"
+        ],
+        "profileIndex": 40
+      }
+    },
+    {
+      "id": "q-41",
+      "index": 41,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "535",
+      "right": "285",
+      "expected": "250",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "250",
+        "options": [
+          "250",
+          "260",
+          "249",
+          "150"
+        ],
+        "profileIndex": 41
+      }
+    },
+    {
+      "id": "q-42",
+      "index": 42,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "0.3",
+      "right": "3.3",
+      "expected": "0.99",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.99",
+        "options": [
+          "99",
+          "9.9",
+          "0.099",
+          "0.99"
+        ],
+        "profileIndex": 42
+      }
+    },
+    {
+      "id": "q-43",
+      "index": 43,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "1 1/4",
+      "right": "1/4",
+      "expected": "5",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "5",
+        "options": [
+          "1/5",
+          "5",
+          "5 1/2",
+          "4 3/4"
+        ],
+        "profileIndex": 43
+      }
+    },
+    {
+      "id": "q-44",
+      "index": 44,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "41",
+      "right": "16",
+      "expected": "41",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "57",
+        "options": [
+          "51",
+          "43",
+          "41",
+          "42"
+        ],
+        "profileIndex": 44
+      }
+    },
+    {
+      "id": "q-45",
+      "index": 45,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "8",
+      "right": "19",
+      "expected": "152",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "152",
+        "options": [
+          "152",
+          "151",
+          "153",
+          "162"
+        ],
+        "profileIndex": 45
+      }
+    },
+    {
+      "id": "q-46",
+      "index": 46,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "4 2/3",
+      "right": "1/3",
+      "expected": "1/3",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "14",
+        "options": [
+          "1 1/3",
+          "1",
+          "1/3",
+          "3"
+        ],
+        "profileIndex": 46
+      }
+    },
+    {
+      "id": "q-47",
+      "index": 47,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "0.000272",
+      "right": "0.004",
+      "expected": "0.004",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "right",
+        "result": "0.068",
+        "options": [
+          "0.04",
+          "0.004",
+          "0.0004",
+          "0.4"
+        ],
+        "profileIndex": 47
+      }
+    },
+    {
+      "id": "q-48",
+      "index": 48,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "35",
+      "right": "42",
+      "expected": "77",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "77",
+        "options": [
+          "87",
+          "77",
+          "78",
+          "75"
+        ],
+        "profileIndex": 48
+      }
+    },
+    {
+      "id": "q-49",
+      "index": 49,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "83",
+      "right": "32",
+      "expected": "115",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "115",
+        "options": [
+          "114",
+          "115",
+          "125",
+          "105"
+        ],
+        "profileIndex": 49
+      }
+    },
+    {
+      "id": "q-50",
+      "index": 50,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "1/3",
+      "right": "7/18",
+      "expected": "13/18",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "13/18",
+        "options": [
+          "2/3",
+          "5/6",
+          "18/13",
+          "13/18"
+        ],
+        "profileIndex": 50
+      }
+    },
+    {
+      "id": "q-51",
+      "index": 51,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "0.26",
+      "right": "2.1",
+      "expected": "0.546",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.546",
+        "options": [
+          "0.546",
+          "0.0546",
+          "54.6",
+          "5.46"
+        ],
+        "profileIndex": 51
+      }
+    },
+    {
+      "id": "q-52",
+      "index": 52,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "583",
+      "right": "87",
+      "expected": "670",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "670",
+        "options": [
+          "570",
+          "670",
+          "669",
+          "660"
+        ],
+        "profileIndex": 52
+      }
+    },
+    {
+      "id": "q-53",
+      "index": 53,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "2/5",
+      "right": "1/5",
+      "expected": "2",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "2",
+        "options": [
+          "7/4",
+          "2",
+          "5/2",
+          "1/2"
+        ],
+        "profileIndex": 53
+      }
+    },
+    {
+      "id": "q-54",
+      "index": 54,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "203",
+      "right": "7",
+      "expected": "29",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "29",
+        "options": [
+          "27",
+          "28",
+          "19",
+          "29"
+        ],
+        "profileIndex": 54
+      }
+    },
+    {
+      "id": "q-55",
+      "index": 55,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "15",
+      "right": "1 3/4",
+      "expected": "15",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "left",
+        "result": "26 1/4",
+        "options": [
+          "1/15",
+          "15 1/2",
+          "14 3/4",
+          "15"
+        ],
+        "profileIndex": 55
+      }
+    },
+    {
+      "id": "q-56",
+      "index": 56,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "11/2",
+      "right": "9/8",
+      "expected": "53/8",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "53/8",
+        "options": [
+          "55/8",
+          "8/53",
+          "13/2",
+          "53/8"
+        ],
+        "profileIndex": 56
+      }
+    },
+    {
+      "id": "q-57",
+      "index": 57,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "9",
+      "right": "12",
+      "expected": "108",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "108",
+        "options": [
+          "118",
+          "109",
+          "108",
+          "110"
+        ],
+        "profileIndex": 57
+      }
+    },
+    {
+      "id": "q-58",
+      "index": 58,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "1 2/7",
+      "right": "1 1/14",
+      "expected": "1 2/7",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "left",
+        "result": "3/14",
+        "options": [
+          "1 2/7",
+          "7/9",
+          "1 1/7",
+          "1 4/7"
+        ],
+        "profileIndex": 58
+      }
+    },
+    {
+      "id": "q-59",
+      "index": 59,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "75",
+      "right": "62",
+      "expected": "13",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "13",
+        "options": [
+          "13",
+          "11",
+          "14",
+          "15"
+        ],
+        "profileIndex": 59
+      }
+    },
+    {
+      "id": "q-60",
+      "index": 60,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "0.041",
+      "right": "0.036",
+      "expected": "0.077",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.077",
+        "options": [
+          "0.077",
+          "0.377",
+          "0.177",
+          "0.277"
+        ],
+        "profileIndex": 60
+      }
+    },
+    {
+      "id": "q-61",
+      "index": 61,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "5.1",
+      "right": "0.06",
+      "expected": "0.06",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "right",
+        "result": "5.16",
+        "options": [
+          "0.08",
+          "0.07",
+          "0.06",
+          "0.05"
+        ],
+        "profileIndex": 61
+      }
+    },
+    {
+      "id": "q-62",
+      "index": 62,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "16/9",
+      "right": "1",
+      "expected": "16/9",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "left",
+        "result": "7/9",
+        "options": [
+          "2",
+          "5/3",
+          "16/9",
+          "9/16"
+        ],
+        "profileIndex": 62
+      }
+    },
+    {
+      "id": "q-63",
+      "index": 63,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "5",
+      "right": "13/8",
+      "expected": "13/8",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "right",
+        "result": "27/8",
+        "options": [
+          "13/8",
+          "8/13",
+          "3/2",
+          "15/8"
+        ],
+        "profileIndex": 63
+      }
+    },
+    {
+      "id": "q-64",
+      "index": 64,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "0.03478",
+      "right": "0.037",
+      "expected": "0.94",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "0.94",
+        "options": [
+          "9.4",
+          "94",
+          "0.94",
+          "0.094"
+        ],
+        "profileIndex": 64
+      }
+    },
+    {
+      "id": "q-65",
+      "index": 65,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "26",
+      "right": "8",
+      "expected": "26",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "34",
+        "options": [
+          "24",
+          "25",
+          "26",
+          "36"
+        ],
+        "profileIndex": 65
+      }
+    },
+    {
+      "id": "q-66",
+      "index": 66,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "8/3",
+      "right": "5/3",
+      "expected": "1",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "1",
+        "options": [
+          "3/4",
+          "1",
+          "5/4",
+          "3/2"
+        ],
+        "profileIndex": 66
+      }
+    },
+    {
+      "id": "q-67",
+      "index": 67,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "0.24",
+      "right": "0.034",
+      "expected": "0.24",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "left",
+        "result": "0.206",
+        "options": [
+          "0.24",
+          "0.14",
+          "0.44",
+          "0.34"
+        ],
+        "profileIndex": 67
+      }
+    },
+    {
+      "id": "q-68",
+      "index": 68,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "0.081",
+      "right": "0.9",
+      "expected": "0.9",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "right",
+        "result": "0.981",
+        "options": [
+          "1.1",
+          "0.9",
+          "1",
+          "0.8"
+        ],
+        "profileIndex": 68
+      }
+    },
+    {
+      "id": "q-69",
+      "index": 69,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "0.5",
+      "right": "0.059",
+      "expected": "0.5",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "left",
+        "result": "0.0295",
+        "options": [
+          "50",
+          "0.05",
+          "5",
+          "0.5"
+        ],
+        "profileIndex": 69
+      }
+    },
+    {
+      "id": "q-70",
+      "index": 70,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "35",
+      "right": "3 1/2",
+      "expected": "35",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "left",
+        "result": "10",
+        "options": [
+          "35 1/2",
+          "34 3/4",
+          "1/35",
+          "35"
+        ],
+        "profileIndex": 70
+      }
+    },
+    {
+      "id": "q-71",
+      "index": 71,
+      "operation": "subtraction",
+      "groupId": "optiver-subtraction",
+      "left": "11/7",
+      "right": "5/21",
+      "expected": "11/7",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "left",
+        "result": "4/3",
+        "options": [
+          "7/11",
+          "10/7",
+          "11/7",
+          "13/7"
+        ],
+        "profileIndex": 71
+      }
+    },
+    {
+      "id": "q-72",
+      "index": 72,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "43",
+      "right": "38",
+      "expected": "43",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "81",
+        "options": [
+          "41",
+          "43",
+          "42",
+          "45"
+        ],
+        "profileIndex": 72
+      }
+    },
+    {
+      "id": "q-73",
+      "index": 73,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "7",
+      "right": "10",
+      "expected": "7",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "left",
+        "result": "70",
+        "options": [
+          "6",
+          "7",
+          "11",
+          "4"
+        ],
+        "profileIndex": 73
+      }
+    },
+    {
+      "id": "q-74",
+      "index": 74,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "209",
+      "right": "19",
+      "expected": "11",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "11",
+        "options": [
+          "15",
+          "13",
+          "8",
+          "11"
+        ],
+        "profileIndex": 74
+      }
+    },
+    {
+      "id": "q-75",
+      "index": 75,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "696",
+      "right": "240",
+      "expected": "936",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "integer",
+        "blank": "result",
+        "result": "936",
+        "options": [
+          "946",
+          "936",
+          "916",
+          "935"
+        ],
+        "profileIndex": 75
+      }
+    },
+    {
+      "id": "q-76",
+      "index": 76,
+      "operation": "division",
+      "groupId": "optiver-division",
+      "left": "35.04",
+      "right": "7.3",
+      "expected": "4.8",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "4.8",
+        "options": [
+          "0.48",
+          "48",
+          "480",
+          "4.8"
+        ],
+        "profileIndex": 76
+      }
+    },
+    {
+      "id": "q-77",
+      "index": 77,
+      "operation": "multiplication",
+      "groupId": "optiver-multiplication",
+      "left": "9",
+      "right": "5/3",
+      "expected": "15",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "fraction",
+        "blank": "result",
+        "result": "15",
+        "options": [
+          "15",
+          "1/15",
+          "59/4",
+          "31/2"
+        ],
+        "profileIndex": 77
+      }
+    },
+    {
+      "id": "q-78",
+      "index": 78,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "2.8",
+      "right": "0.63",
+      "expected": "3.43",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "3.43",
+        "options": [
+          "3.431",
+          "3.432",
+          "3.43",
+          "3.429"
+        ],
+        "profileIndex": 78
+      }
+    },
+    {
+      "id": "q-79",
+      "index": 79,
+      "operation": "addition",
+      "groupId": "optiver-addition",
+      "left": "0.02",
+      "right": "1",
+      "expected": "1.02",
+      "selection": {
+        "operationBasisPoints": null,
+        "groupBasisPoints": null,
+        "validPairCount": null
+      },
+      "optiver": {
+        "kind": "decimal",
+        "blank": "result",
+        "result": "1.02",
+        "options": [
+          "0.92",
+          "1.22",
+          "1.02",
+          "1.12"
+        ],
+        "profileIndex": 79
+      }
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import math
 from decimal import InvalidOperation
 from server.decimal_input import exact
 from server.content import custom_trace_valid
+from server.optiver import derive_optiver
 from statistics import mean, median
 
 
@@ -38,6 +39,8 @@ def derive_session(session):
     may still have usable timings, but are explicitly unversioned. Malformed
     relationships never yield fabricated timing values.
     """
+    if session.get("mode") == "optiver":
+        return derive_optiver(session)
     warnings = []
     questions = []
     by_id = {}
@@ -249,6 +252,7 @@ def derive_session(session):
 
 
 CSV_FIELDS = [
+    "optiverSummaryJson", "optiverQuestionJson", "responseTimeMs", "selectedOptionIndex",
     "replayOf", "annotationsJson", "interactionJson",
     "sessionId", "createdAt", "startedAt", "endedAt", "status", "terminationState", "terminationReason", "endTimeKnown",
     "sessionFormat", "durationSeconds", "countdown", "measurementVersion", "mode", "contentVersion", "cohortKey", "score", "scoreState", "comparisonEligible", "seed", "generatorVersion", "policyVersion",
@@ -274,8 +278,10 @@ def export_csv(sessions):
             row.update(session["config"].get("session", {}))
             row.pop("format", None)
             row.update(sessionId=session["id"], sessionFormat=session["config"]["session"]["format"],
+                       optiverSummaryJson=json_text(session["optiverSummary"]) if session.get("optiverSummary") else None,
+                       optiverQuestionJson=json_text(question["optiver"]) if question.get("optiver") else None,
                        annotationsJson=json_text([a for a in session.get("annotations", []) if a["presentationSequence"] == question["presentationSequence"]]),
-                       interactionJson=json_text(next((r for r in session.get("runAnalytics", {}).get("questions", []) if r["presentationSequence"] == question["presentationSequence"]), None)),
+                       interactionJson=json_text(next((r for r in (session.get("runAnalytics") or {}).get("questions", []) if r["presentationSequence"] == question["presentationSequence"]), None)),
                        questionId=question["id"], questionIndex=question["index"],
                        acceptedInputJson=json_text(question["acceptedInput"]) if question["acceptedInput"] is not None else None,
                        lastInputJson=json_text(question["lastInput"]) if question["lastInput"] is not None else None,

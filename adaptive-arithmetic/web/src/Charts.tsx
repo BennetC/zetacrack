@@ -65,8 +65,10 @@ const tick = (value: number) =>
   value.toLocaleString(undefined, { maximumFractionDigits: 2 });
 export function FullRunStatistics({
   data,
+  choiceMode = false,
 }: {
   data: Analytics["fullRunStatistics"];
+  choiceMode?: boolean;
 }) {
   const score = (value: number | null) =>
     value == null ? "—" : value.toFixed(2);
@@ -76,7 +78,9 @@ export function FullRunStatistics({
       <h2>Full-run statistics</h2>
       <p className="section-help">
         Eligible full runs in the selected comparison group and date range.
-        Times include answer entry and edits.
+        {choiceMode
+          ? "Net score is correct minus incorrect. Times include reading and choosing an answer."
+          : "Times include answer entry and edits."}
       </p>
       <div className="statistics-grid">
         <section>
@@ -125,7 +129,7 @@ export function FullRunStatistics({
       </div>
       <p className="recent-comparison" aria-label="Recent score comparison">
         {data.previousRunCount
-          ? `Latest ${data.recentRunCount} runs: ${score(data.recentMeanScore)} average · Previous ${data.previousRunCount}: ${score(data.previousMeanScore)} · Change: ${(data.recentScoreDifference ?? 0) > 0 ? "+" : ""}${score(data.recentScoreDifference)} questions.`
+          ? `Latest ${data.recentRunCount} runs: ${score(data.recentMeanScore)} average · Previous ${data.previousRunCount}: ${score(data.previousMeanScore)} · Change: ${(data.recentScoreDifference ?? 0) > 0 ? "+" : ""}${score(data.recentScoreDifference)} ${choiceMode ? "points" : "questions"}.`
           : `No previous comparison block yet. This selection has ${data.recentRunCount} of up to 10 recent runs.`}{" "}
         Describes these runs; it does not establish learning benefit.
       </p>
@@ -170,6 +174,7 @@ function Frame({
   title,
   unit,
   max,
+  min = 0,
   labels,
   children,
   interactive = false,
@@ -177,6 +182,7 @@ function Frame({
   title: string;
   unit: string;
   max: number;
+  min?: number;
   labels: [number, string][];
   children: React.ReactNode;
   interactive?: boolean;
@@ -216,7 +222,7 @@ function Frame({
                 className="chart-grid"
               />
               <text x={X - 8} y={Y + H * (1 - ratio) + 4} textAnchor="end">
-                {tick(max * ratio)}
+                {tick(min + (max - min) * ratio)}
               </text>
             </g>
           ))}
@@ -317,6 +323,9 @@ export function TrendCharts({
         ]
     : [];
   const scoreMax = Math.max(1, ...rows.map((r) => r.score));
+  const scoreMin = Math.min(0, ...rows.map((r) => r.score));
+  const scoreY = (value: number) =>
+    Y + H - ((value - scoreMin) / (scoreMax - scoreMin)) * H;
   const timeMax = Math.max(
     0.02,
     ...rows
@@ -357,16 +366,19 @@ export function TrendCharts({
           <Frame
             interactive
             title="Full-run score chronology"
-            unit="Questions completed"
+            unit={
+              data.cohorts.find((c) => c.key === data.selectedCohortKey)
+                ?.mode === "optiver"
+                ? "Net points"
+                : "Questions completed"
+            }
             max={scoreMax}
+            min={scoreMin}
             labels={labels}
           >
             <polyline
               points={rows
-                .map(
-                  (r) =>
-                    `${x(r.createdAt)},${Y + H - (r.score / scoreMax) * H}`,
-                )
+                .map((r) => `${x(r.createdAt)},${scoreY(r.score)}`)
                 .join(" ")}
               className="series-primary"
             />
@@ -379,12 +391,12 @@ export function TrendCharts({
                 <circle
                   className="point-hit-area"
                   cx={x(r.createdAt)}
-                  cy={Y + H - (r.score / scoreMax) * H}
+                  cy={scoreY(r.score)}
                   r={12}
                 />
                 <circle
                   cx={x(r.createdAt)}
-                  cy={Y + H - (r.score / scoreMax) * H}
+                  cy={scoreY(r.score)}
                   r={4}
                   className="point-primary"
                 >

@@ -1,5 +1,9 @@
 # Stage 1 — Verification and acceptance
 
+## Optiver mode verified, 2026-11-11 (D-031)
+
+The user requested the QuantPrep/Optiver 80-in-8 format as a distinct mode with independent analytics. [Contract](OPTIVER.md) and [implementation verification](../reviews/2026-11-11-optiver-verification.md) record actual behavior, source/fidelity limits and the complete synthetic browser→API→SQLite→results/analytics/export trace. **138 backend, 33 frontend, 56 browser groups and four packaging checks**, TypeScript and build passed. The final isolated Optiver browser suite passes after one transient setup-fetch failure. The actual [default local preview](http://127.0.0.1:4173/?view=optiver) was refreshed and read-only checked; original record digests match. This records implementer verification; new human acceptance and independent review are not implied.
+
 ## Approved eight follow-up improvements verified, 2026-11-04 (D-026)
 
 The user said “Approve all features” after the eight-item review. All eight are implemented: recent/best score statistics and quick ranges/point inspection; accurate filtered-empty/reset behavior; compatible History filters; explicitly global and separately filtered deletion; URL context/reload/Back/Forward; Run again/R; durable retry-safe creation; compact mobile controls with visible numeric scores. [Verification report](../reviews/2026-11-04-follow-up-verification.md) documents exact behavior and evidence; [PLATFORM.md](PLATFORM.md) and [DATA_CONTRACT.md](DATA_CONTRACT.md) remain authoritative.

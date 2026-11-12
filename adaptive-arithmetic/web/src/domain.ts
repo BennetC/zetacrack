@@ -412,6 +412,13 @@ function sample(
   return { coefficient: values.min + index, scale: values.scale };
 }
 export interface Question {
+  optiver?: {
+    kind: "integer" | "decimal" | "fraction";
+    blank: "left" | "right" | "result";
+    result: string;
+    options: string[];
+    profileIndex: number;
+  };
   id: string;
   index: number;
   operation: Operation;
@@ -420,9 +427,9 @@ export interface Question {
   right: string;
   expected: string;
   selection: {
-    operationBasisPoints: number;
-    groupBasisPoints: number;
-    validPairCount: string;
+    operationBasisPoints: number | null;
+    groupBasisPoints: number | null;
+    validPairCount: string | null;
   };
 }
 export class QuestionGenerator {

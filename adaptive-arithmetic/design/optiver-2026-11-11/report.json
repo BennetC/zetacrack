@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "Optiver home and empty analytics render without auto-starting or mutating Custom settings",
+    "80 mouse/keyboard choices finish early at 56 net (68 correct, 12 wrong), saving exact rational options and timings",
+    "Results review filters wrong choices; dedicated analytics, saved detail, back navigation and JSON/CSV agree",
+    "390px analytics and two-column answer choices fit the viewport; interrupted tests remain excluded",
+    "Switching tabs keeps the test running; duplicate clicks submit once; the exclusive deadline saves exactly 480000ms",
+    "Reload starts a fresh Optiver paper with a new identity/seed and independent 480-second configuration",
+    "Dedicated date filters, invalid/empty states, reset and Optiver History filters remain usable",
+    "Negative scores stay visible in both chart surfaces, and keyboard chart activation opens exact saved review",
+    "Failed Optiver terminal saves retain the choice journal and recover through Retry save",
+    "Dedicated analytics failures expose a working retry without creating or changing tests"
+  ],
+  "pageErrors": []
+}

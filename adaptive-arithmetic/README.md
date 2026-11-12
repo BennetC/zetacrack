@@ -1,8 +1,10 @@
 # Adaptive Arithmetic
 
+**Optiver 80 in 8** is a distinct choice-test mode: 80 integer/decimal/fraction/missing-operand questions in eight minutes, four answers per question, +1/−1/0 scoring, fresh seeded papers and its own score/accuracy/pace/pass-rate analytics. The timer continues through tab switching. Results include exact choice review and JSON/CSV exports. The public QuantPrep reference supplies the format and 56-point practice target; fresh numeric content is generated locally. [Contract and fidelity limits](docs/stage-1-ai/OPTIVER.md).
+
 Session detail now includes a Run explorer with input replay, revisions, timing splits, ghost pace comparisons, arithmetic profiles, correction labels and Custom practice from selected questions. Same-seed challenges are explicitly excluded from benchmarks. See the [measurement contract](docs/stage-1-ai/RUN_EXPLORER.md) and [verification](docs/reviews/2026-11-05-explorer-verification.md). Typo labels are descriptive hypotheses, not established causes.
 
-A complete local Stage 1 arithmetic platform following selected design option 1. Open Standard Zetamac for an immediate two-minute run using the original default question distribution, or use independently remembered Custom practice with weighted operations/groups, exact signed ranges and decimals, presets, and timed/endless sessions. Correct answers advance automatically; leaving the window ends practice. Our disclosed timing/input/focus rules differ from the original game, so external scores are not interchangeable.
+A complete local Stage 1 arithmetic platform following selected design option 1. Open Standard Zetamac for an immediate two-minute run using the original default question distribution, or use independently remembered Custom practice with weighted operations/groups, exact signed ranges and decimals, presets, and timed/endless sessions. In Standard and Custom, correct typed answers advance automatically and leaving the window ends practice. In Optiver, every submitted choice advances and the eight-minute clock continues through focus loss. Our disclosed content/timing/input rules limit external score comparisons.
 
 Saved results show median/mean correct-answer times and first-input details. History offers pagination, filters, original configurations, exact questions, raw inputs/events and provenance. Graphs show comparable full-run score/timing chronology, distributions, operation/group breakdowns and per-session sequence with unfinished observations. JSON/CSV downloads retain snapshots and raw precision. Sessions are kept locally until confirmed deletion; ongoing/owned/pending data is protected. See the [complete platform contract](docs/stage-1-ai/PLATFORM.md).
 
@@ -10,7 +12,7 @@ Graphs also show numeric average/median scores, pooled answer times and equally 
 
 The approved follow-up adds best/latest-10 score comparisons, quick date ranges, inspectable graph points, persistent filtered URLs/Back/Forward, separate matching/all-history deletion and **Run again** (R after saving). Pending Start requests retain a stable operation key so a lost response can be retried or recovered without creating an orphan. Mobile graph controls collapse to bring the scores into the first viewport.
 
-Reload now keeps the run layout visible while the fresh session starts. History and Graphs reuse unchanged session derivations and defer replay work. Pace and ghost comparisons use exact completion steps, with visible loading, failure and missing-comparison states. Current verified preview: [127.0.0.1:4173](http://127.0.0.1:4173), API 8017, refreshed on 2026-11-08. [Verification and measured performance](docs/reviews/2026-11-08-performance-verification.md).
+Reload now keeps the run layout visible while the fresh session starts. History and Graphs reuse unchanged session derivations and defer replay work. Pace and ghost comparisons use exact completion steps, with visible loading, failure and missing-comparison states. [Verification and measured performance](docs/reviews/2026-11-08-performance-verification.md). The [Optiver preview](http://127.0.0.1:4173/?view=optiver) was verified on 2026-11-11 using the default frontend4173/API8017.
 
 ## Run locally on Windows
 
@@ -31,6 +33,8 @@ Start both services:
 ```
 
 [Open the app](http://127.0.0.1:4173). The script launches hidden processes, verifies the API/frontend connection, and writes logs into ignored `data/`. It reuses listening services after checking their responses. API: `127.0.0.1:8017`; frontend: `127.0.0.1:4173`.
+
+Select **Optiver 80 in 8** in the top navigation, then **Start Optiver test** for a fresh paper or **Your Optiver analytics** for its separate dashboard. History has an Optiver mode filter; completed tests, partial tests and original choices remain inspectable. Standard remains the default entry and Custom settings stay independent.
 
 Presets, remembered setup, immutable sessions, and observations live in `data/arithmetic.sqlite3`. Use a SQLite-aware backup tool, or stop the API before copying the database and its WAL files. `ARITHMETIC_DB` can select a separate database before launch.
 
@@ -61,16 +65,19 @@ npm run test:review-fixes
 npm run test:improvements
 npm run test:next-improvements
 npm run test:sites
+npm run test:optiver
 ```
 
 Browser checks require installed Chrome (or `CHROME_PATH`). The baseline harness uses free ports 8018/4174; recovery, timing/export and complete-platform checks choose dynamic ports. They use isolated servers/databases and synthetic data, and stop their own servers afterward. Run browser suites sequentially on Windows.
 
+Optiver verification on 2026-11-11: **138 backend / 33 frontend tests, 56 browser scenario groups and four packaging checks**, plus TypeScript and production build. This includes 24,000 generated-question property checks and a complete 80-choice browser→API→SQLite→results/analytics/export journey. [Verification report](docs/reviews/2026-11-11-optiver-verification.md), [mode contract](docs/stage-1-ai/OPTIVER.md) and [screenshots/report](design/optiver-2026-11-11/report.json).
+
 Actual complete-platform verification on 2026-10-09: 20 frontend and 65 backend tests, 10 baseline / 8 recovery / 6 timing-export / 13 complete-platform browser checks, typecheck/build and 4 protected packaging tests. [Acceptance](docs/stage-1-ai/ACCEPTANCE.md) and [visual QA](design-qa.md) record traces, responsive/zoom/keyboard inspection and practical limits. Fixtures use isolated synthetic databases and never delete normal practice data.
 
-Latest requested review repairs, 2026-10-15: **95 backend / 21 frontend / 45 browser / 4 packaging** checks pass, plus typecheck/build. [Resolution report](docs/reviews/2026-10-15-fix-verification.md) records all five repaired findings and reproducible regression evidence. Its replay preparation script runs the original browser suites on dynamic ports and new evidence paths, preserving the historical reports. Independent patch review and human acceptance remain separate.
+Earlier requested review repairs, 2026-10-15: **95 backend / 21 frontend / 45 browser / 4 packaging** checks passed, plus typecheck/build. [Resolution report](docs/reviews/2026-10-15-fix-verification.md) records all five repaired findings and reproducible regression evidence. Its replay preparation script runs the original browser suites on dynamic ports and new evidence paths, preserving the historical reports. Independent patch review and human acceptance remain separate.
 
 ## Scope and next work
 
-See the [complete platform contract](docs/stage-1-ai/PLATFORM.md), [custom-practice contract](docs/stage-1-ai/CUSTOM_PRACTICE.md), [timing/export contract](docs/stage-1-ai/TIMING_EXPORTS.md), [handoff](docs/stage-1-ai/HANDOFF.md), and [project state](docs/PROJECT_STATE.md). All F01–F27 local Stage 1 requirements are delivered; the user accepted Stage 1 on 2026-10-23 (D-023). Accounts/cloud synchronization, deployment and permanent naming are outside this completion scope.
+See the [complete platform contract](docs/stage-1-ai/PLATFORM.md), [Optiver contract](docs/stage-1-ai/OPTIVER.md), [custom-practice contract](docs/stage-1-ai/CUSTOM_PRACTICE.md), [timing/export contract](docs/stage-1-ai/TIMING_EXPORTS.md), [handoff](docs/stage-1-ai/HANDOFF.md), and [project state](docs/PROJECT_STATE.md). All F01–F27 local Stage 1 requirements are delivered; the user accepted Stage 1 on 2026-10-23 (D-023). The later Optiver mode is implemented and verified under D-031; new acceptance remains separate. Accounts/cloud synchronization, deployment and permanent naming are outside this completion scope.
 
 Stage 2 planning opened on 2026-10-23. Start with the [research brief](docs/stage-2-user/RESEARCH_BRIEF.md) and [planning kickoff](docs/stage-2-user/IMPLEMENTATION_PLAN.md). The user owns the learning-system investigation/design/implementation; the agent assists with research, teaching, critique and review. The first investigation and methodology remain open; no learning-engine implementation is authorized. Implementation, verification and human acceptance are separate. The product name remains provisional. Read [AGENTS.md](AGENTS.md) and [DECISIONS.md](docs/DECISIONS.md) before continuing.

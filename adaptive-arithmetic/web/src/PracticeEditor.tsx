@@ -32,6 +32,17 @@ import {
   CUSTOM_CONTENT_VERSION,
 } from "./standard";
 import { HistoryView, GraphsView } from "./SavedViews";
+import {
+  OptiverGenerator,
+  optiverConfig,
+  OPTIVER_CONTENT,
+  OPTIVER_GENERATOR,
+  OPTIVER_POLICY,
+  OPTIVER_MEASUREMENT,
+  type PlayMode,
+} from "./optiver";
+import { OptiverHome, OptiverAnalytics } from "./OptiverViews";
+import "./optiver.css";
 import { updateLocation, useLocationParams } from "./navigation";
 import {
   rememberCreation,
@@ -223,7 +234,12 @@ export function App() {
   const params = useLocationParams();
   const view = params.get("view") || "standard";
   const detailId = params.get("session");
-  const returnTo = params.get("returnTo") === "graphs" ? "graphs" : "history";
+  const returnTo =
+    params.get("returnTo") === "graphs"
+      ? "graphs"
+      : params.get("returnTo") === "optiver-analytics"
+        ? "optiver-analytics"
+        : "history";
   const navigate = (next: string) => {
     updateLocation({ view: next, session: null, returnTo: null });
   };
@@ -232,7 +248,12 @@ export function App() {
       updateLocation({
         view: "history",
         session: id,
-        returnTo: source === "graphs" ? "graphs" : "history",
+        returnTo:
+          source === "graphs"
+            ? "graphs"
+            : source === "optiver-analytics"
+              ? "optiver-analytics"
+              : "history",
       });
     else updateLocation({ view: returnTo, session: null, returnTo: null });
   };
@@ -285,8 +306,8 @@ export function App() {
     const challenge = (event: Event) => {
       if (starting.current || runtime) return;
       const source = (event as CustomEvent<SavedSession>).detail;
-      navigate(source.mode === "standard" ? "standard" : "custom");
-      void start(source.mode === "standard", source.config, {
+      navigate(source.mode || "custom");
+      void start(source.mode || "custom", source.config, {
         seed: source.seed,
         replayOf: source.id,
       });
@@ -366,7 +387,7 @@ export function App() {
     }
   }, []);
   useEffect(() => {
-    if (["history", "graphs"].includes(view)) return;
+    if (["history", "graphs", "optiver-analytics"].includes(view)) return;
     let live = true;
     // Wait only on the quick prior-owner check, so recovery cannot take that
     // lock first. Replacement creation never waits for journal recovery.
@@ -613,7 +634,7 @@ export function App() {
     snapshot.session.countdown = false;
     setRestartError("");
     const succeeded = await start(
-      intent.mode === "standard",
+      intent.mode,
       snapshot,
       intent.replayOf
         ? { replayOf: intent.replayOf, seed: intent.challengeSeed }
@@ -627,15 +648,21 @@ export function App() {
     setReloadPreview(null);
   }
   async function start(
-    standard = false,
+    standard: boolean | PlayMode = false,
     restartConfig?: Config,
     challenge?: { seed?: string; replayOf: string },
   ) {
+    let playMode: PlayMode =
+      typeof standard === "string"
+        ? standard
+        : standard
+          ? "standard"
+          : "custom";
     if (
       starting.current ||
       (!pendingCreation.current &&
         !restartConfig &&
-        ((!standard && !valid) || busy || !ready))
+        ((playMode === "custom" && !valid) || busy || !ready))
     )
       return false;
     starting.current = true;
@@ -652,11 +679,13 @@ export function App() {
         );
       let snapshot = restartConfig
           ? structuredClone(restartConfig)
-          : standard
-            ? standardConfig()
-            : structuredClone(config),
+          : playMode === "optiver"
+            ? optiverConfig()
+            : playMode === "standard"
+              ? standardConfig()
+              : structuredClone(config),
         seed: string = challenge?.seed || crypto.randomUUID();
-      if (!pendingCreation.current && !standard && !restartConfig) {
+      if (!pendingCreation.current && playMode === "custom" && !restartConfig) {
         await lastQueue.current.catch(() => {});
         await request("/api/last-config", "PUT", snapshot);
       }
@@ -666,15 +695,27 @@ export function App() {
           ...(challenge ? { replayOf: challenge.replayOf } : {}),
           config: snapshot,
           seed,
-          generatorVersion: standard
-            ? STANDARD_GENERATOR_VERSION
-            : GENERATOR_VERSION,
-          policyVersion: standard ? STANDARD_POLICY_VERSION : POLICY_VERSION,
-          measurementVersion: MEASUREMENT_VERSION,
-          mode: standard ? "standard" : "custom",
-          contentVersion: standard
-            ? STANDARD_CONTENT_VERSION
-            : CUSTOM_CONTENT_VERSION,
+          generatorVersion:
+            playMode === "optiver"
+              ? OPTIVER_GENERATOR
+              : playMode === "standard"
+                ? STANDARD_GENERATOR_VERSION
+                : GENERATOR_VERSION,
+          policyVersion:
+            playMode === "optiver"
+              ? OPTIVER_POLICY
+              : playMode === "standard"
+                ? STANDARD_POLICY_VERSION
+                : POLICY_VERSION,
+          measurementVersion:
+            playMode === "optiver" ? OPTIVER_MEASUREMENT : MEASUREMENT_VERSION,
+          mode: playMode,
+          contentVersion:
+            playMode === "optiver"
+              ? OPTIVER_CONTENT
+              : playMode === "standard"
+                ? STANDARD_CONTENT_VERSION
+                : CUSTOM_CONTENT_VERSION,
         };
       const creation = pendingCreation.current;
       if (!creationOwnership.current) {
@@ -687,7 +728,7 @@ export function App() {
       rememberCreation(creation);
       snapshot = creation.config;
       seed = creation.seed;
-      standard = creation.mode === "standard";
+      playMode = creation.mode;
       const session = await request<{ id: string }>(
         "/api/sessions",
         "POST",
@@ -728,9 +769,12 @@ export function App() {
         localStorage.removeItem(JOURNAL_PREFIX + session.id);
         return;
       }
-      const generator = standard
-        ? new StandardGenerator(seed)
-        : new QuestionGenerator(snapshot, seed);
+      const generator =
+        playMode === "optiver"
+          ? new OptiverGenerator(seed)
+          : playMode === "standard"
+            ? new StandardGenerator(seed)
+            : new QuestionGenerator(snapshot, seed);
       setRuntime({
         id: session.id,
         config: snapshot,
@@ -739,7 +783,7 @@ export function App() {
         firstQuestion: generator.next(),
         ownership,
         startFocus,
-        mode: standard ? "standard" : "custom",
+        mode: playMode,
         replayOf: creation.replayOf,
       });
       handedOff = true;
@@ -809,7 +853,7 @@ export function App() {
           onBack={leaveRun}
           onAgain={async () => {
             await start(
-              runtime.mode === "standard",
+              runtime.mode || "custom",
               runtime.config,
               runtime.replayOf
                 ? { replayOf: runtime.id, seed: runtime.seed }
@@ -822,6 +866,10 @@ export function App() {
           }}
           onGraphs={(cohort, includePartial) => {
             leaveRun();
+            if (runtime.mode === "optiver") {
+              navigate("optiver-analytics");
+              return;
+            }
             navigate("graphs");
             updateLocation(
               { gCohort: cohort, gPartial: includePartial ? "true" : null },
@@ -861,14 +909,23 @@ export function App() {
       <nav className="product-nav" aria-label="Practice and saved data">
         {[
           ["standard", "Standard Zetamac"],
+          ["optiver", "Optiver 80 in 8"],
           ["custom", "Custom practice"],
           ["history", "History"],
           ["graphs", "Graphs"],
         ].map(([id, label]) => (
           <button
             key={id}
-            className={view === id ? "nav-current" : ""}
-            aria-current={view === id ? "page" : undefined}
+            className={
+              view === id || (id === "optiver" && view === "optiver-analytics")
+                ? "nav-current"
+                : ""
+            }
+            aria-current={
+              view === id || (id === "optiver" && view === "optiver-analytics")
+                ? "page"
+                : undefined
+            }
             onClick={() => navigate(id)}
           >
             {label}
@@ -900,7 +957,11 @@ export function App() {
           detailId={detailId}
           onDetail={openDetail}
           backLabel={
-            returnTo === "graphs" ? "Back to graphs" : "Back to history"
+            returnTo === "graphs"
+              ? "Back to graphs"
+              : returnTo === "optiver-analytics"
+                ? "Back to Optiver analytics"
+                : "Back to history"
           }
         />
       </>
@@ -914,6 +975,40 @@ export function App() {
             openDetail(id, "graphs");
           }}
         />
+      </>
+    );
+  if (view === "optiver" || view === "optiver-analytics")
+    return (
+      <>
+        {navigation}
+        {view === "optiver" ? (
+          <OptiverHome
+            busy={!ready || busy}
+            onStart={() => void start("optiver")}
+            onAnalytics={() => navigate("optiver-analytics")}
+          />
+        ) : (
+          <OptiverAnalytics
+            onBack={() => navigate("optiver")}
+            onDetail={(id) => openDetail(id, "optiver-analytics")}
+            onHistory={() => {
+              navigate("history");
+              updateLocation({ hMode: "optiver", hOffset: null }, true);
+            }}
+          />
+        )}
+        {apiError && (
+          <p className="api-error" role="alert">
+            {apiError}
+            <button
+              className="text-button"
+              onClick={() => setSetupAttempt((n) => n + 1)}
+            >
+              Retry connection
+            </button>
+          </p>
+        )}
+        {recoveryNotice}
       </>
     );
   if (view !== "custom")

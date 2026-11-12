@@ -4,6 +4,8 @@ Status: Explicitly approved by the user's “PLEASE IMPLEMENT THIS PLAN” on 20
 
 ## Measurement contract
 
+This document defines the `response-timing-v1` typed-answer measurements used by Standard and Custom. The later Optiver mode uses `choice-response-v1`: explicit correct/incorrect submissions, all-choice response times and null first-input timing. Its exact choice, net-score, completion and export definitions are in [OPTIVER.md](OPTIVER.md). JSON exports provide versioned `measurementDefinitions` for mixed-mode histories; CSV preserves Optiver's original equation/options, selected index and response time in additive fields. Existing typed-answer semantics below are unchanged.
+
 New clients submit `measurementVersion: "response-timing-v1"`. The metadata is nullable: older clients omit it and historical sessions retain null. The additive SQLite migration never rewrites historical configurations or observations. Legacy timings can remain usable, with a warning that their semantics are not certified as v1.
 
 The browser uses monotonic `performance.now()` relative to the first question's React layout commit. Each question presentation is recorded in a layout effect. This measures an observable rendering event, not physical screen presentation. Countdown and pending Start precede the clock origin. Wall-clock timestamps locate events; they never drive elapsed-time subtraction.

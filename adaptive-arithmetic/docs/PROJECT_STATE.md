@@ -1,6 +1,18 @@
 # Project State
 
-Workflow authority, read with the [working agreement](../AGENTS.md) and [decision log](DECISIONS.md). Updated 2026-11-08.
+Workflow authority, read with the [working agreement](../AGENTS.md) and [decision log](DECISIONS.md). Updated 2026-11-12.
+
+## Optiver GitHub handoff, 2026-11-12
+
+The user explicitly requested pushing the implemented Optiver mode to GitHub and updating the README/related documentation (D-032). This authorizes committing the complete D-031 implementation, tests and synthetic verification artifacts to the existing public `BennetC/zetacrack` repository. Root/app READMEs now describe all three modes, separate Optiver analytics, the different focus/scoring rules and reference-fidelity limits. Product/platform/data contracts and the handoff link the authoritative Optiver contract. Normal practice records, credentials, dependencies and generated builds remain excluded. No Orbit mutation or production rollout is part of this request. Git transport success must be confirmed from the remote receipt; this source entry records the authorized handoff scope.
+
+## Optiver 80 in 8, 2026-11-11
+
+The user supplied the QuantPrep reference and explicitly requested implementation as a distinct play mode with its own analytics (D-031). The new mode is implemented and verified against [its contract](stage-1-ai/OPTIVER.md): four-choice integer/decimal/fraction/missing-operand questions, 80 answers/eight minutes, +1/−1/0 scoring, a disclosed 56-point practice target, continuous timer through focus loss, exact choice events, local results/review/export, and isolated score/accuracy/pace analytics. Fresh seeded numerical content uses the observed public trial’s question-family profile. Official/unseen-bank equivalence is not claimed.
+
+Actual checks: **138 backend / 33 frontend / 56 browser groups / four packaging checks**, TypeScript and production build passed. [Verification report](reviews/2026-11-11-optiver-verification.md) records the complete browser/API/SQLite/results/analytics/export flow, screenshot review, the one transient connection failure and passing isolated rerun, and practical limits. User acceptance and independent review remain separate.
+
+Current verified preview: [Optiver 80 in 8 on 4173](http://127.0.0.1:4173/?view=optiver), refreshed API8017 / process50172 / supervised session59967. Existing frontend serves updated source. Read-only actual-preview inspection had zero page errors/API writes; original sessions/observations/presets/settings/annotations match saved before/after digests. Tests use isolated synthetic databases and browser origins. No Stage 2 implementation, Orbit mutation, GitHub push, or deployment is part of this request. Prior dated entries below remain historical.
 
 ## Orbit logging and GitHub handoff, 2026-11-08
 

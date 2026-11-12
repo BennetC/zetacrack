@@ -1,5 +1,6 @@
 import { configsEqual, validateConfig, type Config } from "./domain";
 import { standardConfig } from "./standard";
+import { optiverConfig, type PlayMode } from "./optiver";
 
 export const RESTART_KEY = "arithmetic.reload-restart.v1";
 export interface ReloadRestart {
@@ -7,7 +8,7 @@ export interface ReloadRestart {
   challengeSeed?: string;
   version: 1;
   sessionId: string;
-  mode: "standard" | "custom";
+  mode: PlayMode;
   config: Config;
 }
 
@@ -18,10 +19,11 @@ export function parseReloadRestart(raw: string): ReloadRestart | null {
       value.version !== 1 ||
       typeof value.sessionId !== "string" ||
       !value.sessionId ||
-      !["standard", "custom"].includes(value.mode) ||
+      !["standard", "custom", "optiver"].includes(value.mode) ||
       Object.keys(validateConfig(value.config)).length ||
       (value.mode === "standard" &&
-        !configsEqual(value.config, standardConfig()))
+        !configsEqual(value.config, standardConfig())) ||
+      (value.mode === "optiver" && !configsEqual(value.config, optiverConfig()))
     )
       return null;
     return value;
@@ -39,7 +41,7 @@ export function peekReloadRestart(view: string): ReloadRestart | null {
   if (
     !raw ||
     navigation?.type !== "reload" ||
-    !["standard", "custom"].includes(view)
+    !["standard", "custom", "optiver"].includes(view)
   )
     return null;
   return parseReloadRestart(raw);

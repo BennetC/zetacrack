@@ -1,0 +1,782 @@
+{
+  "id": "d2ad9324-c796-4bf5-8b5c-8533ec91c8aa",
+  "config": {
+    "operations": [
+      {
+        "groups": [
+          {
+            "allowNegative": false,
+            "first": {
+              "decimalPlaces": 3,
+              "max": "-1.000",
+              "min": "-1.000"
+            },
+            "id": "export-fixed",
+            "name": "Fixed signed decimals",
+            "second": {
+              "decimalPlaces": 2,
+              "max": "0.25",
+              "min": "0.25"
+            },
+            "share": "100",
+            "version": 1
+          }
+        ],
+        "id": "addition",
+        "share": "100",
+        "version": 1
+      }
+    ],
+    "session": {
+      "countdown": false,
+      "durationSeconds": "120",
+      "format": "endless"
+    },
+    "version": 1
+  },
+  "seed": "87af0381-290c-4bc9-bb8d-a1ab24a0fa94",
+  "generatorVersion": "exact-grid-v1",
+  "policyVersion": "hierarchical-shares-v1",
+  "measurementVersion": "response-timing-v1",
+  "mode": "custom",
+  "contentVersion": "custom-grid-v1",
+  "replayOf": null,
+  "annotations": [],
+  "createdAt": "2026-11-11T18:57:28.393810+00:00",
+  "status": "ended",
+  "events": [
+    {
+      "elapsedMs": 0,
+      "payload": {
+        "wallAt": "2026-11-11T18:57:28.412Z"
+      },
+      "sequence": 0,
+      "type": "session-started"
+    },
+    {
+      "elapsedMs": 0.2999999523162842,
+      "payload": {
+        "question": {
+          "expected": "-0.75",
+          "groupId": "export-fixed",
+          "id": "q-0",
+          "index": 0,
+          "left": "-1.000",
+          "operation": "addition",
+          "right": "0.25",
+          "selection": {
+            "groupBasisPoints": 10000,
+            "operationBasisPoints": 10000,
+            "validPairCount": "1"
+          }
+        }
+      },
+      "sequence": 1,
+      "type": "question-presented"
+    },
+    {
+      "elapsedMs": 47.299999952316284,
+      "payload": {
+        "beforeValue": "",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-0",
+        "selectionAfterEnd": 1,
+        "selectionAfterStart": 1,
+        "selectionEnd": 0,
+        "selectionStart": 0,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "9"
+      },
+      "sequence": 2,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 70.89999997615814,
+      "payload": {
+        "beforeValue": "9",
+        "inputType": "deleteContentBackward",
+        "isComposing": false,
+        "questionId": "q-0",
+        "selectionAfterEnd": 0,
+        "selectionAfterStart": 0,
+        "telemetryVersion": "answer-edits-v2",
+        "value": ""
+      },
+      "sequence": 3,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 221.10000002384186,
+      "payload": {
+        "beforeValue": "",
+        "inputType": "insertFromPaste",
+        "isComposing": false,
+        "questionId": "q-0",
+        "selectionAfterEnd": 6,
+        "selectionAfterStart": 6,
+        "selectionEnd": 0,
+        "selectionStart": 0,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "-0.750"
+      },
+      "sequence": 4,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 221.10000002384186,
+      "payload": {
+        "questionId": "q-0",
+        "value": "-0.750"
+      },
+      "sequence": 5,
+      "type": "answer-accepted"
+    },
+    {
+      "elapsedMs": 223.19999992847443,
+      "payload": {
+        "question": {
+          "expected": "-0.75",
+          "groupId": "export-fixed",
+          "id": "q-1",
+          "index": 1,
+          "left": "-1.000",
+          "operation": "addition",
+          "right": "0.25",
+          "selection": {
+            "groupBasisPoints": 10000,
+            "operationBasisPoints": 10000,
+            "validPairCount": "1"
+          }
+        }
+      },
+      "sequence": 6,
+      "type": "question-presented"
+    },
+    {
+      "elapsedMs": 242.60000002384186,
+      "payload": {
+        "beforeValue": "",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 1,
+        "selectionAfterStart": 1,
+        "selectionEnd": 0,
+        "selectionStart": 0,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "u"
+      },
+      "sequence": 7,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 250.5,
+      "payload": {
+        "beforeValue": "u",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 2,
+        "selectionAfterStart": 2,
+        "selectionEnd": 1,
+        "selectionStart": 1,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "un"
+      },
+      "sequence": 8,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 257.5,
+      "payload": {
+        "beforeValue": "un",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 3,
+        "selectionAfterStart": 3,
+        "selectionEnd": 2,
+        "selectionStart": 2,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unf"
+      },
+      "sequence": 9,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 262.7999999523163,
+      "payload": {
+        "beforeValue": "unf",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 4,
+        "selectionAfterStart": 4,
+        "selectionEnd": 3,
+        "selectionStart": 3,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfi"
+      },
+      "sequence": 10,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 267.7999999523163,
+      "payload": {
+        "beforeValue": "unfi",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 5,
+        "selectionAfterStart": 5,
+        "selectionEnd": 4,
+        "selectionStart": 4,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfin"
+      },
+      "sequence": 11,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 272.89999997615814,
+      "payload": {
+        "beforeValue": "unfin",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 6,
+        "selectionAfterStart": 6,
+        "selectionEnd": 5,
+        "selectionStart": 5,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfini"
+      },
+      "sequence": 12,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 279.10000002384186,
+      "payload": {
+        "beforeValue": "unfini",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 7,
+        "selectionAfterStart": 7,
+        "selectionEnd": 6,
+        "selectionStart": 6,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfinis"
+      },
+      "sequence": 13,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 284.6999999284744,
+      "payload": {
+        "beforeValue": "unfinis",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 8,
+        "selectionAfterStart": 8,
+        "selectionEnd": 7,
+        "selectionStart": 7,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfinish"
+      },
+      "sequence": 14,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 290.6999999284744,
+      "payload": {
+        "beforeValue": "unfinish",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 9,
+        "selectionAfterStart": 9,
+        "selectionEnd": 8,
+        "selectionStart": 8,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfinishe"
+      },
+      "sequence": 15,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 296.7999999523163,
+      "payload": {
+        "beforeValue": "unfinishe",
+        "inputType": "insertText",
+        "isComposing": false,
+        "questionId": "q-1",
+        "selectionAfterEnd": 10,
+        "selectionAfterStart": 10,
+        "selectionEnd": 9,
+        "selectionStart": 9,
+        "telemetryVersion": "answer-edits-v2",
+        "value": "unfinished"
+      },
+      "sequence": 16,
+      "type": "input-changed"
+    },
+    {
+      "elapsedMs": 328.5,
+      "payload": {
+        "endTimeKnown": true,
+        "reason": "manual-end",
+        "unfinishedQuestionId": "q-1",
+        "wallAt": "2026-11-11T18:57:28.741Z"
+      },
+      "sequence": 17,
+      "type": "session-ended"
+    }
+  ],
+  "terminationState": "ended",
+  "terminationReason": "manual-end",
+  "startedAt": "2026-11-11T18:57:28.412Z",
+  "endedAt": "2026-11-11T18:57:28.741Z",
+  "endTimeKnown": true,
+  "observedDurationMs": 328.5,
+  "questions": [
+    {
+      "id": "q-0",
+      "index": 0,
+      "presentationSequence": 1,
+      "operation": "addition",
+      "operationVersion": 1,
+      "groupId": "export-fixed",
+      "groupVersion": 1,
+      "groupName": "Fixed signed decimals",
+      "left": "-1.000",
+      "right": "0.25",
+      "expected": "-0.75",
+      "selection": {
+        "groupBasisPoints": 10000,
+        "operationBasisPoints": 10000,
+        "validPairCount": "1"
+      },
+      "outcome": "correct",
+      "presentedElapsedMs": 0.2999999523162842,
+      "acceptedElapsedMs": 221.10000002384186,
+      "firstInputElapsedMs": 47.299999952316284,
+      "correctAnswerTimeMs": 220.80000007152557,
+      "firstInputTimeMs": 47,
+      "observedUnfinishedDurationMs": null,
+      "unfinishedDurationIsLowerBound": null,
+      "acceptedInput": "-0.750",
+      "lastInput": "-0.750",
+      "inputChangeCount": 3,
+      "dataQualityWarnings": []
+    },
+    {
+      "id": "q-1",
+      "index": 1,
+      "presentationSequence": 6,
+      "operation": "addition",
+      "operationVersion": 1,
+      "groupId": "export-fixed",
+      "groupVersion": 1,
+      "groupName": "Fixed signed decimals",
+      "left": "-1.000",
+      "right": "0.25",
+      "expected": "-0.75",
+      "selection": {
+        "groupBasisPoints": 10000,
+        "operationBasisPoints": 10000,
+        "validPairCount": "1"
+      },
+      "outcome": "unfinished",
+      "presentedElapsedMs": 223.19999992847443,
+      "acceptedElapsedMs": null,
+      "firstInputElapsedMs": 242.60000002384186,
+      "correctAnswerTimeMs": null,
+      "firstInputTimeMs": 19.40000009536743,
+      "observedUnfinishedDurationMs": 105.30000007152557,
+      "unfinishedDurationIsLowerBound": false,
+      "acceptedInput": null,
+      "lastInput": "unfinished",
+      "inputChangeCount": 10,
+      "dataQualityWarnings": []
+    }
+  ],
+  "summary": {
+    "presentedQuestionCount": 2,
+    "correctQuestionCount": 1,
+    "unfinishedQuestionCount": 1,
+    "validCorrectAnswerCount": 1,
+    "medianCorrectAnswerTimeMs": 220.80000007152557,
+    "meanCorrectAnswerTimeMs": 220.80000007152557
+  },
+  "dataQualityWarnings": [],
+  "cohortKey": "ac1738574551e9d6420c4d6f1a04c2dc4833e8ac01ecbe9cb9daa968a2c694d0",
+  "cohortLabel": "Custom practice · endless · addition · ac173857",
+  "score": 1,
+  "comparisonEligible": false,
+  "comparisonExclusionReasons": [
+    "Interrupted or untimed run",
+    "Run did not record its full fixed duration"
+  ],
+  "scoreState": "partial",
+  "runAnalytics": {
+    "version": "run-explorer-v1",
+    "questions": [
+      {
+        "index": 1,
+        "id": "q-0",
+        "presentationSequence": 1,
+        "operation": "addition",
+        "groupId": "export-fixed",
+        "left": "-1.000",
+        "right": "0.25",
+        "expected": "-0.75",
+        "outcome": "correct",
+        "presentedMs": 0.2999999523162842,
+        "acceptedMs": 221.10000002384186,
+        "totalMs": 220.80000007152557,
+        "firstMs": 47,
+        "entryMs": 173.80000007152557,
+        "unfinishedMs": null,
+        "lowerBound": null,
+        "deltaMs": null,
+        "rollingMedianMs": 220.80000007152557,
+        "inputChanges": 3,
+        "charactersInserted": 7,
+        "charactersRemoved": 1,
+        "revisionEpisodes": 1,
+        "revisionToAcceptanceMs": 150.20000004768372,
+        "editPositions": [
+          1
+        ],
+        "removedDigits": [
+          "9"
+        ],
+        "hypothesis": "unknown",
+        "telemetry": "answer-edits-v2",
+        "frames": [
+          {
+            "sequence": 2,
+            "value": "9",
+            "atMs": 47,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 3,
+            "value": "",
+            "atMs": 70.60000002384186,
+            "inputType": "deleteContentBackward",
+            "revision": true
+          },
+          {
+            "sequence": 4,
+            "value": "-0.750",
+            "atMs": 220.80000007152557,
+            "inputType": "insertFromPaste",
+            "revision": false
+          }
+        ],
+        "features": [
+          "operation: addition",
+          "answer length: 3 digits",
+          "decimal: yes",
+          "negative: yes",
+          "operand size: 1 digits",
+          "transition: first question",
+          "removed digit: 9",
+          "revision position: 1"
+        ],
+        "maxPauseMs": 150.20000004768372
+      },
+      {
+        "index": 2,
+        "id": "q-1",
+        "presentationSequence": 6,
+        "operation": "addition",
+        "groupId": "export-fixed",
+        "left": "-1.000",
+        "right": "0.25",
+        "expected": "-0.75",
+        "outcome": "unfinished",
+        "presentedMs": 223.19999992847443,
+        "acceptedMs": null,
+        "totalMs": null,
+        "firstMs": 19.40000009536743,
+        "entryMs": null,
+        "unfinishedMs": 105.30000007152557,
+        "lowerBound": false,
+        "deltaMs": null,
+        "rollingMedianMs": null,
+        "inputChanges": 10,
+        "charactersInserted": 10,
+        "charactersRemoved": 0,
+        "revisionEpisodes": 0,
+        "revisionToAcceptanceMs": null,
+        "editPositions": [],
+        "removedDigits": [],
+        "hypothesis": "no revision observed",
+        "telemetry": "answer-edits-v2",
+        "frames": [
+          {
+            "sequence": 7,
+            "value": "u",
+            "atMs": 19.40000009536743,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 8,
+            "value": "un",
+            "atMs": 27.300000071525574,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 9,
+            "value": "unf",
+            "atMs": 34.300000071525574,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 10,
+            "value": "unfi",
+            "atMs": 39.60000002384186,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 11,
+            "value": "unfin",
+            "atMs": 44.60000002384186,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 12,
+            "value": "unfini",
+            "atMs": 49.700000047683716,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 13,
+            "value": "unfinis",
+            "atMs": 55.90000009536743,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 14,
+            "value": "unfinish",
+            "atMs": 61.5,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 15,
+            "value": "unfinishe",
+            "atMs": 67.5,
+            "inputType": "insertText",
+            "revision": false
+          },
+          {
+            "sequence": 16,
+            "value": "unfinished",
+            "atMs": 73.60000002384186,
+            "inputType": "insertText",
+            "revision": false
+          }
+        ],
+        "features": [
+          "operation: addition",
+          "answer length: 3 digits",
+          "decimal: yes",
+          "negative: yes",
+          "operand size: 1 digits",
+          "transition: repeat operation",
+          "after operation: addition → addition"
+        ],
+        "maxPauseMs": 7.899999976158142
+      }
+    ],
+    "summary": {
+      "completed": 1,
+      "withInput": 2,
+      "revisedCompleted": 1,
+      "revisedUnfinished": 0,
+      "revisionEpisodes": 1,
+      "charactersRemoved": 1,
+      "charactersInserted": 17,
+      "medianMs": 220.80000007152557,
+      "p90Ms": 220.80000007152557,
+      "iqrMs": 0,
+      "slowestFiveShare": 0.6721461189391951
+    },
+    "durationMs": 328.5,
+    "splits": [
+      {
+        "startMs": 0,
+        "endMs": 328.5,
+        "count": 1,
+        "medianMs": 220.80000007152557,
+        "revised": 1,
+        "indices": [
+          1
+        ]
+      }
+    ],
+    "splitWidthMs": 15000,
+    "timeBreakdown": [
+      {
+        "label": "Before first input (completed)",
+        "ms": 47,
+        "indices": [
+          1
+        ]
+      },
+      {
+        "label": "After first input · unrevised",
+        "ms": 0,
+        "indices": []
+      },
+      {
+        "label": "After first input · revised",
+        "ms": 173.80000007152557,
+        "indices": [
+          1
+        ]
+      },
+      {
+        "label": "Completed · first input unavailable",
+        "ms": 0,
+        "indices": []
+      },
+      {
+        "label": "Unfinished observation",
+        "ms": 105.30000007152557,
+        "indices": [
+          2
+        ]
+      },
+      {
+        "label": "Unattributed / presentation gaps",
+        "ms": 2.3999998569488525,
+        "indices": []
+      }
+    ],
+    "reel": {
+      "slowest": [
+        1
+      ],
+      "revisions": [
+        1
+      ],
+      "fastest": [
+        1
+      ]
+    }
+  },
+  "analysis": {
+    "optiverStatistics": null,
+    "totalSavedSessionCount": 1,
+    "cohorts": [
+      {
+        "key": "ac1738574551e9d6420c4d6f1a04c2dc4833e8ac01ecbe9cb9daa968a2c694d0",
+        "label": "Custom practice · endless · addition · ac173857",
+        "mode": "custom",
+        "sessionCount": 1,
+        "eligibleSessionCount": 0
+      }
+    ],
+    "selectedCohortKey": "ac1738574551e9d6420c4d6f1a04c2dc4833e8ac01ecbe9cb9daa968a2c694d0",
+    "selectedSessionCount": 1,
+    "eligibleSessionCount": 0,
+    "excludedSessionCount": 1,
+    "exclusionReasons": {
+      "Interrupted or untimed run": 1,
+      "Run did not record its full fixed duration": 1
+    },
+    "includePartialObservations": true,
+    "observationSessionCount": 1,
+    "summary": {
+      "presentedQuestionCount": 2,
+      "correctQuestionCount": 1,
+      "unfinishedQuestionCount": 1,
+      "validCorrectAnswerCount": 1,
+      "medianCorrectAnswerTimeMs": 220.80000007152557,
+      "meanCorrectAnswerTimeMs": 220.80000007152557
+    },
+    "fullRunStatistics": {
+      "runCount": 0,
+      "meanScore": null,
+      "medianScore": null,
+      "bestScore": null,
+      "recentRunCount": 0,
+      "recentMeanScore": null,
+      "previousRunCount": 0,
+      "previousMeanScore": null,
+      "recentScoreDifference": null,
+      "answerSummary": {
+        "presentedQuestionCount": 0,
+        "correctQuestionCount": 0,
+        "unfinishedQuestionCount": 0,
+        "validCorrectAnswerCount": 0,
+        "medianCorrectAnswerTimeMs": null,
+        "meanCorrectAnswerTimeMs": null
+      },
+      "runTiming": {
+        "contributingRunCount": 0,
+        "meanRunMeanMs": null,
+        "medianRunMeanMs": null,
+        "meanRunMedianMs": null,
+        "medianRunMedianMs": null
+      }
+    },
+    "histogram": [
+      {
+        "lowerMs": 220.80000007152557,
+        "upperMs": 220.80000007152557,
+        "upperInclusive": true,
+        "count": 1
+      }
+    ],
+    "breakdown": [
+      {
+        "level": "operation",
+        "operation": "addition",
+        "groupId": null,
+        "label": "addition",
+        "presentedQuestionCount": 2,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 1,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 220.80000007152557,
+        "meanCorrectAnswerTimeMs": 220.80000007152557
+      },
+      {
+        "level": "group",
+        "operation": "addition",
+        "groupId": "export-fixed",
+        "label": "Fixed signed decimals",
+        "presentedQuestionCount": 2,
+        "correctQuestionCount": 1,
+        "unfinishedQuestionCount": 1,
+        "validCorrectAnswerCount": 1,
+        "medianCorrectAnswerTimeMs": 220.80000007152557,
+        "meanCorrectAnswerTimeMs": 220.80000007152557
+      }
+    ],
+    "trend": [],
+    "sessions": [
+      {
+        "id": "d2ad9324-c796-4bf5-8b5c-8533ec91c8aa",
+        "createdAt": "2026-11-11T18:57:28.393810+00:00",
+        "scoreState": "partial"
+      }
+    ]
+  }
+}

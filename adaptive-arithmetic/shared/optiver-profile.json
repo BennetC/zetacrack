@@ -1,0 +1,482 @@
+[
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "result",
+    "large": true
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "decimal",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "integer",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "fraction",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "integer",
+    "blank": "result",
+    "large": true
+  },
+  {
+    "operation": "multiplication",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "result",
+    "large": true
+  },
+  {
+    "operation": "division",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "fraction",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "decimal",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "right",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "decimal",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "fraction",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "subtraction",
+    "kind": "fraction",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "integer",
+    "blank": "left",
+    "large": false
+  },
+  {
+    "operation": "division",
+    "kind": "integer",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "integer",
+    "blank": "result",
+    "large": true
+  },
+  {
+    "operation": "division",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "multiplication",
+    "kind": "fraction",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  },
+  {
+    "operation": "addition",
+    "kind": "decimal",
+    "blank": "result",
+    "large": false
+  }
+]

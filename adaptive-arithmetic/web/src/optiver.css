@@ -1,0 +1,333 @@
+.optiver-mode-label {
+  margin-left: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted, #667085);
+}
+.optiver-facts,
+.optiver-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  padding: 26px 0;
+}
+.optiver-facts {
+  border-bottom: 1px solid #e7eaf0;
+  margin-bottom: 24px;
+}
+.optiver-facts strong,
+.optiver-metrics strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.optiver-facts span,
+.optiver-metrics span {
+  display: block;
+  font-size: 13px;
+  color: #667085;
+  margin-top: 8px;
+}
+.run-page.optiver-run {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 36px;
+}
+.optiver-run .run-header {
+  margin-bottom: 76px;
+}
+.optiver-run .run-center {
+  max-width: none;
+  min-height: 0;
+  padding: 0;
+  align-items: stretch;
+  gap: 0;
+}
+.optiver-test-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+.optiver-question-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 176px;
+  border: 1px solid #e4e8f0;
+  border-top: 4px solid #3563e9;
+  border-radius: 10px;
+  background: white;
+  padding: 24px;
+}
+.optiver-run .optiver-question-card h1 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 500;
+}
+.optiver-equation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  white-space: nowrap;
+}
+.optiver-choices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+.optiver-choice {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 18px 28px;
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+  background: white;
+  color: #1d2939;
+  font: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    border-color 80ms,
+    background 80ms;
+}
+.optiver-choice:hover:not(:disabled) {
+  border-color: #3563e9;
+  background: #f6f8ff;
+}
+.optiver-choice:focus-visible {
+  outline: 3px solid #3563e9;
+  outline-offset: 3px;
+}
+.optiver-choice:disabled {
+  cursor: default;
+  opacity: 1;
+}
+.optiver-choice.correct {
+  background: #e6f5ed;
+  border-color: #258258;
+}
+.optiver-choice.incorrect {
+  background: #ffeded;
+  border-color: #c33c3c;
+}
+.optiver-choice small {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-size: 11px;
+  color: #7b8495;
+}
+.optiver-feedback {
+  min-height: 22px;
+  font-size: 13px;
+  color: #667085;
+}
+.math-value {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+.math-value > span {
+  display: inline-flex;
+  align-items: center;
+}
+.stacked-fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 0.85em;
+}
+.stacked-fraction > span {
+  padding: 0.04em 0.18em;
+}
+.stacked-fraction > span:first-child {
+  border-bottom: 1px solid currentColor;
+}
+.mixed-whole {
+  margin-right: 0.2em;
+}
+.optiver-score-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+.optiver-score-line > strong {
+  font-size: 54px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.optiver-score-line > strong > span {
+  font-size: 24px;
+  color: #667085;
+  font-weight: 400;
+}
+.optiver-verdict {
+  border-radius: 24px;
+  padding: 7px 12px;
+  background: #f2f4f7;
+  font-size: 13px;
+}
+.optiver-verdict.is-pass {
+  color: #17603e;
+  background: #e6f5ed;
+}
+.optiver-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.optiver-section-heading select {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border: 1px solid #d8dde6;
+  border-radius: 6px;
+  background: white;
+  font: inherit;
+}
+.optiver-review table {
+  min-width: 850px;
+}
+.optiver-review .optiver-equation {
+  font-size: 15px;
+}
+.review-options {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.review-options > span {
+  padding: 6px;
+  border: 1px solid #eaecf0;
+  border-radius: 4px;
+}
+.review-options .chosen {
+  border-color: #3563e9;
+  background: #f2f5ff;
+}
+.optiver-outcome {
+  white-space: nowrap;
+  font-size: 12px;
+}
+.optiver-outcome.correct {
+  color: #17603e;
+}
+.optiver-outcome.incorrect {
+  color: #b42318;
+}
+.optiver-date-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin: 24px 0;
+}
+.optiver-date-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: #667085;
+}
+.optiver-date-controls input {
+  border: 1px solid #d8dde6;
+  border-radius: 6px;
+  padding: 8px;
+  font: inherit;
+  color: #1d2939;
+}
+.optiver-score-chart {
+  display: block;
+  width: 100%;
+  font-size: 12px;
+  overflow: visible;
+}
+.optiver-score-chart [role="button"] {
+  cursor: pointer;
+}
+.optiver-score-chart [role="button"]:focus {
+  outline: none;
+}
+.optiver-score-chart [role="button"]:focus circle:last-child {
+  stroke: #111;
+  stroke-width: 3px;
+}
+.pass-line {
+  stroke: #27845c;
+  stroke-dasharray: 6 4;
+}
+.optiver-pace > div {
+  display: grid;
+  grid-template-columns: 28px minmax(60px, 1fr) 270px;
+  gap: 16px;
+  align-items: center;
+  margin: 16px 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.pace-track {
+  height: 9px;
+  background: #eef1f7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.pace-track > span {
+  display: block;
+  height: 100%;
+  background: #5479ed;
+  border-radius: inherit;
+}
+@media (max-width: 650px) {
+  .run-page.optiver-run {
+    padding: 18px;
+  }
+  .optiver-run .run-header {
+    margin-bottom: 48px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .optiver-facts,
+  .optiver-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  .optiver-choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .optiver-question-card {
+    min-height: 148px;
+    padding: 16px;
+  }
+  .optiver-run .optiver-question-card h1 {
+    font-size: 26px;
+  }
+  .optiver-section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .optiver-pace > div {
+    grid-template-columns: 25px minmax(25px, 1fr);
+    gap: 8px;
+  }
+  .optiver-pace > div > span:last-child {
+    grid-column: 2;
+    font-size: 12px;
+  }
+  .optiver-mode-label {
+    display: block;
+    margin: 8px 0 0;
+  }
+}

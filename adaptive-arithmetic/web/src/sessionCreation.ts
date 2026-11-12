@@ -1,4 +1,5 @@
 import { validateConfig, type Config } from "./domain";
+import type { PlayMode } from "./optiver";
 
 export const CREATION_PREFIX = "arithmetic.creating.";
 export interface CreationRequest {
@@ -9,7 +10,7 @@ export interface CreationRequest {
   generatorVersion: string;
   policyVersion: string;
   measurementVersion: string;
-  mode: "standard" | "custom";
+  mode: PlayMode;
   contentVersion: string;
 }
 
@@ -21,7 +22,7 @@ export function readCreation(raw: string): CreationRequest {
     !value.creationKey ||
     typeof value.seed !== "string" ||
     !value.seed ||
-    !["standard", "custom"].includes(value.mode) ||
+    !["standard", "custom", "optiver"].includes(value.mode) ||
     Object.keys(validateConfig(value.config)).length ||
     ![
       value.generatorVersion,

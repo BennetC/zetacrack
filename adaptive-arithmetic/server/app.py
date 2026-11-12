@@ -20,6 +20,7 @@ from server.measurements import TIMING_DEFINITIONS, derive_session, export_csv
 from server.analytics import enrich, add_details, filter_sessions, analytics, standard_config
 from server.decimal_input import decimal_lexeme
 from server.run_analytics import profile, describe_run
+from server.optiver import optiver_config, optiver_statistics, CHOICE_TIMING_DEFINITIONS, CONTENT as OPTIVER_CONTENT, GENERATOR as OPTIVER_GENERATOR, POLICY as OPTIVER_POLICY, MEASUREMENT as OPTIVER_MEASUREMENT
 
 
 class Model(BaseModel):
@@ -152,11 +153,11 @@ class SessionWrite(Model):
     creationKey: str | None = Field(None, min_length=1, max_length=128)
     config: Config
     seed: str
-    generatorVersion: Literal["exact-grid-v1", "zetamac-reverse-v1"]
-    policyVersion: Literal["hierarchical-shares-v1", "equal-operations-v1"]
-    measurementVersion: Literal["response-timing-v1"] | None = None
-    mode: Literal["standard", "custom"] | None = None
-    contentVersion: Literal["zetamac-default-v1", "custom-grid-v1"] | None = None
+    generatorVersion: Literal["exact-grid-v1", "zetamac-reverse-v1", "optiver-rational-v1"]
+    policyVersion: Literal["hierarchical-shares-v1", "equal-operations-v1", "optiver-profile-v1"]
+    measurementVersion: Literal["response-timing-v1", "choice-response-v1"] | None = None
+    mode: Literal["standard", "custom", "optiver"] | None = None
+    contentVersion: Literal["zetamac-default-v1", "custom-grid-v1", "optiver-80-in-8-v1"] | None = None
 
 
 class DeleteSelection(Model):
@@ -170,7 +171,7 @@ class AnnotationWrite(Model):
 
 class Event(Model):
     sequence: int = Field(ge=0)
-    type: Literal["session-started", "question-presented", "input-changed", "answer-accepted", "session-ended"]
+    type: Literal["session-started", "question-presented", "input-changed", "answer-accepted", "answer-submitted", "session-ended"]
     elapsedMs: float = Field(ge=0, allow_inf_nan=False)
     payload: dict
 
@@ -300,10 +301,13 @@ def create_app(database: str | Path) -> FastAPI:
     @app.post("/api/sessions", status_code=201)
     def start_session(body: SessionWrite):
         validate(body.config)
-        if body.mode == "standard":
+        if body.mode == "optiver":
+            if (body.config.model_dump() != optiver_config() or body.generatorVersion != OPTIVER_GENERATOR or body.policyVersion != OPTIVER_POLICY or body.contentVersion != OPTIVER_CONTENT or body.measurementVersion != OPTIVER_MEASUREMENT):
+                raise HTTPException(422, detail="Optiver 80 in 8 requires its fixed 80-question, 480-second choice-test rules.")
+        elif body.mode == "standard":
             if (body.config.model_dump() != standard_config() or body.generatorVersion != "zetamac-reverse-v1" or body.policyVersion != "equal-operations-v1" or body.contentVersion != "zetamac-default-v1" or body.measurementVersion != "response-timing-v1"):
                 raise HTTPException(422, detail="Standard Zetamac requires its fixed versioned rules and 120-second settings.")
-        elif body.generatorVersion != "exact-grid-v1" or body.policyVersion != "hierarchical-shares-v1" or body.contentVersion not in (None, "custom-grid-v1"):
+        elif body.generatorVersion != "exact-grid-v1" or body.policyVersion != "hierarchical-shares-v1" or body.contentVersion not in (None, "custom-grid-v1") or body.measurementVersion not in (None, "response-timing-v1"):
             raise HTTPException(422, detail="Custom and legacy sessions require the exact-grid generator and weighted policy.")
         if body.mode == "custom" and body.contentVersion != "custom-grid-v1":
             raise HTTPException(422, detail="New custom sessions require custom-grid-v1 content provenance.")
@@ -397,7 +401,7 @@ def create_app(database: str | Path) -> FastAPI:
         return sessions, exported_at
 
     @app.get("/api/sessions")
-    def session_history(offset: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100), mode: Literal["standard", "custom", "legacy"] | None = None,
+    def session_history(offset: int = Query(0, ge=0), limit: int = Query(20, ge=1, le=100), mode: Literal["standard", "custom", "optiver", "legacy"] | None = None,
                         status: Literal["ended", "ongoing", "incomplete"] | None = None, after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
                         before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), configuration: str | None = None, eligibleOnly: bool = False):
         sessions, snapshot_at = read_sessions(detailed=False)
@@ -411,6 +415,15 @@ def create_app(database: str | Path) -> FastAPI:
     def session_analytics(cohort: str | None = None, includePartial: bool = False, after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$")):
         sessions, snapshot_at = read_sessions(detailed=False)
         return {**analytics(filter_sessions(sessions, after=after, before=before), cohort, includePartial), "snapshotAt": snapshot_at, "totalSavedSessionCount": len(sessions)}
+
+    @app.get("/api/optiver/analytics")
+    def optiver_analytics(after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$")):
+        sessions, snapshot_at = read_sessions(detailed=False)
+        selected = filter_sessions(sessions, mode="optiver", after=after, before=before)
+        # Exclude challenges and invalid/partial runs from every benchmark metric.
+        return {"snapshotAt": snapshot_at, "statistics": optiver_statistics(selected),
+                "savedRunCount": len(selected), "excludedRunCount": sum(not s["comparisonEligible"] for s in selected),
+                "runs": [{k: s[k] for k in ("id", "createdAt", "score", "comparisonEligible", "cohortKey", "optiverSummary", "terminationReason")} for s in selected]}
 
     @app.get("/api/explorer/{identity}")
     def explorer(identity: str):
@@ -454,7 +467,7 @@ def create_app(database: str | Path) -> FastAPI:
         return {"revision": revision + 1, "label": body.label}
 
     @app.get("/api/sessions/deletion-preview")
-    def deletion_preview(mode: Literal["standard", "custom", "legacy"] | None = None,
+    def deletion_preview(mode: Literal["standard", "custom", "optiver", "legacy"] | None = None,
                          status: Literal["ended", "ongoing", "incomplete"] | None = None,
                          after: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
                          before: str | None = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"),
@@ -507,7 +520,9 @@ def create_app(database: str | Path) -> FastAPI:
         headers = {"Content-Disposition": f'attachment; filename="{filename}.{format}"', "Cache-Control": "no-store"}
         if format == "csv":
             return Response(export_csv(sessions), media_type="text/csv; charset=utf-8", headers=headers)
-        return JSONResponse({"exportVersion":1, "exportedAt":exported_at, "timingDefinitions":TIMING_DEFINITIONS, "sessions":sessions}, headers=headers)
+        timing = CHOICE_TIMING_DEFINITIONS if sessions and all(s.get("mode") == "optiver" for s in sessions) else TIMING_DEFINITIONS
+        return JSONResponse({"exportVersion":1, "exportedAt":exported_at, "timingDefinitions":timing,
+                             "measurementDefinitions": {"response-timing-v1": TIMING_DEFINITIONS, OPTIVER_MEASUREMENT: CHOICE_TIMING_DEFINITIONS}, "sessions":sessions}, headers=headers)
 
     @app.get("/api/sessions/{identity}/export")
     def export_session(identity: str, format: Literal["json", "csv"]):

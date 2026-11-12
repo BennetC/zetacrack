@@ -1,5 +1,6 @@
 import type { Config, Question } from "./domain";
 import type { Observation } from "./sessionRecovery";
+import type { PlayMode } from "./optiver";
 
 export const MEASUREMENT_VERSION = "response-timing-v1";
 export interface QualityWarning {
@@ -17,7 +18,10 @@ export interface DerivedQuestion {
   left: string | null;
   right: string | null;
   expected: string | null;
-  outcome: "correct" | "unfinished";
+  outcome: "correct" | "incorrect" | "unfinished";
+  optiver?: Question["optiver"];
+  responseTimeMs?: number | null;
+  selectedOptionIndex?: number | null;
   correctAnswerTimeMs: number | null;
   firstInputTimeMs: number | null;
   observedUnfinishedDurationMs: number | null;
@@ -40,7 +44,21 @@ export interface SavedSession {
   endedAt: string | null;
   generatorVersion: string;
   policyVersion: string;
-  mode: "standard" | "custom" | null;
+  mode: PlayMode | null;
+  optiverSummary?: {
+    totalQuestions: number;
+    attempted: number;
+    correct: number;
+    incorrect: number;
+    unanswered: number;
+    netScore: number;
+    accuracy: number | null;
+    meanResponseTimeMs: number | null;
+    medianResponseTimeMs: number | null;
+    validResponseCount: number;
+    practicePassMark: number;
+    passed: boolean | null;
+  };
   contentVersion: string | null;
   status: "open" | "ended";
   terminationState: "ended" | "ongoing" | "incomplete";
